@@ -1,0 +1,1 @@
+!function(){window.App=Ember.Application.create()}(),function(){App.IndexController=Ember.ArrayController.extend({})}(),function(){App.ApplicationAdapter=DS.FixtureAdapter}(),function(){App.IndexRoute=Ember.Route.extend({model:function(){return["red","yellow","blue"]}})}(),function(){App.Router.map(function(){})}();
