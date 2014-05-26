@@ -11,9 +11,12 @@
 bower install --save ember-c3
 ```
 
-Include library's script in your application:
+Include C3 and the library's script in your application:
 
 ```html
+<link rel="stylesheet" href="bower_components/c3/c3.css">
+
+<script src="bower_components/c3/c3.min.js"></script>
 <script src="bower_components/ember-c3/build/lib.js"></script>
 ```
 
