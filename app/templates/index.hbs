@@ -1,21 +1,30 @@
 <div class="">
-    <h1 class="">Welcome to ember-c3</h1>
+    <h1 class="">Welcome to Ember C3</h1>
 
-    <button class="form-control" {{action "refresh"}}>Reload with random data</button>
+    <br/>
 
-    <h2>Donut</h2>
-    {{!-- c3-donut data= --}}
+    <h2>Generated Chart</h2>
+    <p>See the <strong>data</strong> in the JSON editor below.</p>
 
-    <h2>Area Spline</h2>
-    {{!-- c3-area-spline data= --}}
+    {{c3-chart data=model}}
 
-    <h2>Timeseries</h2>
-    {{!-- c3-timeseries data= --}}
+    <h3>Usage In Ember</h3>
+    <p>See <a href="https://github.com/Glavin001/ember-c3/tree/master/app" target="_blank">example app source code on GitHub</a>.</p>
+    <div class="well">
+          \{{c3-chart data=model}}
+    </div>
 
-    <h2>Bar Chart</h2>
-    {{!-- c3-bar-chart data= --}}
+    <hr/>
 
-    <h2>Line Chart</h2>
-    {{!-- c3-line-chart data= --}}
+    <h2>Chart Editor</h2>
+    <p>
+      Edit the <strong>data</strong> below, powered by
+      <a href="https://github.com/Glavin001/ember-jsoneditor" target="_blank">Ember JSONEditor</a>,
+      to see the changes thanks to two-way data binding support.
+      The <strong>data</strong> below is from the
+      <a href="http://c3js.org/samples/chart_combination.html" target="_blank">Combination Chart</a>
+      in the <a href="http://c3js.org/examples.html" target="_blank">C3 examples</a>.
+     </p>
+    {{json-editor json=model}}
 
 </div>

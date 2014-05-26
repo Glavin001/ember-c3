@@ -1,9 +1,9 @@
 (function() {
 
 Ember.C3 = Ember.Namespace.create();
-Ember.C3.VERSION = '0.0.0';
+Ember.C3.VERSION = '0.1.0';
 
-Ember.libraries.register('ember-c3', Ember.C3.VERSION);
+Ember.libraries.register('Ember C3', Ember.C3.VERSION);
 
 
 })();
@@ -23,12 +23,7 @@ Ember.C3.ChartComponent = Ember.Component.extend({
     /**
     Element classes
     */
-    classNames: [],
-
-    /**
-    The element to bind the chart to
-    */
-    bindTo: null,
+    classNames: ['c3-chart-component'],
 
     /**
     The data to display
@@ -45,10 +40,9 @@ Ember.C3.ChartComponent = Ember.Component.extend({
     */
     regions: {},
 
-    /**
+    /*
     Type of chart
     */
-    type: null,
     bar: {},
     pie: {},
     donut: {},
@@ -56,7 +50,7 @@ Ember.C3.ChartComponent = Ember.Component.extend({
     /**
     Grid lines
     */
-    grid:{},
+    grid: {},
 
     /**
     Legend
@@ -66,7 +60,7 @@ Ember.C3.ChartComponent = Ember.Component.extend({
     /**
     Tooltip
     */
-    tooltip: {}
+    tooltip: {},
 
     /**
     Subchart
@@ -100,21 +94,82 @@ Ember.C3.ChartComponent = Ember.Component.extend({
     transition: {},
 
     /**
+
+    */
+    _chart: undefined,
+
+    /**
     The Chart
     */
     chart: function() {
         var self = this;
-        var chart = c3.generate({
+        if (Ember.isEqual(self.get('_chart'), undefined)) {
+            // Empty, create it.
+            var container = self.get('element');
+            console.log(container);
+            if (Ember.isEqual(container, undefined)) {
+                return undefined;
+            } else {
+                var config = self.get('_config');
+                var chart = c3.generate(config);
+                self.set('_chart', chart);
+                return chart;
+            }
+        } else {
+            // Editor is already created and cached.
+            return self.get('_chart');
+        }
+    }.property('element', '_config'),
 
-        });
-    },
+    /**
+
+    */
+    _config: function() {
+        var self = this;
+        var c = self.getProperties([
+            'data',
+            'axis',
+            'regions',
+            'bar',
+            'pie',
+            'donut',
+            'grid',
+            'legend',
+            'tooltip',
+            'subchart',
+            'zoom',
+            'size',
+            'padding',
+            'color',
+            'transition'
+        ]);
+        c.bindto = self.get('element');
+        return c;
+    }.property('element',
+        'data',
+        'axis',
+        'regions',
+        'bar',
+        'pie',
+        'donut',
+        'grid',
+        'legend',
+        'tooltip',
+        'subchart',
+        'zoom',
+        'size',
+        'padding',
+        'color',
+        'transition'),
 
     /**
     Data Observer
     */
     dataDidChange: function() {
-
-    }.observes('data')
+      var self = this;
+      var chart = self.get('chart');
+      chart.load(self.get('data'));
+    }.observes('data').on('didInsertElement')
 
 });
 

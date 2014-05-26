@@ -1,3 +1,2 @@
-EmberC3.IndexController = Ember.ArrayController.extend({
-
+EmberC3.IndexController = Ember.Controller.extend({
 });

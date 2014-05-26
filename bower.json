@@ -1,15 +1,22 @@
 {
   "name": "ember-c3",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "dependencies": {
     "ember": "^1.3.2",
     "handlebars": "^1.2.1",
-    "ember-data": "^1.0.0-beta.5",
     "c3": "~0.1.42"
   },
   "devDependencies": {
     "ember-mocha-adapter": "0.1.2",
-    "bootstrap": "~3.1.1"
+    "ember-data": "^1.0.0-beta.5",
+    "bootstrap": "~3.1.1",
+    "jsoneditor": "~2.3.6",
+    "ember-jsoneditor": "~0.1.0"
   },
-  "main": "build/ember-plugin.js"
+  "ignore": [
+    "app/",
+    "dist/",
+    "lib/",
+  ],
+  "main": "build/lib.js"
 }
