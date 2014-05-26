@@ -1,3 +1,3 @@
-App.Router.map(function () {
+EmberC3.Router.map(function () {
   // Add your routes here
 });

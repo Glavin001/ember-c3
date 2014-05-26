@@ -19,6 +19,7 @@
   "smarttabs": true,
   "white": true,
   "globals": {
+    "EmberC3": true,
     "jQuery": true,
     "$": true,
     "Ember": true,

@@ -1,4 +1,4 @@
-var App = window.App = Ember.Application.create();
+var EmberC3 = window.EmberC3 = Ember.Application.create();
 
 /* Order and include as you please. */
 require('scripts/controllers/*');

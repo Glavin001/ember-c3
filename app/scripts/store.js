@@ -1,1 +1,1 @@
-App.ApplicationAdapter = DS.FixtureAdapter;
+EmberC3.ApplicationAdapter = DS.FixtureAdapter;
