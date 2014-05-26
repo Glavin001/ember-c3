@@ -3,6 +3,8 @@
 
 > Ember component library for [C3, a D3-based reusable chart library](https://github.com/masayuki0812/c3).
 
+**Live Demo:** http://glavin001.github.io/ember-c3/dist/
+
 ## Usage
 
 ### Install with Bower
