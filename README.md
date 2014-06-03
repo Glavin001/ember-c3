@@ -1,9 +1,13 @@
-[ember-c3](https://github.com/Glavin001/ember-c3)
+[Ember-C3](https://github.com/Glavin001/ember-c3)
 ==========
 
 > Ember component library for [C3, a D3-based reusable chart library](https://github.com/masayuki0812/c3).
 
 **Live Demo:** http://glavin001.github.io/ember-c3/dist/
+
+Alternatively take a look at [Ember-NVD3](https://github.com/Glavin001/ember-nvd3) for your charting needs.
+
+---
 
 ## Usage
 
