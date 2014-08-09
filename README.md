@@ -22,8 +22,17 @@ Include C3 and the library's script in your application:
 ```html
 <link rel="stylesheet" href="bower_components/c3/c3.css">
 
+<script src="bower_components/d3/d3.min.js"></script>
 <script src="bower_components/c3/c3.min.js"></script>
 <script src="bower_components/ember-c3/build/lib.js"></script>
+```
+
+or Ember-CLI users add these to your Brocfile.js
+```javascript
+app.import('vendor/d3/d3.min.js');
+app.import('vendor/c3/c3.css');
+app.import('vendor/c3/c3.min.js');
+app.import('vendor/ember-c3/build/lib.js');
 ```
 
 ### Using the Ember Component
