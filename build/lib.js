@@ -46,6 +46,7 @@ Ember.C3.ChartComponent = Ember.Component.extend({
     bar: {},
     pie: {},
     donut: {},
+    gauge: {},
 
     /**
     Grid lines
@@ -94,31 +95,19 @@ Ember.C3.ChartComponent = Ember.Component.extend({
     transition: {},
 
     /**
-
-    */
-    _chart: undefined,
-
-    /**
     The Chart
     */
     chart: function() {
-        var self = this;
-        if (Ember.isEqual(self.get('_chart'), undefined)) {
-            // Empty, create it.
-            var container = self.get('element');
-            console.log(container);
-            if (Ember.isEqual(container, undefined)) {
-                return undefined;
-            } else {
-                var config = self.get('_config');
-                var chart = c3.generate(config);
-                self.set('_chart', chart);
-                return chart;
-            }
-        } else {
-            // Editor is already created and cached.
-            return self.get('_chart');
-        }
+      var self = this;
+      var container = self.get('element');
+      if (Ember.isEqual(container, undefined)) {
+          return undefined;
+      } else {
+          var config = self.get('_config');
+          var chart = c3.generate(config);
+          self.set('_chart', chart);
+          return chart;
+      }
     }.property('element', '_config'),
 
     /**
@@ -133,6 +122,7 @@ Ember.C3.ChartComponent = Ember.Component.extend({
             'bar',
             'pie',
             'donut',
+            'gauge',
             'grid',
             'legend',
             'tooltip',
@@ -152,6 +142,7 @@ Ember.C3.ChartComponent = Ember.Component.extend({
         'bar',
         'pie',
         'donut',
+        'gauge',
         'grid',
         'legend',
         'tooltip',
@@ -163,13 +154,30 @@ Ember.C3.ChartComponent = Ember.Component.extend({
         'transition'),
 
     /**
-    Data Observer
+    Observer
     */
-    dataDidChange: function() {
+    chartDataDidChange: function() {
       var self = this;
       var chart = self.get('chart');
       chart.load(self.get('data'));
-    }.observes('data').on('didInsertElement')
+    }.observes('data',
+      'axis',
+      'regions',
+      'bar',
+      'pie',
+      'donut',
+      'gauge',
+      'grid',
+      'legend',
+      'tooltip',
+      'subchart',
+      'zoom',
+      'size',
+      'padding',
+      'color',
+      'transition'
+    ).on('didInsertElement')
+
 
 });
 
