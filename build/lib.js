@@ -101,12 +101,12 @@ Ember.C3.ChartComponent = Ember.Component.extend({
       var self = this;
       var container = self.get('element');
       if (Ember.isEqual(container, undefined)) {
-          return undefined;
+        return undefined;
       } else {
-          var config = self.get('_config');
-          var chart = c3.generate(config);
-          self.set('_chart', chart);
-          return chart;
+        var config = self.get('_config');
+        var chart = c3.generate(config);
+        self.set('_chart', chart);
+        return chart;
       }
     }.property('element', '_config'),
 
@@ -158,8 +158,10 @@ Ember.C3.ChartComponent = Ember.Component.extend({
     */
     chartDataDidChange: function() {
       var self = this;
-      var chart = self.get('chart');
-      chart.load(self.get('data'));
+      if (!Ember.isBlank(self.get('data'))) {
+        var chart = self.get('chart');
+        chart.load(self.get('data'));
+      }
     }.observes('data',
       'axis',
       'regions',
