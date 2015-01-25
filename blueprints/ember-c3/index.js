@@ -1,5 +1,5 @@
 module.exports = {
-  description: '',
+  normalizeEntityName: function() {},
 
   afterInstall: function() {
     var self = this;

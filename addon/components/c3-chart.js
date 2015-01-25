@@ -110,9 +110,6 @@ export default Ember.Component.extend({
     }
   }.property('element', '_config'),
 
-  /**
-
-  */
   _config: function() {
     var self = this;
     var c = self.getProperties([
@@ -162,5 +159,3 @@ export default Ember.Component.extend({
     chart.load(self.get('data'));
   }.observes('data').on('didInsertElement')
 });
-
-// Ember.Handlebars.helper('c3-chart', Ember.C3.ChartComponent);
