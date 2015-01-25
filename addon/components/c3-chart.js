@@ -1,3 +1,4 @@
+/* global c3*/
 import Ember from 'ember';
 
 /**
