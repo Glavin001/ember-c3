@@ -1,7 +1,7 @@
 {
   "name": "ember-c3",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.0.1",
+  "description": "Ember component library for C3, a D3-based reusable chart library.",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,11 +11,11 @@
     "build": "ember build",
     "test": "ember test"
   },
-  "repository": "",
+  "repository": "https://github.com/Glavin001/ember-c3",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Glavin Wiechert",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.0",
@@ -32,7 +32,10 @@
     "glob": "^4.0.5"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "C3",
+    "D3",
+    "C3 charts"
   ],
   "ember-addon": {
     "configPath": "tests/dummy/config"
