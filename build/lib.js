@@ -1,7 +1,7 @@
 (function() {
 
 Ember.C3 = Ember.Namespace.create();
-Ember.C3.VERSION = '0.1.2';
+Ember.C3.VERSION = '0.1.4';
 
 Ember.libraries.register('Ember C3', Ember.C3.VERSION);
 
@@ -46,6 +46,7 @@ Ember.C3.ChartComponent = Ember.Component.extend({
     bar: {},
     pie: {},
     donut: {},
+    gauge: {},
 
     /**
     Grid lines
@@ -106,7 +107,6 @@ Ember.C3.ChartComponent = Ember.Component.extend({
         if (Ember.isEqual(self.get('_chart'), undefined)) {
             // Empty, create it.
             var container = self.get('element');
-            console.log(container);
             if (Ember.isEqual(container, undefined)) {
                 return undefined;
             } else {
@@ -119,7 +119,7 @@ Ember.C3.ChartComponent = Ember.Component.extend({
             // Editor is already created and cached.
             return self.get('_chart');
         }
-    }.property('element', '_config'),
+    }.property('_config'),
 
     /**
 
@@ -133,6 +133,7 @@ Ember.C3.ChartComponent = Ember.Component.extend({
             'bar',
             'pie',
             'donut',
+            'gauge',
             'grid',
             'legend',
             'tooltip',
@@ -145,13 +146,13 @@ Ember.C3.ChartComponent = Ember.Component.extend({
         ]);
         c.bindto = self.get('element');
         return c;
-    }.property('element',
-        'data',
+    }.property('data',
         'axis',
         'regions',
         'bar',
         'pie',
         'donut',
+        'gauge',
         'grid',
         'legend',
         'tooltip',
