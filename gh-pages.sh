@@ -1,5 +1,6 @@
 #!/bin/bash
 git checkout gh-pages
+git pull origin master
 ember build --environment production
 mv dist/* .
 rm -rf dist
