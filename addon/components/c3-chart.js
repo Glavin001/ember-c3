@@ -92,8 +92,9 @@ export default Ember.Component.extend({
   /**
     The Chart
   */
-  chart: function() {
+  chart: Ember.computed('element', 'config', function() {
     var self = this;
+
     if (Ember.isEqual(self.get('_chart'), undefined)) {
       // Empty, create it.
       var container = self.get('element');
@@ -109,9 +110,26 @@ export default Ember.Component.extend({
       // Editor is already created and cached.
       return self.get('_chart');
     }
-  }.property('element', '_config'),
+  }),
 
-  _config: function() {
+  _config: Ember.computed('element',
+  'data',
+  'axis',
+  'regions',
+  'bar',
+  'pie',
+  'donut',
+  'gauge',
+  'grid',
+  'legend',
+  'tooltip',
+  'subchart',
+  'zoom',
+  'size',
+  'padding',
+  'color',
+  'transition',
+  function() {
     var self = this;
     var c = self.getProperties([
       'data',
@@ -133,30 +151,14 @@ export default Ember.Component.extend({
     ]);
     c.bindto = self.get('element');
     return c;
-  }.property('element',
-    'data',
-    'axis',
-    'regions',
-    'bar',
-    'pie',
-    'donut',
-    'gauge',
-    'grid',
-    'legend',
-    'tooltip',
-    'subchart',
-    'zoom',
-    'size',
-    'padding',
-    'color',
-    'transition'),
+  }),
 
   /**
     Data Observer
   */
-  dataDidChange: function() {
+  dataDidChange: Ember.on('didInsertElement', Ember.observer('data', function() {
     var self = this;
     var chart = self.get('chart');
     chart.load(self.get('data'));
-  }.observes('data').on('didInsertElement')
+  }))
 });
