@@ -4,6 +4,6 @@ git pull origin master
 ember build --environment production
 mv dist/* .
 rm -rf dist
-git add .
+git add -A
 git commit -m "Publishing to github pages"
 git push origin gh-pages
