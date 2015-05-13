@@ -8,13 +8,8 @@ var app = new EmberAddon();
 app.import('bower_components/d3/d3.min.js');
 app.import('bower_components/c3/c3.min.css');
 app.import('bower_components/c3/c3.min.js');
-app.import('bower_components/jsoneditor/jsoneditor.js');
-app.import('bower_components/jsoneditor/jsoneditor.css');
 app.import('bower_components/ember-jsoneditor/build/lib.js');
 app.import('bower_components/ember-jsoneditor/build/lib.css');
-app.import('bower_components/jsoneditor/img/jsoneditor-icons.png', {
-  destDir: 'assets/img'
-});
 
 // Use `app.import` to add additional libraries to the generated
 // output files.
