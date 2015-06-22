@@ -142,7 +142,8 @@ Ember.C3.ChartComponent = Ember.Component.extend({
             'size',
             'padding',
             'color',
-            'transition'
+            'transition',
+            'point'
         ]);
         c.bindto = self.get('element');
         return c;
@@ -161,7 +162,8 @@ Ember.C3.ChartComponent = Ember.Component.extend({
         'size',
         'padding',
         'color',
-        'transition'),
+        'transition',
+        'point'),
 
     /**
     Data Observer

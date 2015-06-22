@@ -57,6 +57,7 @@ See http://c3js.org/examples.html for examples of how to use C3.
   bar=bar
   pie=pie
   donut=donut
+  gauge=gauge
   grid=grid
   legend=legend
   tooltip=tooltip
@@ -66,6 +67,7 @@ See http://c3js.org/examples.html for examples of how to use C3.
   padding=padding
   color=color
   transition=transition
+  point=point
   }}
 ```
 
