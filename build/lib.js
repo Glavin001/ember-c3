@@ -108,7 +108,7 @@ Ember.C3.ChartComponent = Ember.Component.extend({
         self.set('_chart', chart);
         return chart;
       }
-    }.property('element', '_config'),
+    }.property('_config'),
 
     /**
 
@@ -135,8 +135,7 @@ Ember.C3.ChartComponent = Ember.Component.extend({
         ]);
         c.bindto = self.get('element');
         return c;
-    }.property('element',
-        'data',
+    }.property('data',
         'axis',
         'regions',
         'bar',
