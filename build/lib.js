@@ -166,13 +166,14 @@ Ember.C3.ChartComponent = Ember.Component.extend({
         'point'),
 
     /**
-    Data Observer
+    Load Data Observer
     */
-    dataDidChange: function() {
-      var self = this;
-      var chart = self.get('chart');
-      chart.load(self.get('data'));
-    }.observes('data').on('didInsertElement')
+    loadChartData: function() {
+        console.log("Loading Charts");
+        var self = this;
+        var chart = self.get('chart');
+        chart.load(self.get('data'));
+    }.observes('data.dirtyFlipFlopFlag')
 
 });
 
