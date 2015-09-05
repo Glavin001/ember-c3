@@ -1,4 +1,4 @@
-# Ember-C3
+# Ember-C3 [![npm version](https://badge.fury.io/js/ember-c3.svg)](http://badge.fury.io/js/ember-c3)
 
 > Ember component library for [C3, a D3-based reusable chart library](https://github.com/masayuki0812/c3).
 
