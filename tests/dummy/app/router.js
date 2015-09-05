@@ -6,6 +6,10 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('gauge');
+  this.route('timeseries');
+  this.route('pie');
+  this.route('donut');
 });
 
 export default Router;

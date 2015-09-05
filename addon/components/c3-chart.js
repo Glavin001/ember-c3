@@ -92,13 +92,13 @@ export default Ember.Component.extend({
   /**
     The Chart
   */
-  chart: Ember.computed('element', 'config', function() {
+  chart: Ember.computed('config', function() {
     var self = this;
 
-    if (Ember.isEqual(self.get('_chart'), undefined)) {
+    if (Ember.isEmpty(self.get('_chart'))) {
       // Empty, create it.
-      var container = self.get('element');
-      if (Ember.isEqual(container, undefined)) {
+      var container = self.$().get(0);
+      if (Ember.isEmpty(container)) {
         return undefined;
       } else {
         var config = self.get('_config');
@@ -112,7 +112,7 @@ export default Ember.Component.extend({
     }
   }),
 
-  _config: Ember.computed('element',
+  _config: Ember.computed(
   'data',
   'axis',
   'regions',
@@ -149,16 +149,53 @@ export default Ember.Component.extend({
       'color',
       'transition'
     ]);
-    c.bindto = self.get('element');
+    c.bindto = self.$().get(0);
     return c;
   }),
 
   /**
     Data Observer
   */
-  dataDidChange: Ember.on('didInsertElement', Ember.observer('data', function() {
+  dataDidChange: Ember.observer('data', function() {
+    // console.log('data');
     var self = this;
     var chart = self.get('chart');
-    chart.load(self.get('data'));
-  }))
+    if (Ember.isEmpty(chart)) {
+      return;
+    }
+    var data = self.get('data');
+    if (Ember.isEmpty(data)) {
+      return;
+    }
+    // console.log('data', data, chart);
+    chart.load(data);
+  }),
+  /**
+  See https://github.com/emberjs/ember.js/issues/10661
+  and http://stackoverflow.com/a/25523850/2578205
+  */
+  didInsertElement: function() {
+    // console.log('didInsertElement', this, controller);
+    var controller = this.get('targetObject');
+    // Find the key on the controller for the data passed to this component
+    // See http://stackoverflow.com/a/9907509/2578205
+    var propertyKey;
+    var data = this.get('data');
+    for ( var prop in controller ) {
+        if ( controller.hasOwnProperty( prop ) ) {
+             if ( controller[ prop ] === data ) {
+               propertyKey = prop;
+               break;
+             }
+        }
+    }
+    if (Ember.isEmpty(propertyKey)) {
+      // console.log('Could not find propertyKey', data);
+    } else {
+      // console.log('Found key!', propertyKey, data);
+      controller.addObserver(propertyKey, this, this.dataDidChange);
+    }
+    this.dataDidChange();
+  }
+
 });
