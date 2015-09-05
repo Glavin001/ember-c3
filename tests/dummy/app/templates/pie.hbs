@@ -3,12 +3,12 @@
   <h2>Generated Chart</h2>
   <p>See the <strong>data</strong> in the JSON editor below.</p>
 
-  {{c3-chart data=model}}
+  {{c3-chart data=data}}
 
   <h3>Usage In Ember</h3>
   <p>See <a href="https://github.com/Glavin001/ember-c3/tree/master/tests/dummy/app" target="_blank">example app source code on GitHub</a>.</p>
   <div class="well">
-        \{{c3-chart data=model}}
+      \{{c3-chart data=data}}
   </div>
   <p>You can edit the data for this chart in the editor below.</p>
 
@@ -20,9 +20,9 @@
     <a href="https://github.com/Glavin001/ember-jsoneditor" target="_blank">Ember JSONEditor</a>,
     to see the changes thanks to two-way data binding support.
     The <strong>data</strong> below is from the
-    <a href="http://c3js.org/samples/chart_combination.html" target="_blank">Combination Chart</a>
+    <a href="http://c3js.org/samples/chart_pie.html" target="_blank">Pie Chart</a>
     in the <a href="http://c3js.org/examples.html" target="_blank">C3 examples</a>.
    </p>
-  {{json-editor json=model}}
+  {{json-editor json=data}}
 
 </div>

@@ -13,5 +13,8 @@
     "loader.js": "ember-cli/loader.js#3.2.0",
     "qunit": "~1.17.1",
     "c3": "~0.4.10"
+  },
+  "devDependencies": {
+    "jsoneditor": "~4.2.1"
   }
 }
