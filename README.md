@@ -1,3 +1,4 @@
+
 [Ember-C3](https://github.com/Glavin001/ember-c3)
 ==========
 
@@ -11,29 +12,13 @@ Alternatively take a look at [Ember-NVD3](https://github.com/Glavin001/ember-nvd
 
 ## Usage
 
-### Install with Bower
+### Install with npm
 
-```bash
-bower install --save ember-c3
-```
+`npm install ember-c3 --save-dev`
 
-Include C3 and the library's script in your application:
+### Run the generator
 
-```html
-<link rel="stylesheet" href="bower_components/c3/c3.css">
-
-<script src="bower_components/d3/d3.min.js"></script>
-<script src="bower_components/c3/c3.min.js"></script>
-<script src="bower_components/ember-c3/build/lib.js"></script>
-```
-
-or Ember-CLI users add these to your Brocfile.js
-```javascript
-app.import('bower_components/d3/d3.min.js');
-app.import('bower_components/c3/c3.css');
-app.import('bower_components/c3/c3.min.js');
-app.import('bower_components/ember-c3/build/lib.js');
-```
+`ember g ember-c3`
 
 ### Using the Ember Component
 
@@ -73,15 +58,22 @@ See http://c3js.org/examples.html for examples of how to use C3.
 
 ## Developing
 
-After cloning repository, install library dependencies.
+* `git clone` this repository
+* `npm install`
+* `bower install`
 
-```bash
-npm install
-bower install
-```
+## Running
 
-Then build with `grunt`.
+* `ember server`
+* Visit your app at http://localhost:4200.
 
-```bash
-grunt serve
-```
+## Running Tests
+
+* `ember test`
+* `ember test --server`
+
+## Building
+
+* `ember build`
+
+For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).

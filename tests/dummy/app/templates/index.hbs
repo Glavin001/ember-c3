@@ -1,0 +1,30 @@
+<div class="">
+  <h1 class="">Welcome to Ember C3</h1>
+
+  <br/>
+
+  <h2>Generated Chart</h2>
+  <p>See the <strong>data</strong> in the JSON editor below.</p>
+
+  {{c3-chart data=model}}
+
+  <h3>Usage In Ember</h3>
+  <p>See <a href="https://github.com/Glavin001/ember-c3/tree/master/app" target="_blank">example app source code on GitHub</a>.</p>
+  <div class="well">
+        \{{c3-chart data=model}}
+  </div>
+
+  <hr/>
+
+  <h2>Chart Editor</h2>
+  <p>
+    Edit the <strong>data</strong> below, powered by
+    <a href="https://github.com/Glavin001/ember-jsoneditor" target="_blank">Ember JSONEditor</a>,
+    to see the changes thanks to two-way data binding support.
+    The <strong>data</strong> below is from the
+    <a href="http://c3js.org/samples/chart_combination.html" target="_blank">Combination Chart</a>
+    in the <a href="http://c3js.org/examples.html" target="_blank">C3 examples</a>.
+   </p>
+  {{!json-editor json=model}}
+
+</div>
