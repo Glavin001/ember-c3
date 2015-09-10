@@ -43,6 +43,9 @@ See http://c3js.org/examples.html for examples of how to use C3.
   tooltip=tooltip
   subchart=subchart
   zoom=zoom
+  point=point
+  line=line
+  area=area
   size=size
   padding=padding
   color=color

@@ -64,6 +64,21 @@ export default Ember.Component.extend({
   zoom: {},
 
   /**
+    Point
+  */
+  point: {},
+
+  /**
+    Line
+  */
+  line: {},
+
+  /**
+    Area
+  */
+  area: {},
+
+  /**
     Size
   */
   size: {},
@@ -77,7 +92,6 @@ export default Ember.Component.extend({
     Color
   */
   color: {},
-
 
   /**
     Transition
@@ -125,6 +139,9 @@ export default Ember.Component.extend({
   'tooltip',
   'subchart',
   'zoom',
+  'point',
+  'line',
+  'area',
   'size',
   'padding',
   'color',
@@ -144,6 +161,9 @@ export default Ember.Component.extend({
       'tooltip',
       'subchart',
       'zoom',
+      'point',
+      'line',
+      'area',
       'size',
       'padding',
       'color',
