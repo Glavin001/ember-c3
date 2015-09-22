@@ -1,5 +1,8 @@
-# Ember-C3 [![npm version](https://badge.fury.io/js/ember-c3.svg)](http://badge.fury.io/js/ember-c3)
+# Ember-C3 
 
+[![npm version](https://badge.fury.io/js/ember-c3.svg)](http://badge.fury.io/js/ember-c3)
+[![Join the chat at https://gitter.im/Glavin001/ember-c3](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Glavin001/ember-c3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+ 
 > Ember component library for [C3, a D3-based reusable chart library](https://github.com/masayuki0812/c3).
 
 **Live Demo:** http://glavin001.github.io/ember-c3/
