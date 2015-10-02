@@ -1,5 +1,5 @@
-/* global c3*/
 import Ember from 'ember';
+import c3 from 'c3';
 
 /**
   C3 Chart component

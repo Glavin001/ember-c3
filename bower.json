@@ -1,6 +1,8 @@
 {
   "name": "ember-c3",
   "dependencies": {
+    "c3": "~0.4.10",
+    "d3": "<=3.5.0",
     "ember": "1.13.5",
     "ember-cli-shims": "ember-cli/ember-cli-shims#0.0.3",
     "ember-cli-test-loader": "ember-cli-test-loader#0.1.3",
@@ -11,10 +13,12 @@
     "ember-resolver": "~0.1.18",
     "jquery": "^1.11.1",
     "loader.js": "ember-cli/loader.js#3.2.0",
-    "qunit": "~1.17.1",
-    "c3": "~0.4.10"
+    "qunit": "~1.17.1"
   },
   "devDependencies": {
     "jsoneditor": "~4.2.1"
+  },
+  "resolutions": {
+    "d3": "<=3.5.0"
   }
 }
