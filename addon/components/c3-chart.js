@@ -169,6 +169,20 @@ export default Ember.Component.extend({
       'color',
       'transition'
     ]);
+
+    Ember.A([
+      'oninit',
+      'onrendered',
+      'onmouseover',
+      'onmouseout',
+      'onresize',
+      'onresized'
+    ]).forEach(function(eventname) {
+      c[eventname] = function() {
+        self.sendAction(eventname, this);
+      };
+    });
+
     c.bindto = self.$().get(0);
     return c;
   }),
