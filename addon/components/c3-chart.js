@@ -204,6 +204,23 @@ export default Ember.Component.extend({
     // console.log('data', data, chart);
     chart.load(data);
   }),
+
+  /**
+    Size Observer
+  */
+  sizeDidChange: Ember.observer('size', function() {
+    var self = this;
+    var chart = self.get('chart');
+    if (Ember.isEmpty(chart)) {
+      return;
+    }
+    var size = self.get('size');
+    if (Ember.isEmpty(size)) {
+      return;
+    }
+
+    chart.resize(size);
+  }),
   /**
   See https://github.com/emberjs/ember.js/issues/10661
   and http://stackoverflow.com/a/25523850/2578205
