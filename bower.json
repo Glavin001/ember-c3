@@ -16,5 +16,8 @@
   },
   "devDependencies": {
     "jsoneditor": "~4.2.1"
+  },
+  "resolutions": {
+    "qunit-notifications": "~0.1.0"
   }
 }
