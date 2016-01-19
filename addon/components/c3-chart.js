@@ -190,18 +190,11 @@ export default Ember.Component.extend({
   /**
     Data Observer
   */
-  dataDidChange: Ember.observer('data', 'data.columns.[]', function() {
-    var self = this;
-    var chart = self.get('chart');
-    if (Ember.isEmpty(chart)) {
-      return;
-    }
-    var data = self.get('data');
-    if (Ember.isEmpty(data)) {
-      return;
-    }
-
-    chart.load(data);
+  dataDidChange: Ember.observer('data.columns.[]', function() {
+    var config = this.get('_config');
+    var chart = c3.generate(config);
+    this.set('_chart', chart);
+    return chart;
   }),
   /**
   See https://github.com/emberjs/ember.js/issues/10661
