@@ -106,10 +106,10 @@ export default Ember.Component.extend({
   /**
     The Chart
   */
-  chart: Ember.computed('config', function() {
+  chart: Ember.computed('_config', function() {
     var self = this;
-
-    if (Ember.isEmpty(self.get('_chart'))) {
+    var reuse = this.get('reuse');
+    if (!reuse || Ember.isEmpty(self.get('_chart'))) {
       // Empty, create it.
       var container = self.$().get(0);
       if (Ember.isEmpty(container)) {
@@ -127,6 +127,7 @@ export default Ember.Component.extend({
   }),
 
   _config: Ember.computed(
+  'reuse',
   'data',
   'axis',
   'regions',
