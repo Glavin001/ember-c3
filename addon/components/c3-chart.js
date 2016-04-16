@@ -1,34 +1,43 @@
-/* global c3*/
+// C data-viz
 import Ember from 'ember';
-const { Component, computed, get, getProperties, run } = Ember;
+import c3 from 'c3';
+const { Component, get, getProperties, set, run } = Ember;
 
 export default Component.extend({
   tagName: 'div',
   classNames: ['c3-chart-component'],
 
-  properties: ['data','axis','regions','bar','pie','donut','gauge',
-    'grid','legend','tooltip','subchart','zoom','point','line',
-    'area','size','padding','color','transition'],
-
-  c3chart: undefined,
-
-  config: computed('data', 'legend', function() {
-    let c = getProperties(this, ...get(this, 'properties'));
-    c.bindto = this.get('element');
-    return c;
-  }),
-
-  didUpdateAttrs() {
-    run.debounce(this, get(this, '_render'), 50);
+  _reload() {
+    const chart = get(this, 'c3chart');
+    chart.load(
+      get(this, 'data'),
+      get(this, 'axis'),
+      get(this, 'color')
+    );
   },
 
-  _render() {
-    get(this, 'c3chart').load(get(this, 'data'));
+  _setupc3() {
+    // get c3 properties
+    const chartConfig = getProperties(this, 
+      ['data','axis','regions','bar','pie','donut','gauge',
+      'grid','legend','tooltip','subchart','zoom','point',
+      'line','area','size','padding','color','transition']);
+
+    // bind to component DOM element
+    chartConfig.bindto = get(this, 'element'); 
+
+    // load chart
+    set(this, 'c3chart', c3.generate(chartConfig));
   },
 
   didInsertElement() {
-    this.set('c3chart', c3.generate(get(this, 'config')));
-    get(this, '_render');
+    // prevent premature rendering
+    run.scheduleOnce('afterRender', this, this._setupc3);
+  },
+
+  didUpdateAttrs() {
+    // protect against promise render issues
+    run.debounce(this, this._reload, 360);
   },
 
   willDestroyElement() {
