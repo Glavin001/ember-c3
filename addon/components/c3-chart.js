@@ -1,6 +1,5 @@
-// C data-viz
+/* global c3*/
 import Ember from 'ember';
-import c3 from 'c3';
 const { Component, get, getProperties, set, run } = Ember;
 
 export default Component.extend({
@@ -22,6 +21,24 @@ export default Component.extend({
       ['data','axis','regions','bar','pie','donut','gauge',
       'grid','legend','tooltip','subchart','zoom','point',
       'line','area','size','padding','color','transition']);
+
+    // bind callback events
+    setC3EventCallbacks.call(this);
+    function setC3EventCallbacks() {
+      const self = this,
+            c3ChartEvents = [
+        'oninit',
+        'onrendered',
+        'onmouseover',
+        'onmouseout',
+        'onresize',
+        'onresized'];
+      c3ChartEvents.forEach((event) => {
+        chartConfig[event] = function() {
+          self.sendAction(event, self);
+        };
+      });
+    }
 
     // bind to component DOM element
     chartConfig.bindto = get(this, 'element'); 
