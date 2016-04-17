@@ -22,30 +22,33 @@ export default Component.extend({
       'grid','legend','tooltip','subchart','zoom','point',
       'line','area','size','padding','color','transition']);
 
-    // bind callback events
-    setC3EventCallbacks.call(this);
-    function setC3EventCallbacks() {
-      const self = this,
-            c3ChartEvents = [
+    // bind to component DOM element
+    chartConfig.bindto = get(this, 'element'); 
+
+    // emit events to controller
+    callbacks.call(this);
+    function callbacks() {
+      const that = this;
+      const c3events = [
         'oninit',
         'onrendered',
         'onmouseover',
         'onmouseout',
         'onresize',
-        'onresized'];
-      c3ChartEvents.forEach((event) => {
+        'onresized'
+      ];
+      c3events.forEach((event) => {
         chartConfig[event] = function() {
-          self.sendAction(event, self);
+          that.sendAction(event, that);
         };
       });
     }
 
-    // bind to component DOM element
-    chartConfig.bindto = get(this, 'element'); 
-
     // load chart
     set(this, 'c3chart', c3.generate(chartConfig));
   },
+
+  /* use component lifecycle hooks to control rendering */
 
   didInsertElement() {
     // prevent premature rendering
