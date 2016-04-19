@@ -72,6 +72,10 @@ See http://c3js.org/examples.html for examples of how to use C3.
 }}
 ```
 
+### Helpful Links
+
+- [Extending ember-c3 charts using base-component approach](https://medium.com/nimbo-x-development/extending-ember-c3-charts-using-base-component-approach-78df1d635050#.k8j8gnnqa)
+
 ## Development
 
 * `git clone` this repository
