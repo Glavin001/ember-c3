@@ -190,8 +190,7 @@ export default Ember.Component.extend({
   /**
     Data Observer
   */
-  dataDidChange: Ember.observer('data', function() {
-    // console.log('data');
+  dataDidChange: Ember.observer('data', 'data.columns.[]', function() {
     var self = this;
     var chart = self.get('chart');
     if (Ember.isEmpty(chart)) {
@@ -201,7 +200,7 @@ export default Ember.Component.extend({
     if (Ember.isEmpty(data)) {
       return;
     }
-    // console.log('data', data, chart);
+
     chart.load(data);
   }),
   /**
