@@ -116,6 +116,7 @@ export default Ember.Component.extend({
         return undefined;
       } else {
         var config = self.get('_config');
+        self._cleanup();
         var chart = c3.generate(config);
         self.set('_chart', chart);
         return chart;
@@ -231,6 +232,21 @@ export default Ember.Component.extend({
       controller.addObserver(propertyKey, this, this.dataDidChange);
     }
     this.dataDidChange();
+    
+    this._super(...arguments);
+  },
+
+  willDestroyElement() {
+    this._cleanup();
+    this._super(...arguments);
+  },
+
+  _cleanup() {
+    var chart = this.get('_chart');
+    if (chart) {
+      chart.destroy();
+      this.set('_chart', null);
+    }
   }
 
 });
