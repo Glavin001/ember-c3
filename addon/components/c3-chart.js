@@ -1,235 +1,102 @@
-/* global c3*/
-import Ember from 'ember';
+import Component from 'ember-component';
+import get from 'ember-metal/get';
+import set from 'ember-metal/set';
+import { getProperties } from 'ember-metal/get';
+import { debounce, later, scheduleOnce } from 'ember-runloop';
+import c3 from 'c3';
 
-/**
-  C3 Chart component
-*/
-export default Ember.Component.extend({
-  /**
-    Element tag name
-  */
+export default Component.extend({
   tagName: 'div',
-
-  /**
-    Element classes
-  */
   classNames: ['c3-chart-component'],
 
-  /**
-    The data to display
-  */
-  data: {},
+  // triggered when data is updated by didUpdateAttrs
+  _reload() {
+    const chart = get(this, 'c3chart');
 
-  /**
-    Axis specifications
-  */
-  axis: {},
-
-  /**
-    Region specifications
-  */
-  regions: {},
-
-  /*
-  Type of chart
-  */
-  bar: {},
-  pie: {},
-  donut: {},
-  gauge: {},
-
-  /**
-    Grid lines
-  */
-  grid: {},
-
-  /**
-    Legend
-  */
-  legend: {},
-
-  /**
-    Tooltip
-  */
-  tooltip: {},
-
-  /**
-    Subchart
-  */
-  subchart: {},
-
-  /**
-    Zoom
-  */
-  zoom: {},
-
-  /**
-    Point
-  */
-  point: {},
-
-  /**
-    Line
-  */
-  line: {},
-
-  /**
-    Area
-  */
-  area: {},
-
-  /**
-    Size
-  */
-  size: {},
-
-  /**
-    Padding
-  */
-  padding: {},
-
-  /**
-    Color
-  */
-  color: {},
-
-  /**
-    Transition
-  */
-  transition: {},
-
-  /**
-
-  */
-  _chart: undefined,
-
-  /**
-    The Chart
-  */
-  chart: Ember.computed('config', function() {
-    var self = this;
-
-    if (Ember.isEmpty(self.get('_chart'))) {
-      // Empty, create it.
-      var container = self.$().get(0);
-      if (Ember.isEmpty(container)) {
-        return undefined;
-      } else {
-        var config = self.get('_config');
-        var chart = c3.generate(config);
-        self.set('_chart', chart);
-        return chart;
-      }
+    // if data should not be appended
+    // e.g. when using a pie or donut chart
+    if ( get(this, 'unloadDataBeforeChange') ) {
+      chart.unload();
+      // default animation is 350ms
+      // t/f data must by loaded after unload animation (400)
+      // or chart will not properly render
+      later(this, function() {
+        chart.load(
+          // data, axis, color are only mutable elements
+          get(this, 'data'),
+          get(this, 'axis'),
+          get(this, 'color')
+        );
+      }, 400);
     } else {
-      // Editor is already created and cached.
-      return self.get('_chart');
+      chart.load(
+        get(this, 'data'),
+        get(this, 'axis'),
+        get(this, 'color')
+      );
     }
-  }),
+  },
 
-  _config: Ember.computed(
-  'data',
-  'axis',
-  'regions',
-  'bar',
-  'pie',
-  'donut',
-  'gauge',
-  'grid',
-  'legend',
-  'tooltip',
-  'subchart',
-  'zoom',
-  'point',
-  'line',
-  'area',
-  'size',
-  'padding',
-  'color',
-  'transition',
-  function() {
-    var self = this;
-    var c = self.getProperties([
-      'data',
-      'axis',
-      'regions',
-      'bar',
-      'pie',
-      'donut',
-      'gauge',
-      'grid',
-      'legend',
-      'tooltip',
-      'subchart',
-      'zoom',
-      'point',
-      'line',
-      'area',
-      'size',
-      'padding',
-      'color',
-      'transition'
-    ]);
+  // triggered when component added by didInsertElement
+  _setupc3() {
+    // get all base c3 properties
+    const chartConfig = getProperties(this, 
+      ['data','axis','regions','bar','pie','donut','gauge',
+      'grid','legend','tooltip','subchart','zoom','point',
+      'line','area','size','padding','color','transition']);
 
-    Ember.A([
-      'oninit',
-      'onrendered',
-      'onmouseover',
-      'onmouseout',
-      'onresize',
-      'onresized'
-    ]).forEach(function(eventname) {
-      c[eventname] = function() {
-        self.sendAction(eventname, this);
-      };
-    });
+    // bind c3 chart to component's DOM element
+    chartConfig.bindto = get(this, 'element'); 
 
-    c.bindto = self.$().get(0);
-    return c;
-  }),
+    // emit events to controller
+    callbacks.call(this);
+    function callbacks() {
+      const that = this;
+      const c3events = [
+        'oninit',
+        'onrendered',
+        'onmouseover',
+        'onmouseout',
+        'onresize',
+        'onresized'
+      ];
+      c3events.forEach((event) => {
+        chartConfig[event] = function() {
+          that.sendAction(event, that);
+        };
+      });
+    }
 
-  /**
-    Data Observer
-  */
-  dataDidChange: Ember.observer('data', function() {
-    // console.log('data');
-    var self = this;
-    var chart = self.get('chart');
-    if (Ember.isEmpty(chart)) {
-      return;
+    // render the initial chart
+    set(this, 'c3chart', c3.generate(chartConfig));
+  },
+
+  /***
+   * Component lifecycle hooks to control rendering actions
+   ***/
+
+  didReceiveAttrs() {
+    // if DOM is not ready when component is inserted,
+    // rendering issues can occur
+    // t/f use 'afterRender' property to ensure
+    // state readiness
+    try {
+      scheduleOnce('afterRender', this, this._setupc3);
+    } catch(err) {
+      console.log(err);
     }
-    var data = self.get('data');
-    if (Ember.isEmpty(data)) {
-      return;
-    }
-    // console.log('data', data, chart);
-    chart.load(data);
-  }),
-  /**
-  See https://github.com/emberjs/ember.js/issues/10661
-  and http://stackoverflow.com/a/25523850/2578205
-  */
-  didInsertElement: function() {
-    // console.log('didInsertElement', this, controller);
-    var controller = this.get('targetObject');
-    // Find the key on the controller for the data passed to this component
-    // See http://stackoverflow.com/a/9907509/2578205
-    var propertyKey;
-    var data = this.get('data');
-    for ( var prop in controller ) {
-        if ( controller.hasOwnProperty( prop ) ) {
-             if ( controller[ prop ] === data ) {
-               propertyKey = prop;
-               break;
-             }
-        }
-    }
-    if (Ember.isEmpty(propertyKey)) {
-      // console.log('Could not find propertyKey', data);
-    } else {
-      // console.log('Found key!', propertyKey, data);
-      controller.addObserver(propertyKey, this, this.dataDidChange);
-    }
-    this.dataDidChange();
+  },
+
+  didUpdateAttrs() {
+    // if data proprety is dependent on async relationships,
+    // animations can cause buggy renders, therefore debounce
+    // component update to ensure proper visualization
+    debounce(this, this._reload, 360);
+  },
+
+  willDestroyElement() {
+    // execute teardown method
+    this._super();
+    get(this, 'c3chart').destroy();
   }
-
 });
