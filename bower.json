@@ -12,12 +12,14 @@
     "jquery": "^1.11.3",
     "loader.js": "ember-cli/loader.js#3.4.0",
     "qunit": "~1.20.0",
-    "c3": "~0.4.10"
+    "c3": "~0.4.10",
+    "d3": "^4.2.2"
   },
   "devDependencies": {
     "jsoneditor": "~4.2.1"
   },
   "resolutions": {
-    "qunit-notifications": "~0.1.0"
+    "qunit-notifications": "~0.1.0",
+    "d3": "~3.5.0"
   }
 }
