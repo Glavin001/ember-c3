@@ -40,13 +40,13 @@ export default Component.extend({
   // triggered when component added by didInsertElement
   _setupc3() {
     // get all base c3 properties
-    const chartConfig = getProperties(this, 
+    const chartConfig = getProperties(this,
       ['data','axis','regions','bar','pie','donut','gauge',
       'grid','legend','tooltip','subchart','zoom','point',
       'line','area','size','padding','color','transition']);
 
     // bind c3 chart to component's DOM element
-    chartConfig.bindto = get(this, 'element'); 
+    chartConfig.bindto = get(this, 'element');
 
     // emit events to controller
     callbacks.call(this);
