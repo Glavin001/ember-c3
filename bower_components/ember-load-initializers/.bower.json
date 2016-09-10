@@ -1,0 +1,31 @@
+{
+  "name": "ember-load-initializers",
+  "main": "ember-load-initializers.js",
+  "version": "0.1.7",
+  "homepage": "https://github.com/ember-cli/ember-load-initializers",
+  "authors": [
+    "Stefan Penner <stefan.penner@gmail.com>",
+    "Mattia Gheda <ghedamat@gmail.com>",
+    "Manuel Wiedenmann <manuel@funkensturm.de>",
+    "Alex Navasardyan <alex@dockyard.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ember": ">=1.4"
+  },
+  "_release": "0.1.7",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.1.7",
+    "commit": "7bb21488563bd1bba23e903a812bf5815beddd1a"
+  },
+  "_source": "https://github.com/ember-cli/ember-load-initializers.git",
+  "_target": "0.1.7",
+  "_originalSource": "ember-load-initializers"
+}
