@@ -1,6 +1,6 @@
 {
   "name": "ember-c3",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Ember addon library for C3, a D3-based reusable chart library.",
   "directories": {
     "doc": "doc",
