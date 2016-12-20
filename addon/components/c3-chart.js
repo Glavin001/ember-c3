@@ -98,5 +98,10 @@ export default Component.extend({
     // execute teardown method
     this._super();
     get(this, 'c3chart').destroy();
+  },
+  actions: {
+    toggle(dataName) {
+      get(this, 'c3chart').toggle(dataName);
+    }
   }
 });
