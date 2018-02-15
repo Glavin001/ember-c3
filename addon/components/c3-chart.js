@@ -1,9 +1,17 @@
-import Component from 'ember-component';
-import get from 'ember-metal/get';
-import set from 'ember-metal/set';
-import { getProperties } from 'ember-metal/get';
-import { debounce, later, scheduleOnce } from 'ember-runloop';
+import Ember from 'ember';
 import c3 from 'c3';
+
+const {
+  Component,
+  get,
+  set,
+  getProperties,
+  run: {
+    debounce,
+    later,
+    scheduleOnce
+  }
+} = Ember;
 
 export default Component.extend({
   tagName: 'div',
