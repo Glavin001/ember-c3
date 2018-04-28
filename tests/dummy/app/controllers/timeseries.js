@@ -1,17 +1,17 @@
 import { later } from '@ember/runloop';
 import Controller from '@ember/controller';
+/* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
 export default Controller.extend({
 
   init: function() {
     this._super(...arguments);
-    var self = this;
 
-    later(function() {
-      self.get('data.columns').push(
+    later(this, function() {
+      this.get('data.columns').push(
         ['data3', 400, 500, 450, 700, 600, 500]
       );
-      self.notifyPropertyChange('data');
+      this.notifyPropertyChange('data');
     }, 1000);
 
   },

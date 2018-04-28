@@ -1,45 +1,45 @@
 import { later } from '@ember/runloop';
 import Controller from '@ember/controller';
+/* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
 export default Controller.extend({
 
   init: function() {
     this._super(...arguments);
-    var self = this;
     
-    later(function() {
-      self.set('data.columns', [
+    later(this, function() {
+      this.set('data.columns', [
         ['data', 10]
       ]);
-      self.notifyPropertyChange('data');
+      this.notifyPropertyChange('data');
     }, 1000);
 
-    later(function() {
-      self.set('data.columns', [
+    later(this, function() {
+      this.set('data.columns', [
         ['data', 50]
       ]);
-      self.notifyPropertyChange('data');
+      this.notifyPropertyChange('data');
     }, 2000);
 
-    later(function() {
-      self.set('data.columns', [
+    later(this, function() {
+      this.set('data.columns', [
           ['data', 70]
       ]);
-      self.notifyPropertyChange('data');
+      this.notifyPropertyChange('data');
     }, 3000);
 
-    later(function() {
-      self.set('data.columns', [
+    later(this, function() {
+      this.set('data.columns', [
           ['data', 0]
       ]);
-      self.notifyPropertyChange('data');
+      this.notifyPropertyChange('data');
     }, 4000);
 
-    setTimeout(function() {
-      self.set('data.columns', [
+    later(this, function() {
+      this.set('data.columns', [
           ['data', 100]
       ]);
-      self.notifyPropertyChange('data');
+      this.notifyPropertyChange('data');
     }, 5000);
 
   },
