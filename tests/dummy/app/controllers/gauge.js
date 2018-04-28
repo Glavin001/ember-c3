@@ -4,9 +4,9 @@ import Controller from '@ember/controller';
 export default Controller.extend({
 
   init: function() {
-    this._super.apply(this, arguments);
+    this._super(...arguments);
     var self = this;
-    console.log('init', self);
+    
     later(function() {
       self.set('data.columns', [
         ['data', 10]
