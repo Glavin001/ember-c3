@@ -3,15 +3,9 @@
 module.exports = function(environment) {
   let ENV = {
     modulePrefix: 'dummy',
-<<<<<<< HEAD
-    environment: environment,
-    baseURL: '/',
-    locationType: 'hash',
-=======
     environment,
     rootURL: '/',
     locationType: 'auto',
->>>>>>> 88701f1... message
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -60,11 +54,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-<<<<<<< HEAD
-    ENV.baseURL = "/ember-c3";
-=======
     // here you can enable a production-specific feature
->>>>>>> 88701f1... message
   }
 
   return ENV;
