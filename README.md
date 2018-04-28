@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # Ember-C3 
-=======
-# my-addon
->>>>>>> 88701f1... message
 
 [![npm version](https://badge.fury.io/js/ember-c3.svg)](http://badge.fury.io/js/ember-c3)
 [![Join the chat at https://gitter.im/Glavin001/ember-c3](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Glavin001/ember-c3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -17,7 +13,6 @@ Alternatively take a look at [Ember-NVD3](https://github.com/Glavin001/ember-nvd
 
 ## Installation
 
-<<<<<<< HEAD
 ```bash
 ember install ember-c3
 ```
@@ -87,23 +82,11 @@ See http://c3js.org/examples.html for examples of how to use C3.
 * `npm install`
 * `bower install`
 * `ember server`
-=======
-* `git clone <repository-url>` this repository
-* `cd my-addon`
-* `npm install`
-
-## Running
-
-* `ember serve`
->>>>>>> 88701f1... message
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
 ## Running Tests
 
-<<<<<<< HEAD
-=======
 * `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
->>>>>>> 88701f1... message
 * `ember test`
 * `ember test --server`
 
@@ -111,16 +94,4 @@ See http://c3js.org/examples.html for examples of how to use C3.
 
 * `ember build`
 
-<<<<<<< HEAD
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
-
-## Publishing to GitHub Pages
-
-See https://github.com/poetic/ember-cli-github-pages
-
-```bash
-ember github-pages:commit --message "Your commit message"
-```
-=======
 For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
->>>>>>> 88701f1... message
