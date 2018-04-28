@@ -26,7 +26,8 @@
     "build": "ember build",
     "lint:js": "eslint ./*.js addon addon-test-support app config lib server test-support tests",
     "start": "ember serve",
-    "test": "ember try:each"
+    "test": "ember try:each",
+    "deploy": "ember build && ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\" && git push origin gh-pages:gh-pages"
   },
   "dependencies": {
     "ember-cli-babel": "^6.6.0"
@@ -34,11 +35,11 @@
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^3.0.0",
-    "ember-c3-shim": "0.0.6",
+    "ember-c3-shim": "0.0.7",
     "ember-cli": "~2.18.2",
     "ember-cli-dependency-checker": "^2.0.0",
     "ember-cli-eslint": "^4.2.1",
-    "ember-cli-github-pages": "0.0.6",
+    "ember-cli-github-pages": "^0.2.0",
     "ember-cli-htmlbars": "^2.0.1",
     "ember-cli-htmlbars-inline-precompile": "^1.0.0",
     "ember-cli-inject-live-reload": "^1.4.1",
@@ -46,7 +47,7 @@
     "ember-cli-shims": "^1.2.0",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^2.0.0",
-    "ember-d3": "0.2.0",
+    "ember-d3": "^0.4.4",
     "ember-disable-prototype-extensions": "^1.1.2",
     "ember-export-application-global": "^2.0.0",
     "ember-jsoneditor": "^0.1.2",
@@ -54,7 +55,7 @@
     "ember-resolver": "^4.0.0",
     "ember-source": "~2.18.0",
     "eslint-plugin-ember": "^5.0.0",
-    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-node": "^6.0.1",
     "loader.js": "^4.2.3"
   },
   "engines": {
