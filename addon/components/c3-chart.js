@@ -1,26 +1,33 @@
-import Component from 'ember-component';
-import get from 'ember-metal/get';
-import set from 'ember-metal/set';
-import { getProperties } from 'ember-metal/get';
-import { debounce, later, scheduleOnce } from 'ember-runloop';
+import Component from '@ember/component';
+import { get, set, getProperties }  from '@ember/object';
+import { debounce, later, scheduleOnce }  from '@ember/runloop';
 import c3 from 'c3';
 
 export default Component.extend({
   tagName: 'div',
   classNames: ['c3-chart-component'],
-
+  
+  // Callback method triggered when an error occurs
+  error: null,
+    
+  // internal error handler
+  _error:function(error) {
+    if (this.error)
+      this.error(error);
+  },
+  
   // triggered when data is updated by didUpdateAttrs
   _reload() {
     const chart = get(this, 'c3chart');
 
     // if data should not be appended
     // e.g. when using a pie or donut chart
-    if ( get(this, 'unloadDataBeforeChange') ) {
+    if (get(this, 'unloadDataBeforeChange')) {
       chart.unload();
       // default animation is 350ms
       // t/f data must by loaded after unload animation (400)
       // or chart will not properly render
-      later(this, function() {
+      later(this, function () {
         chart.load(
           // data, axis, color are only mutable elements
           get(this, 'data'),
@@ -41,9 +48,9 @@ export default Component.extend({
   _setupc3() {
     // get all base c3 properties
     const chartConfig = getProperties(this,
-      ['data','axis','regions','bar','pie','donut','gauge',
-      'grid','legend','tooltip','subchart','zoom','point',
-      'line','area','size','padding','color','transition']);
+      ['data', 'axis', 'regions', 'bar', 'pie', 'donut', 'gauge',
+        'grid', 'legend', 'tooltip', 'subchart', 'zoom', 'point',
+        'line', 'area', 'size', 'padding', 'color', 'transition']);
 
     // bind c3 chart to component's DOM element
     chartConfig.bindto = get(this, 'element');
@@ -61,7 +68,7 @@ export default Component.extend({
         'onresized'
       ];
       c3events.forEach((event) => {
-        chartConfig[event] = function() {
+        chartConfig[event] = function () {
           that.sendAction(event, that);
         };
       });
@@ -82,8 +89,8 @@ export default Component.extend({
     // state readiness
     try {
       scheduleOnce('afterRender', this, this._setupc3);
-    } catch(err) {
-      console.log(err);
+    } catch (err) {
+      this._error(err);
     }
   },
 
