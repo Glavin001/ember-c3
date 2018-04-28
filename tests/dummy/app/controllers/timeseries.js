@@ -1,12 +1,13 @@
-import Ember from 'ember';
+import { later } from '@ember/runloop';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
 
   init: function() {
     this._super.apply(this, arguments);
     var self = this;
 
-    Ember.run.later(function() {
+    later(function() {
       self.get('data.columns').push(
         ['data3', 400, 500, 450, 700, 600, 500]
       );

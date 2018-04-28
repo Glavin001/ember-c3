@@ -1,12 +1,13 @@
-import Ember from 'ember';
+import { later } from '@ember/runloop';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
 
   init: function() {
     this._super.apply(this, arguments);
     var self = this;
 
-    Ember.run.later(function() {
+    later(function() {
         self.get('data.columns').push(
           ["setosa", 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2,
             0.2, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.4, 0.4, 0.3,

@@ -1,33 +1,34 @@
-import Ember from 'ember';
+import { later } from '@ember/runloop';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
 
   init: function() {
     this._super.apply(this, arguments);
     var self = this;
     console.log('init', self);
-    Ember.run.later(function() {
+    later(function() {
       self.set('data.columns', [
         ['data', 10]
       ]);
       self.notifyPropertyChange('data');
     }, 1000);
 
-    Ember.run.later(function() {
+    later(function() {
       self.set('data.columns', [
         ['data', 50]
       ]);
       self.notifyPropertyChange('data');
     }, 2000);
 
-    Ember.run.later(function() {
+    later(function() {
       self.set('data.columns', [
           ['data', 70]
       ]);
       self.notifyPropertyChange('data');
     }, 3000);
 
-    Ember.run.later(function() {
+    later(function() {
       self.set('data.columns', [
           ['data', 0]
       ]);
