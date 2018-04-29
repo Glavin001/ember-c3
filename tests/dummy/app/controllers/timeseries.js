@@ -4,10 +4,10 @@ import Controller from '@ember/controller';
 
 export default Controller.extend({
 
-  init: function() {
+  init() {
     this._super(...arguments);
 
-    later(this, function() {
+    later(this, function () {
       this.get('data.columns').push(
         ['data3', 400, 500, 450, 700, 600, 500]
       );
@@ -28,6 +28,7 @@ export default Controller.extend({
       ['data2', 130, 340, 200, 500, 250, 350]
     ]
   },
+
   axis: {
     x: {
       type: 'timeseries',
