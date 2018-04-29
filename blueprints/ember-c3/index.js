@@ -8,7 +8,7 @@ module.exports = {
       .then(function() {
         return self.addBowerPackageToProject('c3')
           .then(function() {
-            self.addAddonToProject('ember-c3-shim@0.0.6');
+            self.addAddonToProject('ember-c3-shim');
           });
       });
   }
