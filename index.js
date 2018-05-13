@@ -10,5 +10,11 @@ module.exports = {
       development: 'node_modules/c3/c3.css',
       test: 'node_modules/c3/c3.css'
     });
+
+    app.import('node_modules/c3/c3.js', {
+      using: [
+        { transformation: 'cjs', as: 'c3'}
+      ]
+    });
   }
 };

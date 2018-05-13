@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { set, get, getProperties } from '@ember/object';
 import { debounce, later, scheduleOnce } from '@ember/runloop';
-import c3 from 'npm:c3';
+import c3 from 'c3';
 
 export default Component.extend({
   tagName: 'div',
