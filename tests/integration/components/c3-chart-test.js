@@ -13,12 +13,16 @@ test('it renders', function(assert) {
 
   assert.equal(this.$().text().trim(), '');
 
-  // Template block usage:
-  this.render(hbs`
-    {{#c3-chart}}
-      template block text
-    {{/c3-chart}}
-  `);
+});
 
-  assert.equal(this.$().text().trim(), 'template block text');
+
+test('it renders a SVG barcode', function (assert) {
+  assert.expect(1);
+ 
+  this.render(hbs`{{c3-chart data=data axis=axis}}`);
+
+  // will display - text value is set
+  this.render(hbs`{{bar-code value=code}}`);
+  assert.equal(this.$('svg').attr('style'), 'transform: translate(0,0)');
+
 });
