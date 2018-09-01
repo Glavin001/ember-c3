@@ -1,20 +1,20 @@
 import Component from '@ember/component';
-import { get, set, getProperties } from '@ember/object';
+import { getProperties } from '@ember/object';
 import { debounce, later } from '@ember/runloop';
 import c3 from 'c3';
 
 export default Component.extend({
   tagName: 'div',
   classNames: ['c3-chart-component'],
-
+  transition: 350,
 
   // triggered when data is updated by didUpdateAttrs
   _reload() {
-    const chart = get(this, 'c3chart');
+    const chart = this.get('c3chart');
 
     // if data should not be appended
     // e.g. when using a pie or donut chart
-    if (get(this, 'unloadDataBeforeChange')) {
+    if (this.get('unloadDataBeforeChange')) {
       chart.unload();
 
       // default animation is 350ms
@@ -24,17 +24,17 @@ export default Component.extend({
       later(() => {
         chart.load(
           // data, axis, color are only mutable elements
-          get(this, 'data'),
-          get(this, 'axis'),
-          get(this, 'color')
+          this.get('data'),
+          this.get('axis'),
+          this.get('color')
         );
-      }, 400);
+      }, this.get('transition'));
 
     } else {
       chart.load(
-        get(this, 'data'),
-        get(this, 'axis'),
-        get(this, 'color')
+        this.get('data'),
+        this.get('axis'),
+        this.get('color')
       );
     }
   },
@@ -77,7 +77,7 @@ export default Component.extend({
     }
 
     // render the initial chart
-    set(this, 'c3chart', c3.generate(chartConfig));
+    this.set('c3chart', c3.generate(chartConfig));
   },
 
   /***
@@ -99,6 +99,6 @@ export default Component.extend({
   // execute teardown method
   willDestroyElement() {
     this._super(...arguments);
-    get(this, 'c3chart').destroy();
+    this.get('c3chart').destroy();
   }
 });
