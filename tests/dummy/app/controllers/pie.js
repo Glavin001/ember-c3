@@ -1,13 +1,14 @@
-import { later } from '@ember/runloop';
+import { bind, later } from '@ember/runloop';
 import Controller from '@ember/controller';
+import { computed }  from '@ember/object';
 /* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
 export default Controller.extend({
 
-  init() {
+  init: function () {
     this._super(...arguments);
 
-    later(this, function () {
+    later(this, () => {
       this.get('data.columns').push(
         ["setosa", 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2,
           0.2, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.4, 0.4, 0.3,
@@ -48,21 +49,27 @@ export default Controller.extend({
 
   },
 
-  // iris data from R
-  data: {
-    columns: [
-      ['data1', 30],
-      ['data2', 120],
-    ],
-    type: 'pie',
-    onclick: function (d, i) {
-      console.log("onclick", d, i);
-    },
-    onmouseover: function (d, i) {
-      console.log("onmouseover", d, i);
-    },
-    onmouseout: function (d, i) {
-      console.log("onmouseout", d, i);
+  data: computed(function() {
+    // iris data from R
+    return {
+      columns: [
+        ['data1', 30],
+        ['data2', 120],
+      ],
+      type: 'pie',
+      onclick: bind(this, this.get('actions.myClick')),
+      onmouseover: bind(this, function(d, i) {
+        console.log("onmouseover", d, i);
+      }),
+      onmouseout: (d, i) => {
+        console.log("onmouseout", d, i);
+      }
+    }
+  }),
+
+  actions: {
+    myClick(d, i) {
+      alert(`clicked ${d.name}`)
     }
   }
 

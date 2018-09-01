@@ -7,7 +7,7 @@ export default Controller.extend({
   init() {
     this._super(...arguments);
 
-    later(this, function () {
+    later(this, () => {
       this.get('data.columns').push(
         ["setosa", 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2,
           0.2, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.4, 0.4, 0.3,
@@ -37,7 +37,7 @@ export default Controller.extend({
       1500);
 
     // FIXME: No way to unload yet
-    // Ember.run.later(function() {
+    // later(() => {
     //   chart.unload({
     //     ids: 'data1'
     //   });

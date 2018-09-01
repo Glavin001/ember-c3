@@ -11,6 +11,7 @@ Router.map(function() {
   this.route('timeseries');
   this.route('pie');
   this.route('donut');
+  this.route('events');
 });
 
 export default Router;
