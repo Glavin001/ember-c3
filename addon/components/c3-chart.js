@@ -21,7 +21,7 @@ export default Component.extend({
       // t/f data must by loaded after unload animation (400)
       // or chart will not properly render
 
-      later(this, function () {
+      later(() => {
         chart.load(
           // data, axis, color are only mutable elements
           get(this, 'data'),
