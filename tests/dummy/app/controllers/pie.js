@@ -36,17 +36,6 @@ export default Controller.extend({
       this.notifyPropertyChange('data');
     },
       1500);
-
-    // FIXME: No way to unload yet
-    // Ember.run.later(function() {
-    //   chart.unload({
-    //     ids: 'data1'
-    //   });
-    //   chart.unload({
-    //     ids: 'data2'
-    //   });
-    // }, 2500);
-
   },
 
   data: computed(function() {
@@ -60,10 +49,7 @@ export default Controller.extend({
       onclick: bind(this, this.get('actions.myClick')),
       onmouseover: bind(this, function(d, i) {
         console.log("onmouseover", d, i);
-      }),
-      onmouseout: (d, i) => {
-        console.log("onmouseout", d, i);
-      }
+      })
     }
   }),
 

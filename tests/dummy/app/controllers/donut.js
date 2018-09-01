@@ -35,17 +35,6 @@ export default Controller.extend({
       this.notifyPropertyChange('data');
     },
       1500);
-
-    // FIXME: No way to unload yet
-    // later(() => {
-    //   chart.unload({
-    //     ids: 'data1'
-    //   });
-    //   chart.unload({
-    //     ids: 'data2'
-    //   });
-    // }, 2500);
-
   },
 
   data: {
