@@ -1,12 +1,13 @@
 import Component from "@ember/component";
 import { getProperties } from "@ember/object";
 import { debounce, later } from "@ember/runloop";
+import { isPresent }  from '@ember/utils';
 import c3 from "c3";
 
 export default Component.extend({
   tagName: "div",
   classNames: ["c3-chart-component"],
-  _transition: this.get("transition") || 350,
+  _transition: 350,
 
   // triggered when data is updated by didUpdateAttrs
   _reload() {
@@ -28,7 +29,7 @@ export default Component.extend({
           this.get("axis"),
           this.get("color")
         );
-      }, this.get("_transition"));
+      }, this.get('transition') || this.get("_transition"));
     } else {
       chart.load(this.get("data"), this.get("axis"), this.get("color"));
     }
