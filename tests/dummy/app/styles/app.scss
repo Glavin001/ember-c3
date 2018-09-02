@@ -1,0 +1,54 @@
+@import "ember-cli-bootstrap-4/bootstrap";
+$accent-color: #dd6a58;
+
+html,
+body {
+  min-height: 100%;
+  min-width: 100%;
+  font-family: "Open Sans", sans-serif;
+  background-color: #f3f3f3;
+  height: 100%;
+}
+
+label {
+  font-weight: 600;
+}
+
+.navbar-brand {
+  color: #797979;
+  font-size: 16px;
+  font-weight: 400;
+
+  img {
+    height: 32px;
+    display: inline-block;
+    margin-top: -15px;
+  }
+
+  span {
+    font-size: 18px;
+    vertical-align: super;
+    text-transform: uppercase;
+    color: #444444;
+  }
+}
+
+a.fa.fa-github.github {
+  font-size: 28px;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.5);
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.7);
+  }
+}
+
+.h0 {
+  visibility: hidden;
+  height: 0;
+  padding: 0;
+}
+
+[role="main"] {
+  padding-top: 65px; /* Space for fixed navbar */
+}
