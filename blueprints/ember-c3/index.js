@@ -4,7 +4,7 @@ module.exports = {
   afterInstall: function() {
     var self = this;
 
-    return this.addBowerPackageToProject('d3', '3.5.17')
+    return this.addBowerPackageToProject('d3', '5.7.0')
       .then(function() {
         return self.addBowerPackageToProject('c3')
           .then(function() {

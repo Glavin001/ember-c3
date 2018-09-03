@@ -22,7 +22,7 @@ test("it renders a pie chart", function(assert) {
 
   assert.ok(this.$("g").hasClass("c3-legend-item"), "Pie charte has lengend");
   assert.equal(this.$(".c3-legend-item").length, 2, "Has 2 legend items");
-  assert.equal(this.$("svg g").length, 72, "svg g elements");
+  assert.equal(this.$("svg g").length, 70, "svg g elements");
 });
 
 test("it renders a donut chart", function(assert) {
@@ -49,7 +49,7 @@ test("it renders a donut chart", function(assert) {
     "Text matches title"
   );
   assert.equal(this.$(".c3-legend-item").length, 3, "Has 3 legend items");
-  assert.equal(this.$("svg g").length, 84, "svg g elements");
+  assert.equal(this.$("svg g").length, 82, "svg g elements");
 });
 
 test("it renders a gauge chart", function(assert) {
@@ -83,7 +83,7 @@ test("it renders a gauge chart", function(assert) {
     "Text matches title"
   );
   assert.equal(this.$(".c3-legend-item").length, 1, "Has 1 legend items");
-  assert.equal(this.$("svg g").length, 62, "svg g elements");
+  assert.equal(this.$("svg g").length, 60, "svg g elements");
 });
 
 test("it renders a timeseries chart", function(assert) {
@@ -136,7 +136,7 @@ test("it renders a timeseries chart", function(assert) {
     "Text matches title"
   );
   assert.equal(this.$(".c3-legend-item").length, 2, "Has 2 legend items");
-  assert.equal(this.$("svg g").length, 69, "svg g elements");
+  assert.equal(this.$("svg g").length, 67, "svg g elements");
 });
 
 test("it renders a bar chart", function(assert) {
@@ -176,5 +176,5 @@ test("it renders a bar chart", function(assert) {
     "Text matches title"
   );
   assert.equal(this.$(".c3-legend-item").length, 2, "Has 2 legend items");
-  assert.equal(this.$("svg g").length, 77, "svg g elements");
+  assert.equal(this.$("svg g").length, 75, "svg g elements");
 });
