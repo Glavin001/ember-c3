@@ -67,6 +67,7 @@ See http://c3js.org/examples.html for examples of how to use C3.
   area=area
   size=size
   padding=padding
+  title=title
   color=color
   transition=transition
 }}
