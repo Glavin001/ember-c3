@@ -12,7 +12,7 @@ export default Component.extend({
   _reload() {
     // didUpdateAttrs() can schedule _reload when the component is being destroyed
     // this prevents the reload and an error being spit out into the console
-    if (get(this, 'isDestroying') || get(this, 'isDestroyed')) { 
+    if (this.get('isDestroying') || this.get('isDestroyed')) { 
       return;
     }
 
