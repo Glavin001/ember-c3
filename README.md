@@ -74,6 +74,7 @@ See http://c3js.org/examples.html for examples of how to use C3.
   title=title
   color=color
   transition=transition
+  unloadDataBeforeChange=true
 }}
 ```
 
@@ -92,16 +93,17 @@ c3chart | Points to the c3 chart created by the component.  Any C3 api method ca
   line | Used to assign or modify line chart [properties](https://c3js.org/reference.html#line-connectNull) |
   area | Used to assign or modify area chart [properties](https://c3js.org/reference.html#area-zerobased) |
   point | Used to assign or modify data point [properties](https://c3js.org/reference.html#point-show) |
-  grid |
-  legend |
-  tooltip |
-  subchart |
-  zoom |
-  size | Chart size [settings](https://c3js.org/reference.html#size-width)
-  padding |
+  grid | Used to show, hide and modify the graph grid.  See [docs](https://c3js.org/reference.html#grid-x-show)
+  legend | Show, hide and modify the legend position.  See [docs](https://c3js.org/reference.html#legend-show)
+  tooltip | Show, hide and modify the tooltip.  See [docs](https://c3js.org/reference.html#tooltip-show)
+  subchart | Show, hide and modify C3 sub charts.  See [docs](https://c3js.org/reference.html#subchart-show)
+  zoom | Control and set C3 zoom features. See [docs](https://c3js.org/reference.html#zoom-enabled)
+  size | Control hart size see [docs](https://c3js.org/reference.html#size-width) | size: {width: 640 }
+  padding | Set padding around graph.  See docs(https://c3js.org/reference.html#padding-top)  | padding: { top: 20}
   title | Set chart title | title: { text: "This is my chart" }
   color | Used to assign color [properties](https://c3js.org/reference.html#color-pattern) 
   transition | Equivalent to [transition.duration](https://c3js.org/reference.html#transition-duration).  Default duration is 350ms
+  unloadDataBeforeChange | When set to true the data will be unloaded before new data is loaded with didUpdateAttrs().  This is useful for pie and donut charts.  Can now also manage data loading with .load()/.unload() methods on exposed c3chart
 
 
 ### C3 Methods
@@ -222,7 +224,7 @@ Example code here...
 ## Development
 
 * `git clone` this repository
-* `npm install`
+* `npm install` or `yarn install`
 * `bower install`
 * `ember server`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
