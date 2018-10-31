@@ -4,6 +4,10 @@ import Controller from '@ember/controller';
 
 export default Controller.extend({
 
+  chart: null,
+  legendVisible: true,
+  lbuttonText: "Hide Legend",
+  
   init() {
     this._super(...arguments);
 
@@ -42,19 +46,26 @@ export default Controller.extend({
         ['data1', 30],
         ['data2', 120],
       ],
-      type: 'donut',
-      onclick: function (d, i) {
-        console.log("onclick", d, i);
-      },
-      onmouseover: function (d, i) {
-        console.log("onmouseover", d, i);
-      },
-      onmouseout: function (d, i) {
-        console.log("onmouseout", d, i);
-      }
+      type: 'donut'
     },
 
-  donut: { title: "Iris Petal Width" }
+  title: { text: "Iris data from R" },
+  
+  donut: { title: "Iris Petal Width" },
 
+  padding:  { top: 20 },
+
+  actions: {
+    toggleLegend() {
+      let c = this.get("chart");
+      this.toggleProperty('legendVisible');
+      let v= this.get("legendVisible");
+      let t = v ? "Hide Legend" : "Show Legend";
+      this.set("lbuttonText", t);
+
+      if (v) c.legend.show();
+       else c.legend.hide();
+    }
+  }
 
 });

@@ -4,6 +4,10 @@ import Controller from '@ember/controller';
 
 export default Controller.extend({
 
+  chart: null,
+  legendVisible: true,
+  lbuttonText: "Hide Legend",
+  
   init: function() {
     this._super(...arguments);
     
@@ -48,26 +52,35 @@ export default Controller.extend({
     columns: [
       ['data', 91.4]
     ],
-    type: 'gauge',
-    onclick: function(d, i) {
-      console.log("onclick", d, i);
-    },
-    onmouseover: function(d, i) {
-      console.log("onmouseover", d, i);
-    },
-    onmouseout: function(d, i) {
-      console.log("onmouseout", d, i);
-    }
+    type: 'gauge'
   },
 
+  // the three color levels for the percentage values
   color: {
-    pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'], // the three color levels for the percentage values.
+    pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'], 
     threshold: {
       values: [30, 60, 90, 100]
     }
   },
   size: {
     height: 180
+  },
+
+  title: { text: "Percent complete"},
+
+  padding:  { top: 20 },
+
+  actions: {
+    toggleLegend() {
+      let c = this.get("chart");
+      this.toggleProperty('legendVisible');
+      let v= this.get("legendVisible");
+      let t = v ? "Hide Legend" : "Show Legend";
+      this.set("lbuttonText", t);
+
+      if (v) c.legend.show();
+       else c.legend.hide();
+    }
   }
 
 });
