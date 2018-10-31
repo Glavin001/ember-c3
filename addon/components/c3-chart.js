@@ -11,6 +11,10 @@ export default Component.extend({
 
   // triggered when data is updated by didUpdateAttrs
   _reload() {
+    // didUpdateAttrs() can schedule _reload when the component is being destroyed
+    // this prevents the reload and an error being spit out into the console
+    if (get(this, 'isDestroying') || get(this, 'isDestroyed')) { return }
+
     const chart = get(this, 'c3chart');
 
     // if data should not be appended
