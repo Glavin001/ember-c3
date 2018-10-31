@@ -1,5 +1,5 @@
-import { later } from '@ember/runloop';
-import Controller from '@ember/controller';
+import { later } from "@ember/runloop";
+import Controller from "@ember/controller";
 /* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
 export default Controller.extend({
@@ -12,52 +12,52 @@ export default Controller.extend({
     this._super(...arguments);
     
     later(this, () => {
-      this.set('data.columns', [
-        ['data', 10]
+      this.set("data.columns", [
+        ["data", 10]
       ]);
-      this.notifyPropertyChange('data');
+      this.notifyPropertyChange("data");
     }, 1000);
 
     later(this, () => {
-      this.set('data.columns', [
-        ['data', 50]
+      this.set("data.columns", [
+        ["data", 50]
       ]);
-      this.notifyPropertyChange('data');
+      this.notifyPropertyChange("data");
     }, 2000);
 
     later(this, () => {
-      this.set('data.columns', [
-          ['data', 70]
+      this.set("data.columns", [
+          ["data", 70]
       ]);
-      this.notifyPropertyChange('data');
+      this.notifyPropertyChange("data");
     }, 3000);
 
     later(this, () => {
-      this.set('data.columns', [
-          ['data', 0]
+      this.set("data.columns", [
+          ["data", 0]
       ]);
-      this.notifyPropertyChange('data');
+      this.notifyPropertyChange("data");
     }, 4000);
 
     later(this, () => {
-      this.set('data.columns', [
-          ['data', 100]
+      this.set("data.columns", [
+          ["data", 100]
       ]);
-      this.notifyPropertyChange('data');
+      this.notifyPropertyChange("data");
     }, 5000);
 
   },
 
   data: {
     columns: [
-      ['data', 91.4]
+      ["data", 91.4]
     ],
-    type: 'gauge'
+    type: "gauge"
   },
 
   // the three color levels for the percentage values
   color: {
-    pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'], 
+    pattern: ["#FF0000", "#F97600", "#F6C600", "#60B044"], 
     threshold: {
       values: [30, 60, 90, 100]
     }
@@ -73,7 +73,7 @@ export default Controller.extend({
   actions: {
     toggleLegend() {
       let c = this.get("chart");
-      this.toggleProperty('legendVisible');
+      this.toggleProperty("legendVisible");
       let v= this.get("legendVisible");
       let t = v ? "Hide Legend" : "Show Legend";
       this.set("lbuttonText", t);

@@ -1,4 +1,4 @@
-import Controller from '@ember/controller';
+import Controller from "@ember/controller";
 
 export default Controller.extend({
 
@@ -11,7 +11,7 @@ export default Controller.extend({
   actions: {
     toggleLegend() {
       let c = this.get("chart");
-      this.toggleProperty('legendVisible');
+      this.toggleProperty("legendVisible");
       let v= this.get("legendVisible");
       let t = v ? "Hide Legend" : "Show Legend";
       this.set("lbuttonText", t);

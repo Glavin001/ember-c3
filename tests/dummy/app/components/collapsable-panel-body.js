@@ -1,5 +1,5 @@
-import Component from '@ember/component';
-import layout from '../templates/components/collapsable-panel-body';
+import Component from "@ember/component";
+import layout from "../templates/components/collapsable-panel-body";
 
 export default Component.extend({
   layout,
