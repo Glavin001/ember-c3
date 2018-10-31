@@ -5,6 +5,10 @@ import { computed }  from '@ember/object';
 
 export default Controller.extend({
 
+  chart: null,
+  legendVisible: true,
+  lbuttonText: "Hide Legend",
+  
   init: function () {
     this._super(...arguments);
 
@@ -38,24 +42,35 @@ export default Controller.extend({
       1500);
   },
 
-  data: computed(function() {
-    // iris data from R
-    return {
+  // iris data from R
+  data: {
       columns: [
         ['data1', 30],
         ['data2', 120],
       ],
       type: 'pie',
-      onclick: bind(this, this.get('actions.myClick')),
-      onmouseover: bind(this, function(d, i) {
-        console.log("onmouseover", d, i);
-      })
-    }
-  }),
+  },
+
+  title: { text: "Iris data from R"},
+
+  padding:  { top: 20 },
+
+  onclick: computed(() => bind(this, this.get('actions.myClick'))),
 
   actions: {
-    myClick(d, i) {
+    myClick(d,  /*i */) {
       alert(`clicked ${d.name}`)
+    },
+
+    toggleLegend() {
+      let c = this.get("chart");
+      this.toggleProperty('legendVisible');
+      let v= this.get("legendVisible");
+      let t = v ? "Hide Legend" : "Show Legend";
+      this.set("lbuttonText", t);
+
+      if (v) c.legend.show();
+       else c.legend.hide();
     }
   }
 

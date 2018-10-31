@@ -1,10 +1,9 @@
 {
   "name": "ember-c3",
   "dependencies": {
-    "c3": "~0.4.10",
-    "d3": "^3.5.17"
+    "c3": "~0.6.8",
+    "d3": "^5.0.0"
   },
   "devDependencies": {
-    "jsoneditor": "~5.5.7"
   }
 }

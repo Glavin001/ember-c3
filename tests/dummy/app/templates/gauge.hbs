@@ -1,28 +1,39 @@
-<div class="">
+{{#collapsable-panel as |panel|}}
+  {{#panel.header}}
+  <h3>Gauge Chart</h3>
+  {{/panel.header}}
 
-  <h2>Generated Chart</h2>
-  <p>See the <strong>data</strong> in the JSON editor below.</p>
+  {{#panel.content}}
+    {{c3-chart 
+      data=data 
+      gauge=gauge 
+      color=color 
+      size=size 
+      title=title
+      padding=padding
+       c3chart=chart}}
+  {{/panel.content}}
+{{/collapsable-panel}}
 
-  {{c3-chart data=data gauge=gauge color=color size=size}}
+<div class="container mt-2">
+  <a href="#" class="pull-right" onclick={{action "toggleLegend"}}>{{lbuttonText}}</a>
+</div>
 
-  <h3>Usage In Ember</h3>
-  <p>See <a href="https://github.com/Glavin001/ember-c3/tree/master/tests/dummy/app" target="_blank">example app source code on GitHub</a>.</p>
-  <div class="well">
-        \{{c3-chart data=data gauge=gauge color=color size=size}}
+<div class="mt-5 ">
+  <h5>templates/gauge.hbs</h5>
+  <div class="pl-3 code-background">
+    \{{c3-chart 
+      data=data 
+      gauge=gauge 
+      color=color 
+      size=size 
+      title=title
+      padding=padding
+      c3chart=chart}}
   </div>
-  <p>You can edit the data for this chart in the editor below.</p>
+</div>
 
-  <hr/>
-
-  <h2>Chart Data Editor</h2>
-  <p>
-    Edit the <strong>data</strong> below, powered by
-    <a href="https://github.com/Glavin001/ember-jsoneditor" target="_blank">Ember JSONEditor</a>,
-    to see the changes thanks to two-way data binding support.
-    The <strong>data</strong> below is from the
-    <a href="http://c3js.org/samples/chart_gauge.html" target="_blank">Gauge Chart</a>
-    in the <a href="http://c3js.org/examples.html" target="_blank">C3 examples</a>.
-   </p>
-  {{json-editor json=data}}
-
+<div class="mt-5">
+  <h5>controllers/gauge.js</h5>
+  {{code-snippet name="gauge.js"}}
 </div>

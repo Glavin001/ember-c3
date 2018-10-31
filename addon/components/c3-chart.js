@@ -1,7 +1,6 @@
 import Component from "@ember/component";
 import { getProperties } from "@ember/object";
 import { debounce, later } from "@ember/runloop";
-import { isPresent }  from '@ember/utils';
 import c3 from "c3";
 
 export default Component.extend({
@@ -47,7 +46,7 @@ export default Component.extend({
       "data", "line", "bar", "pie", "donut", "gauge",
       "grid", "legend", "tooltip", "subchart", "zoom",
       "point", "axis", "regions", "area", "size",
-      "padding", "color", "transition"
+      "padding", "color", "transition", "title"
     ];
 
     // get base c3 properties

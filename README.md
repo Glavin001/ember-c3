@@ -5,7 +5,7 @@
  
 > Ember component library for [C3, a D3-based reusable chart library](https://github.com/masayuki0812/c3).
 
-**Live Demo:** http://glavin001.github.io/ember-c3/
+**Forked Demo:** https://maxwondercorn.github.io/ember-c3/
 
 Alternatively take a look at [Ember-NVD3](https://github.com/Glavin001/ember-nvd3) for your charting needs.
 
@@ -19,7 +19,10 @@ ember install ember-c3
 
 ## Usage
 
-For a complete example, see the [dummy test app in `tests/dummy/app/`](https://github.com/Glavin001/ember-c3/tree/master/tests/dummy/app).
+For a complete example, see the [dummy test app in `tests/dummy/app/`]
+(https://github.com/maxwondercorn/ember-c3/tree/master/tests/dummy/app)
+
+<!-- (https://github.com/Glavin001/ember-c3/tree/master/tests/dummy/app). -->
 
 | Combination |
 | --- |
@@ -50,6 +53,7 @@ See http://c3js.org/examples.html for examples of how to use C3.
 
 ```handlebars
 {{c3-chart
+  c3chart=chart
   data=model
   axis=axis
   regions=regions
@@ -57,20 +61,159 @@ See http://c3js.org/examples.html for examples of how to use C3.
   pie=pie
   donut=donut
   gauge=gauge
+  line=line
+  area=area
   grid=grid
   legend=legend
   tooltip=tooltip
   subchart=subchart
   zoom=zoom
   point=point
-  line=line
-  area=area
   size=size
   padding=padding
+  title=title
   color=color
   transition=transition
 }}
 ```
+
+The properties match their corresponding C3 objects found in the [C3 Documentation](https://c3js.org/gettingstarted.html#generate).  As shown in the C3 documentation, most of the objects (i.e. bar, axis, size, etc) can be included in the data object.  The component properties breakout the objects to make it easier to manipulate the chart.  Note: The chart type is always assigned in the chart data object
+
+Property | Description | Example
+---------|-------------|--------
+c3chart | Points to the c3 chart created by the component.  Any C3 api method can be executed using this property | chart.hide("data1")
+  data | C3 data [object](https://c3js.org/gettingstarted.html#generate)
+  axis | C3 axis [object](https://c3js.org/reference.html#axis-rotated). See C3 examples for combining with data object
+  regions | need to test may need to be with data
+  bar | Used to assign or modify bar chart [properties](https://c3js.org/reference.html#bar-width) |
+  pie | Used to assign or modify pie chart [properties](https://c3js.org/reference.html#pie-label-show) |
+  donut | Used to assign or modify donut chart [properties](https://c3js.org/reference.html#donut-label-show) |
+  gauge | Used to assign or modify gauge chart [properties](https://c3js.org/reference.html#gauge-label-show) |
+  line | Used to assign or modify line chart [properties](https://c3js.org/reference.html#line-connectNull) |
+  area | Used to assign or modify area chart [properties](https://c3js.org/reference.html#area-zerobased) |
+  point | Used to assign or modify data point [properties](https://c3js.org/reference.html#point-show) |
+  grid |
+  legend |
+  tooltip |
+  subchart |
+  zoom |
+  size | Chart size [settings](https://c3js.org/reference.html#size-width)
+  padding |
+  title | Set chart title | title: { text: "This is my chart" }
+  color | Used to assign color [properties](https://c3js.org/reference.html#color-pattern) 
+  transition | Equivalent to [transition.duration](https://c3js.org/reference.html#transition-duration).  Default duration is 350ms
+
+
+### C3 Methods
+If you assign a value to the c3chart property, you can use most of the C3 [methods](https://c3js.org/reference.html#api-focus) found in the documentation.  Not all the methods have been tested but all should work as documented.
+
+templates/someroute.hbs
+```
+{{c3-chart data=mydata c3chart=chart}}
+
+<button onclick={{action "loadUS"}}>US Cars</button>
+<button onclikc={{action "loadGerman"}}>German Cars</button>
+<button onclikc={{action "resetData"}}>Reset</button>
+```
+
+controllers/someroute.js
+```js
+import { later } from '@ember/runloop';
+import Controller from '@ember/controller';
+/* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
+
+export default Controller.extend({
+
+ chart: null,
+
+ baseData:   
+    { 
+      columns: [
+        ['US', 64],
+        ['German', 36]
+      ],
+      type: 'donut'
+    },
+ 
+ modelsGerman: [
+        ['Mercedes', 12],
+        ['Volkswagon', 54],
+        ['BMW', 34]
+      ],
+
+  modelsUS: [
+    ['Ford', 35],
+    ['Chevy', 26],
+    ['Tesla', 2],
+    ['Buick', 10],
+    ['Dodge', 27]
+  ],
+
+  actions: {
+     resetData() {
+      let c = this.get("chart");
+      c.unload();
+      later(this, () => c.load({ columns: this.get("baseData") }), 300);
+    },
+
+    loadUS() {
+      let c = this.get('chart');
+      c.load({ columns: this.get('modelsUS')});
+      c.unload("US", "German");
+    },
+       
+    loadGerman() {
+      let c = this.get('chart');
+      c.load({ columns: this.get('modelsGerman')});
+      c.unload("US", "German");
+    }
+  }
+
+});
+```
+
+### Events
+The addon exposes the following C3 [events](https://c3js.org/reference.html#oninit). The events call backs can be assigned to actions as shown in the example below.
+
+* oninit
+* onrendered
+* onmouseover
+* onmouseout
+* onresize
+* onresized
+
+
+```
+import Controller from "@ember/controller";
+import { computed } from "@ember/object";
+import { bind } from "@ember/runloop";
+
+export default Controller.extend({
+ data: computed(function() {
+    // iris data from R
+    return {
+      columns: [
+        ["data1", 30],
+        ["data2", 120],
+        ["data3", 10],
+        ["data4", 45],
+        ["data5", 90]
+      ],
+      type: "pie",
+      onmouseover: bind(this, this.get("actions.myMouseover"))
+    };
+  }),
+
+ actions: {
+     myMouseover(d, /* i */) {
+      this.set("message", `${d.name}, value: ${d.value}`);
+    },
+  }
+});
+```
+
+### Click Events
+Example code here...
 
 ### Helpful Links
 
@@ -86,7 +229,6 @@ See http://c3js.org/examples.html for examples of how to use C3.
 
 ## Running Tests
 
-* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
 * `ember test`
 * `ember test --server`
 
