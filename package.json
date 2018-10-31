@@ -21,6 +21,9 @@
     "doc": "doc",
     "test": "tests"
   },
+  "contributors": [
+    "maxwondercorn <> (https://github.com/maxwondercorn)"
+  ],
   "repository": "https://github.com/Glavin001/ember-c3",
   "scripts": {
     "build": "ember build",
