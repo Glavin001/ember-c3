@@ -1,0 +1,26 @@
+{{#collapsable-panel as |panel|}}
+  {{#panel.header}}
+   <h3>Drill Down</h3>
+  {{/panel.header}}
+
+  {{#panel.content}}
+    {{c3-chart data=data title=title padding=padding c3chart=chart}}
+  {{/panel.content}}
+{{/collapsable-panel}}
+
+<div class="container mt-2">
+  <button class="btn btn-sm btn-primary" onclick={{action "resetData"}}>Reset</button>
+  <a href="#" class="pull-right" onclick={{action "toggleLegend"}}>{{lbuttonText}}</a>
+</div>
+
+<div class="mt-5 ">
+  <h5>templates/drilldown.hbs</h5>
+  <div class="pl-3 code-background">
+    \{{c3-chart data=data title=title padding=padding c3chart=chart}}
+  </div>
+</div>
+
+<div class="mt-5">
+  <h5>controllers/drilldown.js</h5>
+  {{code-snippet name="drilldown.js"}}
+</div>

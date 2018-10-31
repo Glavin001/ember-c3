@@ -12,6 +12,7 @@ Router.map(function() {
   this.route('pie');
   this.route('donut');
   this.route('events');
+  this.route('drilldown');
 });
 
 export default Router;
