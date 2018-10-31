@@ -49,10 +49,6 @@ export default Controller.extend({
         ['data2', 120],
       ],
       type: 'pie',
-      // onclick: bind(this, get(this, 'actions.myClick')),
-      // onmouseover: bind(this, function(d, i) {
-      //   console.log("onmouseover", d, i);
-      // })
   },
 
   title: { text: "Iris data from R"},
