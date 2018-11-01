@@ -11,6 +11,7 @@
     "chart",
     "graph"
   ],
+  "repository": "https://github.com/Glavin001/ember-c3",
   "license": "MIT",
   "author": {
     "name": "Glavin Wiechert",
@@ -24,12 +25,12 @@
   "contributors": [
     "maxwondercorn <> (https://github.com/maxwondercorn)"
   ],
-  "repository": "https://github.com/Glavin001/ember-c3",
   "scripts": {
     "build": "ember build",
-    "lint:js": "eslint ./*.js addon addon-test-support app config lib server test-support tests",
+    "lint:js": "eslint .",
     "start": "ember serve",
     "test": "ember test",
+    "test:all": "ember try:each",
     "deploy": "ember build && ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\" && git push origin gh-pages:gh-pages"
   },
   "dependencies": {
@@ -37,10 +38,10 @@
   },
   "devDependencies": {
     "bootstrap": "^4.1.0",
-    "broccoli-asset-rev": "^2.4.5",
+    "broccoli-asset-rev": "^2.7.0",
     "ember-ajax": "^3.0.0",
     "ember-c3-shim": "0.0.7",
-    "ember-cli": "~2.18.2",
+    "ember-cli": "~3.3.0",
     "ember-cli-bootstrap-4": "^0.6.1",
     "ember-cli-dependency-checker": "^2.0.0",
     "ember-cli-eslint": "^4.2.1",
@@ -48,7 +49,7 @@
     "ember-cli-htmlbars": "^2.0.1",
     "ember-cli-htmlbars-inline-precompile": "^1.0.0",
     "ember-cli-inject-live-reload": "^1.4.1",
-    "ember-cli-qunit": "^4.1.1",
+    "ember-cli-qunit": "^4.3.2",
     "ember-cli-sass": "^8.0.1",
     "ember-cli-shims": "^1.2.0",
     "ember-cli-sri": "^2.1.0",
@@ -57,17 +58,21 @@
     "ember-disable-prototype-extensions": "^1.1.2",
     "ember-export-application-global": "^2.0.0",
     "ember-font-awesome": "^4.0.0-rc.4",
-    "ember-load-initializers": "^1.0.0",
+    "ember-load-initializers": "^1.1.0",
+    "ember-maybe-import-regenerator": "^0.1.6",
     "ember-resolver": "^4.0.0",
-    "ember-source": "~2.18.0",
+    "ember-source": "~3.3.0",
+    "ember-source-channel-url": "^1.0.1",
+    "ember-try": "^0.2.23",
     "eslint-plugin-ember": "^5.0.0",
     "eslint-plugin-node": "^6.0.1",
     "loader.js": "^4.2.3",
     "popper.js": "^1.14.0",
+    "qunit-dom": "^0.6.2",
     "sass": "^1.14.3"
   },
   "engines": {
-    "node": "^4.5 || 6.* || >= 7.*"
+    "node": "6.* || 8.* || >= 10.*"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
