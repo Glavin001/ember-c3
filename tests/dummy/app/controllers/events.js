@@ -22,8 +22,8 @@ export default Controller.extend({
       ],
       type: "pie",
       // https://balinterdi.com/blog/ember-dot-run-dot-bind/
-      onclick: bind(this, this.get("actions.myClick")),
-      onmouseover: bind(this, this.get("actions.myMouseover"))
+      onclick: bind(this, this.actions.myClick),
+      onmouseover: bind(this, this.actions.myMouseover)
     };
   }),
 
@@ -42,9 +42,9 @@ export default Controller.extend({
     },
     
     toggleLegend() {
-      let c = this.get("chart");
+      let c = this.chart;
       this.toggleProperty("legendVisible");
-      let v= this.get("legendVisible");
+      let v= this.legendVisible;
       let t = v ? "Hide Legend" : "Show Legend";
       this.set("lbuttonText", t);
 

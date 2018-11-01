@@ -12,15 +12,15 @@ export default Component.extend({
   _reload() {
     // didUpdateAttrs() can schedule _reload when the component is being destroyed
     // this prevents the reload and an error being spit out into the console
-    if (this.get("isDestroying") || this.get("isDestroyed")) { 
+    if (this.isDestroying || this.isDestroyed) { 
       return;
     }
 
-    const chart = this.get("c3chart");
+    const chart = this.c3chart;
 
     // if data should not be appended
     // e.g. when using a pie or donut chart
-    if (this.get("unloadDataBeforeChange")) {
+    if (this.unloadDataBeforeChange) {
       chart.unload();
 
       // default animation is 350ms
@@ -30,14 +30,14 @@ export default Component.extend({
       later(() => {
         chart.load(
           // data, axis, color, title are only mutable elements
-          this.get("data"),
-          this.get("axis"),
-          this.get("color"),
-          this.get("title")
+          this.data,
+          this.axis,
+          this.color,
+          this.title
         );
-      }, this.get("transition") || this.get("_transition"));
+      }, this.transition || this._transition);
     } else {
-      chart.load(this.get("data"), this.get("axis"), this.get("color"), this.get("title"));
+      chart.load(this.data, this.axis, this.color, this.title);
     }
   },
 
@@ -101,6 +101,6 @@ export default Component.extend({
   // execute teardown method
   willDestroyElement() {
     this._super(...arguments);
-    this.get("c3chart").destroy();
+    this.c3chart.destroy();
   }
 });

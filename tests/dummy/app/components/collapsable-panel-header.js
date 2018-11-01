@@ -5,7 +5,8 @@ export default Component.extend({
   layout,
   classNames: ["card-header bg-white"],
 
-  click() {
-    this.get("on-click")();
-  }
+  // not using expandable header portion
+  // click() {
+  //   this.on-click();
+  // }
 });

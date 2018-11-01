@@ -8,6 +8,6 @@ export default Component.extend({
   h0: true,
 
   didReceiveAttrs() {
-    this.set("h0", !this.get("isOpen"))
+    this.set("h0", !this.isOpen)
   },
 });

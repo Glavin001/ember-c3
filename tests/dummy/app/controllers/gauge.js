@@ -72,9 +72,9 @@ export default Controller.extend({
 
   actions: {
     toggleLegend() {
-      let c = this.get("chart");
+      let c = this.chart;
       this.toggleProperty("legendVisible");
-      let v= this.get("legendVisible");
+      let v= this.legendVisible;
       let t = v ? "Hide Legend" : "Show Legend";
       this.set("lbuttonText", t);
 

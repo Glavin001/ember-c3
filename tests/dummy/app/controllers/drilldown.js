@@ -46,7 +46,7 @@ export default Controller.extend({
         ["Yellow Flowers", 300]
       ],
       type: "pie",
-      onclick: bind(this, this.get("actions.myClick"))
+      onclick: bind(this, this.actions.myClick)
     };
   }),
 
@@ -70,33 +70,33 @@ export default Controller.extend({
     },
 
     resetData() {
-      let c = this.get("chart");
+      let c = this.chart;
       c.unload();
-      later(this, () => c.load({ columns: this.get("baseData") }), 300);
+      later(this, () => c.load({ columns: this.baseData }), 300);
     },
 
     drilldownBlue() {
-      let c = this.get("chart");
-      c.load({ columns: this.get("blueFlowers") });
+      let c = this.chart;
+      c.load({ columns: this.blueFlowers});
       c.unload(["Blue Flowers", "Red Flowers", "Yellow Flowers"]);
     },
 
     drilldownRed() {
-      let c = this.get("chart");
-      c.load({ columns: this.get("redFlowers") });
+      let c = this.chart;
+      c.load({ columns: this.redFlowers});
       c.unload(["Blue Flowers", "Red Flowers", "Yellow Flowers"]);
     },
 
     drilldownYellow() {
-      let c = this.get("chart");
-      c.load({ columns: this.get("yellowFlowers") });
+      let c = this.chart;
+      c.load({ columns: this.yellowFlowers });
       c.unload(["Blue Flowers", "Red Flowers", "Yellow Flowers"]);
     },
 
     toggleLegend() {
-      let c = this.get("chart");
+      let c = this.chart;
       this.toggleProperty("legendVisible");
-      let v = this.get("legendVisible");
+      let v = this.legendVisible;
       let t = v ? "Hide Legend" : "Show Legend";
       this.set("lbuttonText", t);
 

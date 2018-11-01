@@ -154,20 +154,20 @@ export default Controller.extend({
 
   actions: {
      resetData() {
-      let c = this.get("chart");
+      let c = this.chart;
       c.unload();
-      later(this, () => c.load({ columns: this.get("baseData") }), 300);
+      later(this, () => c.load({ columns: this.baseData }), 300);
     },
 
     loadUS() {
-      let c = this.get("chart");
-      c.load({ columns: this.get("modelsUS")});
+      let c = this.chart;
+      c.load({ columns: this.modelsUS});
       c.unload("US", "German");
     },
        
     loadGerman() {
-      let c = this.get("chart");
-      c.load({ columns: this.get("modelsGerman")});
+      let c = this.chart;
+      c.load({ columns: this.modelsGerman});
       c.unload("US", "German");
     }
   }
@@ -203,7 +203,7 @@ export default Controller.extend({
         ["data5", 90]
       ],
       type: "pie",
-      onmouseover: bind(this, this.get("actions.myMouseover"))
+      onmouseover: bind(this, this.actions.myMouseover)
     };
   }),
 

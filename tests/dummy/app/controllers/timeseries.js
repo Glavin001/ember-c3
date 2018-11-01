@@ -14,7 +14,7 @@ export default Controller.extend({
     later(
       this,
       function() {
-        this.get("data.columns").push(["data3", 400, 500, 450, 700, 600, 500]);
+        this.data.columns.push(["data3", 400, 500, 450, 700, 600, 500]);
         this.notifyPropertyChange("data");
       },
       1000
@@ -53,9 +53,9 @@ export default Controller.extend({
 
   actions: {
     toggleLegend() {
-      let c = this.get("chart");
+      let c = this.chart;
       this.toggleProperty("legendVisible");
-      let v = this.get("legendVisible");
+      let v = this.legendVisible;
       let t = v ? "Hide Legend" : "Show Legend";
       this.set("lbuttonText", t);
 
