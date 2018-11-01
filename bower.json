@@ -1,9 +1,0 @@
-{
-  "name": "ember-c3",
-  "dependencies": {
-    "c3": "~0.6.8",
-    "d3": "^5.0.0"
-  },
-  "devDependencies": {
-  }
-}
