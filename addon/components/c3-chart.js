@@ -1,7 +1,7 @@
 import Component from "@ember/component";
 import { getProperties } from "@ember/object";
 import { debounce, later } from "@ember/runloop";
-import c3 from "c3";
+import  c3  from "c3";
 
 export default Component.extend({
   tagName: "div",
@@ -12,7 +12,7 @@ export default Component.extend({
   _reload() {
     // didUpdateAttrs() can schedule _reload when the component is being destroyed
     // this prevents the reload and an error being spit out into the console
-    if (this.get('isDestroying') || this.get('isDestroyed')) { 
+    if (this.get("isDestroying") || this.get("isDestroyed")) { 
       return;
     }
 
@@ -24,19 +24,20 @@ export default Component.extend({
       chart.unload();
 
       // default animation is 350ms
-      // t/f data must by loaded after unload animation (400)
+      // t/f data must by loaded after unload animation (350)
       // or chart will not properly render
 
       later(() => {
         chart.load(
-          // data, axis, color are only mutable elements
+          // data, axis, color, title are only mutable elements
           this.get("data"),
           this.get("axis"),
-          this.get("color")
+          this.get("color"),
+          this.get("title")
         );
-      }, this.get('transition') || this.get("_transition"));
+      }, this.get("transition") || this.get("_transition"));
     } else {
-      chart.load(this.get("data"), this.get("axis"), this.get("color"));
+      chart.load(this.get("data"), this.get("axis"), this.get("color"), this.get("title"));
     }
   },
 

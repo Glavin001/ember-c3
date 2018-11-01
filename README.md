@@ -83,8 +83,8 @@ The properties match their corresponding C3 objects found in the [C3 Documentati
 Property | Description | Example
 ---------|-------------|--------
 c3chart | Points to the c3 chart created by the component.  Any C3 api method can be executed using this property | chart.hide("data1")
-  data | C3 data [object](https://c3js.org/gettingstarted.html#generate)
-  axis | C3 axis [object](https://c3js.org/reference.html#axis-rotated). See C3 examples for combining with data object
+  data* | C3 data [object](https://c3js.org/gettingstarted.html#generate). Chart data is mutable after the chart is created
+  axis* | C3 axis [object](https://c3js.org/reference.html#axis-rotated). See C3 examples for combining with data object.  Chart axis are mutable after the chart is created
   regions | need to test may need to be with data
   bar | Used to assign or modify bar chart [properties](https://c3js.org/reference.html#bar-width) |
   pie | Used to assign or modify pie chart [properties](https://c3js.org/reference.html#pie-label-show) |
@@ -100,8 +100,8 @@ c3chart | Points to the c3 chart created by the component.  Any C3 api method ca
   zoom | Control and set C3 zoom features. See [docs](https://c3js.org/reference.html#zoom-enabled)
   size | Control hart size see [docs](https://c3js.org/reference.html#size-width) | size: {width: 640 }
   padding | Set padding around graph.  See docs(https://c3js.org/reference.html#padding-top)  | padding: { top: 20}
-  title | Set chart title | title: { text: "This is my chart" }
-  color | Used to assign color [properties](https://c3js.org/reference.html#color-pattern) 
+  title* | Set chart title. The title is mutable after the chart is created | title: { text: "This is my chart" }
+  color* | Used to assign color [properties](https://c3js.org/reference.html#color-pattern). The chart colors are mutable after chart creation
   transition | Equivalent to [transition.duration](https://c3js.org/reference.html#transition-duration).  Default duration is 350ms
   unloadDataBeforeChange | When set to true the data will be unloaded before new data is loaded with didUpdateAttrs().  This is useful for pie and donut charts.  Can now also manage data loading with .load()/.unload() methods on exposed c3chart
 
@@ -120,8 +120,8 @@ templates/someroute.hbs
 
 controllers/someroute.js
 ```js
-import { later } from '@ember/runloop';
-import Controller from '@ember/controller';
+import { later } from "@ember/runloop";
+import Controller from "@ember/controller";
 /* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
 export default Controller.extend({
@@ -131,24 +131,24 @@ export default Controller.extend({
  baseData:   
     { 
       columns: [
-        ['US', 64],
-        ['German', 36]
+        ["US", 64],
+        ["German", 36]
       ],
-      type: 'donut'
+      type: "donut"
     },
  
  modelsGerman: [
-        ['Mercedes', 12],
-        ['Volkswagon', 54],
-        ['BMW', 34]
+        ["Mercedes", 12],
+        ["Volkswagon", 54],
+        ["BMW", 34]
       ],
 
   modelsUS: [
-    ['Ford', 35],
-    ['Chevy', 26],
-    ['Tesla', 2],
-    ['Buick', 10],
-    ['Dodge', 27]
+    ["Ford", 35],
+    ["Chevy", 26],
+    ["Tesla", 2],
+    ["Buick", 10],
+    ["Dodge", 27]
   ],
 
   actions: {
@@ -159,14 +159,14 @@ export default Controller.extend({
     },
 
     loadUS() {
-      let c = this.get('chart');
-      c.load({ columns: this.get('modelsUS')});
+      let c = this.get("chart");
+      c.load({ columns: this.get("modelsUS")});
       c.unload("US", "German");
     },
        
     loadGerman() {
-      let c = this.get('chart');
-      c.load({ columns: this.get('modelsGerman')});
+      let c = this.get("chart");
+      c.load({ columns: this.get("modelsGerman")});
       c.unload("US", "German");
     }
   }
