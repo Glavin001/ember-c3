@@ -15,7 +15,7 @@ export default Controller.extend({
   ],
 
   blueFlowers: [
-    ["wolfsbane", 5],
+    ["Wolfsbane", 5],
     ["Cornflower", 17],
     ["Hydrangea", 24],
     ["Triteleia", 51],
@@ -50,8 +50,8 @@ export default Controller.extend({
     };
   }),
 
-  title: { text: "Iris data from R" },
-
+  // chart title
+  title: { text: "Flowers by Color" },
   padding: { top: 20 },
 
   actions: {
@@ -73,6 +73,7 @@ export default Controller.extend({
       let c = this.chart;
       c.unload();
       later(this, () => c.load({ columns: this.baseData }), 300);
+      // this.set("title", "Flowers by Color");
     },
 
     drilldownBlue() {
@@ -88,6 +89,7 @@ export default Controller.extend({
     },
 
     drilldownYellow() {
+      debugger
       let c = this.chart;
       c.load({ columns: this.yellowFlowers });
       c.unload(["Blue Flowers", "Red Flowers", "Yellow Flowers"]);

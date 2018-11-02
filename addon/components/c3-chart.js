@@ -1,7 +1,7 @@
 import Component from "@ember/component";
 import { getProperties } from "@ember/object";
 import { debounce, later } from "@ember/runloop";
-import  c3  from "c3";
+import c3 from "c3";
 
 export default Component.extend({
   tagName: "div",
@@ -12,7 +12,7 @@ export default Component.extend({
   _reload() {
     // didUpdateAttrs() can schedule _reload when the component is being destroyed
     // this prevents the reload and an error being spit out into the console
-    if (this.isDestroying || this.isDestroyed) { 
+    if (this.isDestroying || this.isDestroyed) {
       return;
     }
 
@@ -29,15 +29,14 @@ export default Component.extend({
 
       later(() => {
         chart.load(
-          // data, axis, color, title are only mutable elements
+          // data, axis, color are only mutable elements
           this.data,
           this.axis,
-          this.color,
-          this.title
+          this.color
         );
       }, this.transition || this._transition);
     } else {
-      chart.load(this.data, this.axis, this.color, this.title);
+      chart.load(this.data, this.axis, this.color);
     }
   },
 
@@ -48,7 +47,7 @@ export default Component.extend({
       "grid", "legend", "tooltip", "subchart", "zoom",
       "point", "axis", "regions", "area", "size",
       "padding", "color", "transition", "title"
-    ];
+      ];
 
     // get base c3 properties
     const chartConfig = getProperties(this, properties);
@@ -60,8 +59,6 @@ export default Component.extend({
     callbacks.call(this);
 
     function callbacks() {
-      const that = this;
-
       const c3events = [
         "oninit",
         "onrendered",
@@ -71,21 +68,16 @@ export default Component.extend({
         "onresized"
       ];
 
-      c3events.forEach(event => {
-        chartConfig[event] = function() {
-          that.sendAction(event, that);
-        };
-      });
+      c3events.forEach(
+        event => (chartConfig[event] = () => this.sendAction(event, this))
+      );
     }
 
     // render the initial chart
     this.set("c3chart", c3.generate(chartConfig));
   },
 
-  /***
-   * Component lifecycle hooks to control rendering actions
-   ***/
-
+//  Component lifecycle hoiks
   didInsertElement() {
     this._super(...arguments);
     this._setupc3();

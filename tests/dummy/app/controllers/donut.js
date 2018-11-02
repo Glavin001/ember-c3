@@ -49,10 +49,9 @@ export default Controller.extend({
       type: "donut"
     },
 
+  // chart title
   title: { text: "Iris data from R" },
-  
   donut: { title: "Iris Petal Width" },
-
   padding:  { top: 20 },
 
   actions: {

@@ -101,7 +101,7 @@ c3chart | Points to the c3 chart created by the component.  Any C3 api method ca
   zoom | Control and set C3 zoom features. See [docs](https://c3js.org/reference.html#zoom-enabled)
   size | Control hart size see [docs](https://c3js.org/reference.html#size-width) | size: {width: 640 }
   padding | Set padding around graph.  See docs(https://c3js.org/reference.html#padding-top)  | padding: { top: 20}
-  title* | Set chart title. The title is mutable after the chart is created | title: { text: "This is my chart" }
+  title | Set chart title | title: { text: "This is my chart" }
   color* | Used to assign color [properties](https://c3js.org/reference.html#color-pattern). The chart colors are mutable after chart creation
   transition | Equivalent to [transition.duration](https://c3js.org/reference.html#transition-duration).  Default duration is 350ms
   unloadDataBeforeChange | When set to true the data will be unloaded before new data is loaded with didUpdateAttrs().  This is useful for pie and donut charts.  Can now also manage data loading with .load()/.unload() methods on exposed c3chart

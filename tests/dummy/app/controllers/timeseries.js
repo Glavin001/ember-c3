@@ -47,8 +47,8 @@ export default Controller.extend({
     }
   },
 
+  // chart title
   title: { text: "Downloads by Day" },
-
   padding: { top: 20 },
 
   actions: {

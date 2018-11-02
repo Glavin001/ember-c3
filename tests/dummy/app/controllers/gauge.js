@@ -66,8 +66,8 @@ export default Controller.extend({
     height: 180
   },
 
+  // chart title
   title: { text: "Percent complete"},
-
   padding:  { top: 20 },
 
   actions: {
