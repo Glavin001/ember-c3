@@ -9,15 +9,15 @@
 {{/collapsable-panel}}
 
 <div class="container mt-2">
-  <a href="#" onclick={{action "toggleLegend"}}>Toggle Legend</a>
-  <a href="#" onclick={{action "toggleData3"}}>Toggle Data 3</a>
-  <a href="#" onclick={{action "transform"}}>Transform</a>
+  <button class="btn btn-sm btn-primary" onclick={{action "toggleLegend"}}>Toggle Legend</button>
+  <button class="btn btn-sm btn-primary" onclick={{action "toggleData3"}}>Toggle Data 3</button>
+  <button class="btn btn-sm btn-primary" onclick={{action "transform"}}>Transform</button>
   {{#if isBar}}
-    <a href="#" onclick={{action "stackBars"}}>Stack Bars</a>
+    <button class="btn btn-sm btn-primary" onclick={{action "stackBars"}}>Stack Bars</button>
   {{else}}
-    <a href="#" onclick={{action "makeCombo"}}>Combo</a>
+    <button class="btn btn-sm btn-primary" onclick={{action "makeCombo"}}>Combo</button>
   {{/if}}
-  <a href="#" onclick={{action "changeColors"}}>Change Colors</a>
+  <button class="btn btn-sm btn-primary" onclick={{action "changeColors"}}>Change Colors</button>
 </div>
 
 
