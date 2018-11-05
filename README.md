@@ -255,6 +255,9 @@ export default Controller.extend({
 
 For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
 
+### Dummy app on gh-pages
+Use `npm run deploy` to build and deploy dummy app to the gh-pages branch
+
 License
 ------------------------------------------------------------------------------
 
