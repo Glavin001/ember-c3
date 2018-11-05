@@ -13,35 +13,35 @@ export default Controller.extend({
         ["data", 10]
       ]);
       this.notifyPropertyChange("data");
-    }, 1000);
+    }, 500);
 
     later(this, () => {
       this.set("data.columns", [
         ["data", 50]
       ]);
       this.notifyPropertyChange("data");
-    }, 2000);
+    }, 1000);
 
     later(this, () => {
       this.set("data.columns", [
           ["data", 70]
       ]);
       this.notifyPropertyChange("data");
-    }, 3000);
+    }, 1500);
 
     later(this, () => {
       this.set("data.columns", [
           ["data", 0]
       ]);
       this.notifyPropertyChange("data");
-    }, 4000);
+    }, 2000);
 
     later(this, () => {
       this.set("data.columns", [
           ["data", 100]
       ]);
       this.notifyPropertyChange("data");
-    }, 5000);
+    }, 2500);
 
   },
 

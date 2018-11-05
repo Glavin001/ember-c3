@@ -241,6 +241,9 @@ export default Controller.extend({
 * `npm install` or `yarn install`
 * `ember server`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
+* `npm run lint:hbs`
+* `npm run lint:js`
+* `npm run lint:js -- --fix`
 
 ### Running tests
 

@@ -1,55 +1,79 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   {{#link-to "index" class="navbar-brand"}}
     <img src="images/ember-logo.png" alt="">
-    <span>C3</span>
+    <span>
+      C3
+    </span>
   {{/link-to}}
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
     <span class="navbar-toggler-icon"></span>
   </button>
-
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-         {{#link-to "index" classNames="nav-link"}}Combination{{/link-to}}
+        {{#link-to "index" classNames="nav-link"}}
+          Combination
+        {{/link-to}}
       </li>
       <li class="nav-item">
-        {{#link-to "gauge" classNames="nav-link"}}Gauge{{/link-to}}
+        {{#link-to "gauge" classNames="nav-link"}}
+          Gauge
+        {{/link-to}}
       </li>
       <li class="nav-item">
-        {{#link-to "timeseries" classNames="nav-link"}}Timeseries{{/link-to}}
-      </li>
-        <li class="nav-item">
-         {{#link-to "pie" classNames="nav-link"}}Pie{{/link-to}}
-      </li>
-      <li class="nav-item">
-         {{#link-to "donut" classNames="nav-link"}}Donut{{/link-to}}
-      </li>
-       <li class="nav-item">
-        {{#link-to "chart-events" classNames="nav-link"}}Chart Events{{/link-to}}
+        {{#link-to "timeseries" classNames="nav-link"}}
+          Timeseries
+        {{/link-to}}
       </li>
       <li class="nav-item">
-        {{#link-to "events" classNames="nav-link"}}Data Events{{/link-to}}
+        {{#link-to "pie" classNames="nav-link"}}
+          Pie
+        {{/link-to}}
       </li>
       <li class="nav-item">
-        {{#link-to "chart-obj" classNames="nav-link"}}Chart Object{{/link-to}}
+        {{#link-to "donut" classNames="nav-link"}}
+          Donut
+        {{/link-to}}
       </li>
       <li class="nav-item">
-        {{#link-to "drilldown" classNames="nav-link"}}Drill Down{{/link-to}}
+        {{#link-to "chart-events" classNames="nav-link"}}
+          Chart Events
+        {{/link-to}}
+      </li>
+      <li class="nav-item">
+        {{#link-to "events" classNames="nav-link"}}
+          Data Events
+        {{/link-to}}
+      </li>
+      <li class="nav-item">
+        {{#link-to "chart-obj" classNames="nav-link"}}
+          Chart Object
+        {{/link-to}}
+      </li>
+      <li class="nav-item">
+        {{#link-to "drilldown" classNames="nav-link"}}
+          Drill Down
+        {{/link-to}}
       </li>
     </ul>
-
-    <a href="https://github.com/Glavin001/ember-c3" class="fa fa-github github nav-link"></a>
+    <a
+      href="https://github.com/Glavin001/ember-c3"
+      class="fa fa-github github nav-link"
+    >
+      Demo app
+    </a>
   </div>
 </nav>
-
-  
-  
-
 <main role="main">
   <div class="container">
     {{outlet}}
   </div>
 </main>
-
-
-

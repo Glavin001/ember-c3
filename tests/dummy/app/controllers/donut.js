@@ -42,7 +42,7 @@ export default Controller.extend({
         ]);
       this.notifyPropertyChange("data");
     },
-      1500);
+      500);
   },
 
   data: {
