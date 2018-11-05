@@ -71,7 +71,6 @@ export default Controller.extend({
     },
 
     resizing(/* chart */){
-      debugger
       this.set("message", "adjusting...");
       later(() => this.set("message", ""), 700)
     }
