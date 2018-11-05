@@ -52,7 +52,7 @@ Where `model` is your C3 data:
 
 See http://c3js.org/examples.html for examples of how to use C3.
 
-```handlebars
+```hbs
 {{c3-chart
   c3chart=chart
   data=model
@@ -76,6 +76,12 @@ See http://c3js.org/examples.html for examples of how to use C3.
   color=color
   transition=transition
   unloadDataBeforeChange=true
+  oninit
+  onrendered
+  onmouseover
+  onmouseout
+  onresize
+  onresized
 }}
 ```
 
@@ -105,7 +111,12 @@ c3chart | Points to the c3 chart created by the component.  Any C3 api method ca
   color* | Used to assign color [properties](https://c3js.org/reference.html#color-pattern). The chart colors are mutable after chart creation
   transition | Equivalent to [transition.duration](https://c3js.org/reference.html#transition-duration).  Default duration is 350ms
   unloadDataBeforeChange | When set to true the data will be unloaded before new data is loaded with didUpdateAttrs().  This is useful for pie and donut charts.  Can now also manage data loading with .load()/.unload() methods on exposed c3chart
-
+  oninit | c3 chart event, see events section below | oninit=(action "init")
+  onrendered | c3 chart event, see events section below | onrendered=(action "init")
+  onmouseover | c3 chart event, see events section below | onmouseover=(action "mouseover")
+  onmouseout | c3 chart event, see events section below | onmouseout=(action "mouseout")
+  onresize | c3 chart event, see events section below | onresize=(action "resize")
+  onresized | c3 chart event, see events section below | onresized=(action "resized")
 
 ### C3 Methods
 If you assign a value to the c3chart property, you can use most of the C3 [methods](https://c3js.org/reference.html#api-focus) found in the documentation.  Not all the methods have been tested but all should work as documented.
@@ -171,22 +182,21 @@ export default Controller.extend({
       c.unload("US", "German");
     }
   }
-
 });
 ```
 
-### Events
-The addon exposes the following C3 [events](https://c3js.org/reference.html#oninit). The events call backs can be assigned to actions as shown in the example below.
+### C3 Events
+c3 emits two types of events - [chart](https://c3js.org/reference.html#oninit) and [data](https://c3js.org/reference.html#data-onclick) events.  Chart events can be assigned to an action via a property.  Data events must be assigned an action as part of the data object.  For connivence, the chart object is passed into all chart events.  An example of a chart and data event is shown below.  See the dummy app for more examples
 
-* oninit
-* onrendered
-* onmouseover
-* onmouseout
-* onresize
-* onresized
-
-
-```
+templates/application.hbs
+```hbs
+{{c3-chart 
+  data=data
+  oninit=(action 'init')
+  }}
+  ```
+controllers/application.js
+```js
 import Controller from "@ember/controller";
 import { computed } from "@ember/object";
 import { bind } from "@ember/runloop";
@@ -203,20 +213,23 @@ export default Controller.extend({
         ["data5", 90]
       ],
       type: "pie",
-      onmouseover: bind(this, this.actions.myMouseover)
+      onclick: bind(this, this.actions.onClick)
     };
   }),
 
  actions: {
-     myMouseover(d, /* i */) {
-      this.set("message", `${d.name}, value: ${d.value}`);
+    // oninit chart event
+    init(chart){
+      console.log("chart inited")
+    },
+
+    // data event - triggered when data point clicked
+    onClick(d, i) {
+      alert(`Data ${d.name} has a value of ${d.value}`)
     },
   }
 });
 ```
-
-### Click Events
-Example code here...
 
 ### Helpful Links
 
@@ -226,7 +239,6 @@ Example code here...
 
 * `git clone` this repository
 * `npm install` or `yarn install`
-* `bower install`
 * `ember server`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
