@@ -2,7 +2,7 @@
 
 module.exports = {
   name: "ember-c3",
-
+  
   included: function(app) {
     this._super.included.apply(this, arguments);
 
