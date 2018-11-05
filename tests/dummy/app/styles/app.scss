@@ -1,5 +1,4 @@
 @import "ember-cli-bootstrap-4/bootstrap";
-$accent-color: #dd6a58;
 
 html,
 body {
@@ -57,7 +56,15 @@ a.fa.fa-github.github {
   font-size: 18px;
 }
 
-.code-background {
-  background-color: #f8f8f8;
-  line-height: 60px;
+// for chart event demo
+.demo-box {
+  border: #ffffff 1px solid;
+}
+
+.demo-box-selected {
+  border: #d5d5d5 1px solid;
+  -webkit-box-shadow: 1px 1px 3px 4px #ccc;;
+  -moz-box-shadow: 1px 1px 3px 4px #ccc;
+  // box-shadow: 8px 8px 1px -1px rgba(239,239,239,1);
+  box-shadow:         1px 1px 3px 4px #ccc;
 }

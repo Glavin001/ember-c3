@@ -1,0 +1,44 @@
+{{#collapsable-panel as |panel|}}
+  {{#panel.header}}
+    <h3>
+      {{pageTitle}}
+      <span class="pull-right text-error"> {{message}}</span>
+    </h3>
+  {{/panel.header}}
+
+  {{#panel.content}}
+    <div class="chart-demo row align-items-center justify-content-center mb-3">
+      {{c3-chart
+        data=data
+        c3chart=chart
+        padding=padding
+        title=title
+        size=size
+        axis=axis
+        grid=grid
+        tooltip=tooltip
+        legend=legend
+        oninit=(action "init")
+        onmouseover=(action "mouseover")
+        onmouseout=(action "mouseout")
+        onresize=(action "resizing")
+      }}
+    </div>
+  {{/panel.content}}
+{{/collapsable-panel}}
+
+<div class="container mt-2">
+  <span class="pull-left text-primary">Hover over chart or resize window to trigger events</span>
+</div>
+
+<div class="mt-5">
+  <h5>templates/chart-events.hbs</h5>
+  {{code-snippet name="chart-events.hbs"}}
+</div>
+
+<div class="mt-5">
+  <h5>
+    controllers/index.js
+  </h5>
+  {{code-snippet name="chart-events.js"}}
+</div>

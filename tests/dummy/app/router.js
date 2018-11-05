@@ -13,6 +13,8 @@ Router.map(function() {
   this.route('donut');
   this.route('events');
   this.route('drilldown');
+  this.route('chart-events');
+  this.route('chart-obj');
 });
 
 export default Router;

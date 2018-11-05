@@ -8,16 +8,9 @@
   {{/panel.content}}
 {{/collapsable-panel}}
 
-<div class="container mt-2">
-  <a href="#" class="pull-right" onclick={{action "toggleLegend"}}>{{lbuttonText}}</a>
-</div>
-
-
-<div class="mt-5 ">
+<div class="mt-5">
   <h5>templates/index.hbs</h5>
-  <div class="pl-3 code-background">
-    \{{c3-chart data=model c3chart=chart}}
-  </div>
+  {{code-snippet name="index.hbs"}}
 </div>
 
 <div class="mt-5">

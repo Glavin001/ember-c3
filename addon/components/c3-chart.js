@@ -55,23 +55,14 @@ export default Component.extend({
     // bind c3 chart to component's DOM element
     chartConfig.bindto = this.element;
 
-    // emit events to controller
-    callbacks.call(this);
-
-    function callbacks() {
-      const c3events = [
-        "oninit",
-        "onrendered",
-        "onmouseover",
-        "onmouseout",
-        "onresize",
-        "onresized"
-      ];
-
-      c3events.forEach(
-        event => (chartConfig[event] = () => this.sendAction(event, this))
-      );
-    }
+    // emit chart events to controller
+    chartConfig.oninit = () => this.oninit && this.oninit(this.c3chart);
+    chartConfig.onrendered = () => this.onrendered && this.onrendered(this.c3chart);
+    chartConfig.onmouseover = () => this.onmouseover && this.onmouseover(this.c3chart);
+    chartConfig.onmouseout = () => this.onmouseout && this.onmouseout(this.c3chart);
+    chartConfig.onresize = () => this.onresize && this.onresize(this.c3chart);
+    chartConfig.onresize = () => this.onresize && this.onresize(this.c3chart);
+    chartConfig.onresized = () => this.onresized && this.onresized(this.c3chart);
 
     // render the initial chart
     this.set("c3chart", c3.generate(chartConfig));

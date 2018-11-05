@@ -1,12 +1,11 @@
-import { bind, later } from "@ember/runloop";
+import { bind } from "@ember/runloop";
 import Controller from "@ember/controller";
 import { computed } from "@ember/object";
+import { map } from "@ember/object/computed";
 /* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
 export default Controller.extend({
   chart: null,
-  legendVisible: true,
-  lbuttonText: "Hide Legend",
 
   baseData: [
     ["Blue Flowers", 30],
@@ -22,6 +21,10 @@ export default Controller.extend({
     ["Vanda", 3]
   ],
 
+  unloadBlue: map("blueFlowers", function(item) {
+    return item[0];
+  }),
+
   redFlowers: [
     ["Chrysanthemum", 15],
     ["Poppy", 2],
@@ -30,6 +33,10 @@ export default Controller.extend({
     ["Gloxinia", 5]
   ],
 
+  unloadRed: map("redFlowers", function(item) {
+    return item[0];
+  }),
+
   yellowFlowers: [
     ["Marigold", 25],
     ["Yarrow", 10],
@@ -37,6 +44,11 @@ export default Controller.extend({
     ["Daisy", 39],
     ["Snapdragon", 5]
   ],
+
+  unloadYellow: map("yellowFlowers", function(item) {
+    return item[0];
+  }),
+
   // iris data from R
   data: computed(function() {
     return {
@@ -71,39 +83,28 @@ export default Controller.extend({
 
     resetData() {
       let c = this.chart;
-      c.unload();
-      later(this, () => c.load({ columns: this.baseData }), 300);
-      // this.set("title", "Flowers by Color");
+      c.load({ columns: this.baseData });
+      c.unload(
+        this.unloadBlue.concat(this.unloadRed).concat(this.unloadYellow)
+      );
     },
 
     drilldownBlue() {
       let c = this.chart;
-      c.load({ columns: this.blueFlowers});
+      c.load({ columns: this.blueFlowers });
       c.unload(["Blue Flowers", "Red Flowers", "Yellow Flowers"]);
     },
 
     drilldownRed() {
       let c = this.chart;
-      c.load({ columns: this.redFlowers});
+      c.load({ columns: this.redFlowers });
       c.unload(["Blue Flowers", "Red Flowers", "Yellow Flowers"]);
     },
 
     drilldownYellow() {
-      debugger
       let c = this.chart;
       c.load({ columns: this.yellowFlowers });
       c.unload(["Blue Flowers", "Red Flowers", "Yellow Flowers"]);
     },
-
-    toggleLegend() {
-      let c = this.chart;
-      this.toggleProperty("legendVisible");
-      let v = this.legendVisible;
-      let t = v ? "Hide Legend" : "Show Legend";
-      this.set("lbuttonText", t);
-
-      if (v) c.legend.show();
-      else c.legend.hide();
-    }
   }
 });

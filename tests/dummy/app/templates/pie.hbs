@@ -9,14 +9,12 @@
 {{/collapsable-panel}}
 
 <div class="container mt-2">
-  <a href="#" class="pull-right" onclick={{action "toggleLegend"}}>{{lbuttonText}}</a>
+  <a href="#" class="pull-right" onclick={{action "animate"}}>Animate</a>
 </div>
 
-<div class="mt-5 ">
+<div class="mt-5">
   <h5>templates/pie.hbs</h5>
-  <div class="pl-3 code-background">
-    \{{c3-chart data=data title=title padding=padding c3chart=chart}}
-  </div>
+  {{code-snippet name="pie.hbs"}}
 </div>
 
 <div class="mt-5">

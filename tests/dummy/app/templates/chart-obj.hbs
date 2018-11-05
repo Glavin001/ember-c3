@@ -1,0 +1,32 @@
+ {{#collapsable-panel as |panel|}}
+  {{#panel.header}}
+   <h3>{{chartTitle}}</h3>
+  {{/panel.header}}
+
+  {{#panel.content}}
+    {{c3-chart data=data c3chart=chart}}
+  {{/panel.content}}
+{{/collapsable-panel}}
+
+<div class="container mt-2">
+  <a href="#" onclick={{action "toggleLegend"}}>Toggle Legend</a>
+  <a href="#" onclick={{action "toggleData3"}}>Toggle Data 3</a>
+  <a href="#" onclick={{action "transform"}}>Transform</a>
+  {{#if isBar}}
+    <a href="#" onclick={{action "stackBars"}}>Stack Bars</a>
+  {{else}}
+    <a href="#" onclick={{action "makeCombo"}}>Combo</a>
+  {{/if}}
+  <a href="#" onclick={{action "changeColors"}}>Change Colors</a>
+</div>
+
+
+<div class="mt-5">
+  <h5>templates/index.hbs</h5>
+  {{code-snippet name="index.hbs"}}
+</div>
+
+<div class="mt-5">
+  <h5>controllers/index.js</h5>
+  {{code-snippet name="chart-events.js"}}
+</div>

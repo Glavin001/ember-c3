@@ -5,10 +5,8 @@ import { bind } from "@ember/runloop";
 
 export default Controller.extend({
   message: null,
-  hover: null,
+  hoverMsg: null,
   chart: null,
-  legendVisible: true,
-  lbuttonText: "Hide Legend",
   
   data: computed(function() {
     // iris data from R
@@ -38,18 +36,7 @@ export default Controller.extend({
     },
 
     myMouseover(d /* i */) {
-      this.set("hover", `${d.name}, value: ${d.value}`);
+      this.set("hoverMsg", `${d.name}, value: ${d.value}`);
     },
-    
-    toggleLegend() {
-      let c = this.chart;
-      this.toggleProperty("legendVisible");
-      let v= this.legendVisible;
-      let t = v ? "Hide Legend" : "Show Legend";
-      this.set("lbuttonText", t);
-
-      if (v) c.legend.show();
-       else c.legend.hide();
-    }
   }
 });

@@ -1,12 +1,12 @@
 {{#collapsable-panel as |panel|}}
   {{#panel.header}}
-    <h3>C3 Events</h3>
+    <h3>C3 Data Events</h3>
   {{/panel.header}}
 
   {{#panel.content}}
     <br />
       <div class="text-center">
-      <p>Mouseover: {{hover}}</p>
+      <p>Mouseover: {{hoverMsg}}</p>
       <p>Mouse Click: {{message}}</p>
     </div>
     {{c3-chart data=data title=title padding=padding c3chart=chart}}
@@ -14,14 +14,12 @@
 {{/collapsable-panel}}
 
 <div class="container mt-2">
-   <a href="#" class="pull-right" onclick={{action "toggleLegend"}}>{{lbuttonText}}</a>
+  <span class="pull-left text-primary">Hover and click on pies to trigger events</span>
 </div>
 
-<div class="mt-5 ">
+<div class="mt-5">
   <h5>templates/events.hbs</h5>
-  <div class="pl-3 code-background">
-    \{{c3-chart data=data title=title padding=padding c3chart=chart}}
-  </div>
+  {{code-snippet name="events.hbs"}}
 </div>
 
 <div class="mt-5">

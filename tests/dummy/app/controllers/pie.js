@@ -6,11 +6,8 @@ import { computed }  from "@ember/object";
 export default Controller.extend({
 
   chart: null,
-  legendVisible: true,
-  lbuttonText: "Hide Legend",
-  
-  init: function () {
-    this._super(...arguments);
+
+  animate () {
 
     later(this, () => {
       this.data.columns.push(
@@ -52,25 +49,16 @@ export default Controller.extend({
   },
 
   title: { text: "Iris data from R"},
-
   padding:  { top: 20 },
-
   onclick: computed(() => bind(this, this.actions.myClick)),
 
   actions: {
     myClick(d,  /*i */) {
       alert(`clicked ${d.name}`)
     },
-
-    toggleLegend() {
-      let c = this.chart;
-      this.toggleProperty("legendVisible");
-      let v = this.legendVisible;
-      let t = v ? "Hide Legend" : "Show Legend";
-      this.set("lbuttonText", t);
-
-      if (v) c.legend.show();
-       else c.legend.hide();
+    
+    animate(){
+      this.animate();
     }
   }
 

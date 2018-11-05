@@ -5,11 +5,8 @@ import Controller from "@ember/controller";
 export default Controller.extend({
 
   chart: null,
-  legendVisible: true,
-  lbuttonText: "Hide Legend",
-  
-  init() {
-    this._super(...arguments);
+
+  animate() {
 
     later(
       this,
@@ -52,15 +49,9 @@ export default Controller.extend({
   padding: { top: 20 },
 
   actions: {
-    toggleLegend() {
-      let c = this.chart;
-      this.toggleProperty("legendVisible");
-      let v = this.legendVisible;
-      let t = v ? "Hide Legend" : "Show Legend";
-      this.set("lbuttonText", t);
-
-      if (v) c.legend.show();
-      else c.legend.hide();
+    animate(){
+      this.animate();
     }
   }
+
 });

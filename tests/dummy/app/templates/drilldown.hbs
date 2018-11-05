@@ -9,15 +9,13 @@
 {{/collapsable-panel}}
 
 <div class="container mt-2">
-  <button class="btn btn-sm btn-primary" onclick={{action "resetData"}}>Reset</button>
-  <a href="#" class="pull-right" onclick={{action "toggleLegend"}}>{{lbuttonText}}</a>
+  <span class="pull-left text-primary">Click on pies to drill down</span>
+  <button class="btn btn-sm btn-primary pull-right" onclick={{action "resetData"}}>Reset</button>
 </div>
 
-<div class="mt-5 ">
+<div class="mt-5">
   <h5>templates/drilldown.hbs</h5>
-  <div class="pl-3 code-background">
-    \{{c3-chart data=data title=title padding=padding c3chart=chart}}
-  </div>
+  {{code-snippet name="drilldown.hbs"}}
 </div>
 
 <div class="mt-5">
