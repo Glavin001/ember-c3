@@ -20,8 +20,7 @@ ember install ember-c3
 
 ## Usage
 
-For a complete example, see the [dummy test app in `tests/dummy/app/`]
-(https://github.com/maxwondercorn/ember-c3/tree/master/tests/dummy/app)
+For a complete set of examples, see the [dummy app in `tests/dummy/app/`](https://github.com/maxwondercorn/ember-c3/tree/master/tests/dummy/app)
 
 <!-- (https://github.com/Glavin001/ember-c3/tree/master/tests/dummy/app). -->
 
@@ -85,27 +84,32 @@ See http://c3js.org/examples.html for examples of how to use C3.
 }}
 ```
 
-The properties match their corresponding C3 objects found in the [C3 Documentation](https://c3js.org/gettingstarted.html#generate).  As shown in the C3 documentation, most of the objects (i.e. bar, axis, size, etc) can be included in the data object.  The component properties breakout the objects to make it easier to manipulate the chart.  Note: The chart type is always assigned in the chart data object
+### Component Properties
+The properties match the corresponding C3 objects found in the [C3 Documentation](https://c3js.org/gettingstarted.html#generate).  As shown in the C3 documentation, most of the objects (i.e. bar, axis, size, etc) can be included in the data object.
+
+The component properties break them out to make it simplify chart configuration.  Note: The chart type is _always_ assigned in the chart data object.
+
+The properties with an asterisk are the only ones that are updated on the chart when a property change is triggered when `notifyPropertyChange` is called.  See examples in the dummy app.
 
 Property | Description | Example
 ---------|-------------|--------
-c3chart | Points to the c3 chart created by the component.  Any C3 api method can be executed using this property | chart.hide("data1")
+c3chart | Points to the c3 chart created by the component.  Any C3 api method can be executed using this property.  See the methods below, chart object and drill down examples | chart.hide("data1")
   data* | C3 data [object](https://c3js.org/gettingstarted.html#generate). Chart data is mutable after the chart is created
   axis* | C3 axis [object](https://c3js.org/reference.html#axis-rotated). See C3 examples for combining with data object.  Chart axis are mutable after the chart is created
   regions | need to test may need to be with data
-  bar | Used to assign or modify bar chart [properties](https://c3js.org/reference.html#bar-width) |
-  pie | Used to assign or modify pie chart [properties](https://c3js.org/reference.html#pie-label-show) |
-  donut | Used to assign or modify donut chart [properties](https://c3js.org/reference.html#donut-label-show) |
-  gauge | Used to assign or modify gauge chart [properties](https://c3js.org/reference.html#gauge-label-show) |
-  line | Used to assign or modify line chart [properties](https://c3js.org/reference.html#line-connectNull) |
-  area | Used to assign or modify area chart [properties](https://c3js.org/reference.html#area-zerobased) |
-  point | Used to assign or modify data point [properties](https://c3js.org/reference.html#point-show) |
+  bar | Used to assign bar chart [properties](https://c3js.org/reference.html#bar-width) |
+  pie | Used to assign pie chart [properties](https://c3js.org/reference.html#pie-label-show) |
+  donut | Used to assign donut chart [properties](https://c3js.org/reference.html#donut-label-show) |
+  gauge | Used to assign gauge chart [properties](https://c3js.org/reference.html#gauge-label-show) |
+  line | Used to assign line chart [properties](https://c3js.org/reference.html#line-connectNull) |
+  area | Used to assign area chart [properties](https://c3js.org/reference.html#area-zerobased) |
+  point | Used to assign data point [properties](https://c3js.org/reference.html#point-show) |
   grid | Used to show, hide and modify the graph grid.  See [docs](https://c3js.org/reference.html#grid-x-show)
   legend | Show, hide and modify the legend position.  See [docs](https://c3js.org/reference.html#legend-show)
   tooltip | Show, hide and modify the tooltip.  See [docs](https://c3js.org/reference.html#tooltip-show)
   subchart | Show, hide and modify C3 sub charts.  See [docs](https://c3js.org/reference.html#subchart-show)
-  zoom | Control and set C3 zoom features. See [docs](https://c3js.org/reference.html#zoom-enabled)
-  size | Control hart size see [docs](https://c3js.org/reference.html#size-width) | size: {width: 640 }
+  zoom | Set C3 zoom features. See [docs](https://c3js.org/reference.html#zoom-enabled)
+  size | Control chart size see [docs](https://c3js.org/reference.html#size-width) | size: {width: 640 }
   padding | Set padding around graph.  See docs(https://c3js.org/reference.html#padding-top)  | padding: { top: 20}
   title | Set chart title | title: { text: "This is my chart" }
   color* | Used to assign color [properties](https://c3js.org/reference.html#color-pattern). The chart colors are mutable after chart creation
@@ -166,8 +170,8 @@ export default Controller.extend({
   actions: {
      resetData() {
       let c = this.chart;
-      c.unload();
-      later(this, () => c.load({ columns: this.baseData }), 300);
+      c.load({ columns: this.baseData });
+      c.unload("Mercedes", "Volkswagon", "BMW", "Ford", "Chevy", "Tesla", "Buick", "Dodge");
     },
 
     loadUS() {
@@ -186,7 +190,9 @@ export default Controller.extend({
 ```
 
 ### C3 Events
-c3 emits two types of events - [chart](https://c3js.org/reference.html#oninit) and [data](https://c3js.org/reference.html#data-onclick) events.  Chart events can be assigned to an action via a property.  Data events must be assigned an action as part of the data object.  For connivence, the chart object is passed into all chart events.  An example of a chart and data event is shown below.  See the dummy app for more examples
+c3 emits two types of events - [chart](https://c3js.org/reference.html#oninit) and [data](https://c3js.org/reference.html#data-onclick) events.  Chart events can be assigned to a closure action via a property.  Data events **must** be assigned an action in the data object.
+
+For connivence, the chart object is passed into all chart events.  An example of a chart and data event is shown below.  Note the use of `bind` for tying actions to data events. See the dummy app for more examples
 
 templates/application.hbs
 ```hbs
@@ -248,15 +254,10 @@ export default Controller.extend({
 * `ember test --server` – Runs the test suite in "watch mode"
 * `ember try:each` – Runs the test suite against multiple Ember versions
 
-### Running the dummy application
-
-* `ember serve`
-* Visit the dummy application at [http://localhost:4200](http://localhost:4200).
-
 For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
 
 ### Dummy app on gh-pages
-Use `npm run deploy` to build and deploy dummy app to the gh-pages branch
+Use `npm run deploy` to build and deploy dummy app to the gh-pages branch using [ember-cli-github-pages](https://github.com/poetic/ember-cli-github-pages)
 
 License
 ------------------------------------------------------------------------------
