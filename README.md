@@ -1,5 +1,7 @@
 # Ember-C3 
 
+## THIS README IS FOR A FUTURE VERSION - See branch old-v031 for currently published version
+
 [![npm version](https://badge.fury.io/js/ember-c3.svg)](http://badge.fury.io/js/ember-c3)
 [![Join the chat at https://gitter.im/Glavin001/ember-c3](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Glavin001/ember-c3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
  
