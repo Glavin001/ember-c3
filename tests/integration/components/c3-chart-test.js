@@ -1,9 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from "ember-qunit";
-import { render } from '@ember/test-helpers';
 import hbs from "htmlbars-inline-precompile";
-
-import { /* click, */ find, triggerEvent } from 'ember-native-dom-helpers';
+import { render, find, triggerEvent } from '@ember/test-helpers';
 
 module("Integration | Component | c3 chart", function(hooks) {
   setupRenderingTest(hooks);
