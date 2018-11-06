@@ -46,7 +46,7 @@ export default Component.extend({
       "data", "line", "bar", "pie", "donut", "gauge",
       "grid", "legend", "tooltip", "subchart", "zoom",
       "point", "axis", "regions", "area", "size",
-      "padding", "color", "transition", "title"
+      "padding", "color", "transition", "title", "interaction"
       ];
 
     // get base c3 properties
