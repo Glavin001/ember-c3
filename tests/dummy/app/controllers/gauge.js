@@ -1,6 +1,5 @@
 import Controller from "@ember/controller";
 import { later } from "@ember/runloop";
-import { computed }  from '@ember/object';
 /* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
 export default Controller.extend({
