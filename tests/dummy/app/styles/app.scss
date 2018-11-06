@@ -56,15 +56,9 @@ a.fa.fa-github.github {
   font-size: 18px;
 }
 
-// for chart event demo
-.demo-box {
-  border: #d5d5d5 1px solid;
+.demo-chart-selected {
+  -webkit-box-shadow:  rgba(0, 0, 0, 0.12) 0px 0px 70px 6px;
+  -moz-box-shadow:  rgba(0, 0, 0, 0.12) 0px 0px 70px 6px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 70px 6px;
 }
 
-.demo-box-selected {
-  border: #d5d5d5 1px solid;
-  -webkit-box-shadow: 8px 8px 1px -1px#ccc;;
-  -moz-box-shadow: 8px 8px 1px -1px #ccc;
-  box-shadow: 8px 8px 1px -1px #ccc;
-  // box-shadow:         1px 1px 3px 4px #ccc;
-}
