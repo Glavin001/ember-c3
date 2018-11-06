@@ -1,5 +1,5 @@
-import { later } from "@ember/runloop";
 import Controller from "@ember/controller";
+import { later } from "@ember/runloop";
 /* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
 export default Controller.extend({
@@ -13,21 +13,21 @@ export default Controller.extend({
         ["data", 10]
       ]);
       this.notifyPropertyChange("data");
-    }, 1000);
+    }, 500);
 
     later(this, () => {
       this.set("data.columns", [
         ["data", 50]
       ]);
       this.notifyPropertyChange("data");
-    }, 2000);
+    }, 1000);
 
     later(this, () => {
       this.set("data.columns", [
           ["data", 70]
       ]);
       this.notifyPropertyChange("data");
-    }, 3000);
+    }, 1500);
 
     later(this, () => {
       this.set("data.columns", [
@@ -41,7 +41,7 @@ export default Controller.extend({
           ["data", 100]
       ]);
       this.notifyPropertyChange("data");
-    }, 5000);
+    }, 2000);
 
   },
 
@@ -72,10 +72,4 @@ export default Controller.extend({
       this.animate();
     }
   }
-
-  size: computed(function() {
-    return {
-      height: 180
-    };
-  })
 });

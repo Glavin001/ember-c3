@@ -14,7 +14,7 @@ export default Controller.extend({
         this.data.columns.push(["data3", 400, 500, 450, 700, 600, 500]);
         this.notifyPropertyChange("data");
       },
-      1000
+      500
     );
   },
 
