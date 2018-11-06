@@ -72,11 +72,5 @@ export default Controller.extend({
     animate(){
       this.animate();
     }
-  },
-
-  size: computed(function() {
-    return {
-      height: 180
-    };
-  })
+  }
 });
