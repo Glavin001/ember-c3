@@ -3,6 +3,8 @@ import { setupRenderingTest } from "ember-qunit";
 import { render } from '@ember/test-helpers';
 import hbs from "htmlbars-inline-precompile";
 
+import { /* click, */ find, triggerEvent } from 'ember-native-dom-helpers';
+
 module("Integration | Component | c3 chart", function(hooks) {
   setupRenderingTest(hooks);
 
@@ -19,7 +21,7 @@ module("Integration | Component | c3 chart", function(hooks) {
     // pauses for 20 seconds
     // setTimeout(() => done(), 60000);
 
-    assert.ok(this.$("svg"));
+    assert.ok(find("svg"));
 
     assert.ok(this.$("g").hasClass("c3-legend-item"), "Pie charte has lengend");
     assert.equal(this.$(".c3-legend-item").length, 2, "Has 2 legend items");
@@ -41,7 +43,7 @@ module("Integration | Component | c3 chart", function(hooks) {
     // // pauses for 60 seconds
     // setTimeout(() => done(), 60000);
 
-    assert.ok(this.$("svg"));
+    assert.ok(find("svg"));
 
     assert.ok(this.$("text").hasClass("c3-chart-arcs-title"), "Has title text");
     assert.equal(
@@ -73,7 +75,7 @@ module("Integration | Component | c3 chart", function(hooks) {
     // pauses for 60 seconds
     // setTimeout(() => done(), 60000);
 
-    assert.ok(this.$("svg"));
+    assert.ok(find("svg"));
 
     assert.ok(this.$("text").hasClass("c3-title"), "Has title text");
     assert.equal(
@@ -124,7 +126,7 @@ module("Integration | Component | c3 chart", function(hooks) {
     // pauses for 60 seconds
     // setTimeout(() => done(), 60000);
 
-    assert.ok(this.$("svg"));
+    assert.ok(find("svg"));
 
     assert.ok(this.$("text").hasClass("c3-title"), "Has title text");
     assert.equal(
@@ -162,7 +164,7 @@ module("Integration | Component | c3 chart", function(hooks) {
     // pauses for 60 seconds
     // setTimeout(() => done(), 60000);
 
-    assert.ok(this.$("svg"));
+    assert.ok(find("svg"));
 
     assert.ok(this.$("text").hasClass("c3-title"), "Has title text");
     assert.equal(
@@ -173,4 +175,124 @@ module("Integration | Component | c3 chart", function(hooks) {
     assert.equal(this.$(".c3-legend-item").length, 2, "Has 2 legend items");
     assert.equal(this.$("svg g").length, 75, "svg g elements");
   });
+
+  test("triggers action on chart init", async function(assert) {
+    this.set("data", {
+      columns: [
+        ["data1", 30, 200, 100, 400, 150, 250],
+        ["data2", 130, 100, 140, 200, 150, 50]
+      ],
+      type: "bar"
+    });
+
+    this.set("chartAction", () => {
+      assert.ok(true, "onintit action is called");
+    });
+
+    await render(hbs`{{c3-chart 
+                        data=data 
+                        title=title 
+                        gauge=gauge 
+                        color=color 
+                        size=size
+                        onmouseover=(action chartAction)
+                        }}`);
+
+    assert.ok(find("svg"));
+
+    assert.equal(this.$(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.equal(this.$("svg g").length, 75, "svg g elements");
+  });
+
+  test("triggers action on chart render", async function(assert) {
+    this.set("data", {
+      columns: [
+        ["data1", 30, 200, 100, 400, 150, 250],
+        ["data2", 130, 100, 140, 200, 150, 50]
+      ],
+      type: "bar"
+    });
+
+    this.set("chartAction", (chart) => {
+      assert.equal(typeof chart, "object", "onrender action is called");
+    });
+
+    await render(hbs`{{c3-chart 
+                        data=data 
+                        title=title 
+                        gauge=gauge 
+                        color=color 
+                        size=size
+                        onrender=(action chartAction)
+                        }}`);
+
+    assert.ok(find("svg"));
+
+    assert.equal(this.$(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.equal(this.$("svg g").length, 75, "svg g elements");
+  });
+
+  test("triggers action on chart mouseover", async function(assert) {
+    this.set("data", {
+      columns: [
+        ["data1", 30, 200, 100, 400, 150, 250],
+        ["data2", 130, 100, 140, 200, 150, 50]
+      ],
+      type: "bar"
+    });
+
+    this.set("chartAction", (chart) => {
+      assert.equal(typeof chart, "object", "onmouseover action is called");
+    });
+
+    await render(hbs`{{c3-chart 
+                        data=data 
+                        title=title 
+                        gauge=gauge 
+                        color=color 
+                        size=size
+                        onmouseover=(action chartAction)
+                        }}`);
+
+    assert.ok(find("svg"));
+
+    await triggerEvent('.c3 svg', 'mouseenter');
+
+    assert.equal(this.$(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.equal(this.$("svg g").length, 75, "svg g elements");
+  });
+
+
+  test("triggers action on chart mouseout", async function(assert) {
+    this.set("data", {
+      columns: [
+        ["data1", 30, 200, 100, 400, 150, 250],
+        ["data2", 130, 100, 140, 200, 150, 50]
+      ],
+      type: "bar"
+    });
+
+    this.set("chartAction", (chart) => {
+      assert.equal(typeof chart, "object", "onmouseout action is called");
+    });
+
+    await render(hbs`{{c3-chart 
+                        data=data 
+                        title=title 
+                        gauge=gauge 
+                        color=color 
+                        size=size
+                        onmouseout=(action chartAction)
+                        }}`);
+
+    assert.ok(find("svg"));
+
+    await triggerEvent('.c3 svg', 'mouseout');
+
+    assert.equal(this.$(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.equal(this.$("svg g").length, 75, "svg g elements");
+  });
+
 });
+
+
