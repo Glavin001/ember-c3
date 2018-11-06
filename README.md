@@ -1,5 +1,7 @@
 # Ember-C3 
 
+## THIS README IS FOR A FUTURE VERSION - See branch old-v031 for current published version
+
 [![npm version](https://badge.fury.io/js/ember-c3.svg)](http://badge.fury.io/js/ember-c3)
 [![Join the chat at https://gitter.im/Glavin001/ember-c3](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Glavin001/ember-c3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
  
@@ -7,11 +9,14 @@
 
 **Live Demo:** http://glavin001.github.io/ember-c3/
 
+**Future Features Demo:** https://maxwondercorn.github.io/ember-c3/
+
 Alternatively take a look at [Ember-NVD3](https://github.com/Glavin001/ember-nvd3) for your charting needs.
 
 ---
 
-## Installation
+Installation
+------------------------------------------------------------------------------
 
 ```bash
 ember install ember-c3
@@ -19,7 +24,9 @@ ember install ember-c3
 
 ## Usage
 
-For a complete example, see the [dummy test app in `tests/dummy/app/`](https://github.com/Glavin001/ember-c3/tree/master/tests/dummy/app).
+For a complete set of examples, see the [dummy app in `tests/dummy/app/`](https://github.com/maxwondercorn/ember-c3/tree/master/tests/dummy/app)
+
+<!-- (https://github.com/Glavin001/ember-c3/tree/master/tests/dummy/app). -->
 
 | Combination |
 | --- |
@@ -48,8 +55,9 @@ Where `model` is your C3 data:
 
 See http://c3js.org/examples.html for examples of how to use C3.
 
-```handlebars
+```hbs
 {{c3-chart
+  c3chart=chart
   data=model
   axis=axis
   regions=regions
@@ -57,19 +65,180 @@ See http://c3js.org/examples.html for examples of how to use C3.
   pie=pie
   donut=donut
   gauge=gauge
+  line=line
+  area=area
   grid=grid
   legend=legend
   tooltip=tooltip
   subchart=subchart
   zoom=zoom
   point=point
-  line=line
-  area=area
   size=size
   padding=padding
+  title=title
   color=color
   transition=transition
+  unloadDataBeforeChange=true
+  oninit
+  onrendered
+  onmouseover
+  onmouseout
+  onresize
+  onresized
 }}
+```
+
+### Component Properties
+The properties match the corresponding C3 objects found in the [C3 Documentation](https://c3js.org/gettingstarted.html#generate).  As shown in the C3 documentation, most of the objects (i.e. bar, axis, size, etc) can be included in the data object.
+
+The component properties break them out to make it simplify chart configuration.  Note: The chart type is _always_ assigned in the chart data object.
+
+The properties with an asterisk are the only ones that are updated on the chart when a property change is triggered when `notifyPropertyChange` is called.  See examples in the dummy app.
+
+Property | Description | Example
+---------|-------------|--------
+c3chart | Points to the c3 chart created by the component.  Any C3 api method can be executed using this property.  See the methods below, chart object and drill down examples | chart.hide("data1")
+  data* | C3 data [object](https://c3js.org/gettingstarted.html#generate). Chart data is mutable after the chart is created
+  axis* | C3 axis [object](https://c3js.org/reference.html#axis-rotated). See C3 examples for combining with data object.  Chart axis are mutable after the chart is created
+  regions | need to test may need to be with data
+  bar | Used to assign bar chart [properties](https://c3js.org/reference.html#bar-width) |
+  pie | Used to assign pie chart [properties](https://c3js.org/reference.html#pie-label-show) |
+  donut | Used to assign donut chart [properties](https://c3js.org/reference.html#donut-label-show) |
+  gauge | Used to assign gauge chart [properties](https://c3js.org/reference.html#gauge-label-show) |
+  line | Used to assign line chart [properties](https://c3js.org/reference.html#line-connectNull) |
+  area | Used to assign area chart [properties](https://c3js.org/reference.html#area-zerobased) |
+  point | Used to assign data point [properties](https://c3js.org/reference.html#point-show) |
+  grid | Used to show, hide and modify the graph grid.  See [docs](https://c3js.org/reference.html#grid-x-show)
+  legend | Show, hide and modify the legend position.  See [docs](https://c3js.org/reference.html#legend-show)
+  tooltip | Show, hide and modify the tooltip.  See [docs](https://c3js.org/reference.html#tooltip-show)
+  subchart | Show, hide and modify C3 sub charts.  See [docs](https://c3js.org/reference.html#subchart-show)
+  zoom | Set C3 zoom features. See [docs](https://c3js.org/reference.html#zoom-enabled)
+  size | Control chart size see [docs](https://c3js.org/reference.html#size-width) | size: {width: 640 }
+  padding | Set padding around graph.  See docs(https://c3js.org/reference.html#padding-top)  | padding: { top: 20}
+  title | Set chart title | title: { text: "This is my chart" }
+  color* | Used to assign color [properties](https://c3js.org/reference.html#color-pattern). The chart colors are mutable after chart creation
+  transition | Equivalent to [transition.duration](https://c3js.org/reference.html#transition-duration).  Default duration is 350ms
+  unloadDataBeforeChange | When set to true the data will be unloaded before new data is loaded with didUpdateAttrs().  This is useful for pie and donut charts.  Can now also manage data loading with .load()/.unload() methods on exposed c3chart
+  oninit | c3 chart event, see events section below | oninit=(action "init")
+  onrendered | c3 chart event, see events section below | onrendered=(action "init")
+  onmouseover | c3 chart event, see events section below | onmouseover=(action "mouseover")
+  onmouseout | c3 chart event, see events section below | onmouseout=(action "mouseout")
+  onresize | c3 chart event, see events section below | onresize=(action "resize")
+  onresized | c3 chart event, see events section below | onresized=(action "resized")
+
+### C3 Methods
+If you assign a value to the c3chart property, you can use most of the C3 [methods](https://c3js.org/reference.html#api-focus) found in the documentation.  Not all the methods have been tested but all should work as documented.
+
+templates/someroute.hbs
+```
+{{c3-chart data=mydata c3chart=chart}}
+
+<button onclick={{action "loadUS"}}>US Cars</button>
+<button onclikc={{action "loadGerman"}}>German Cars</button>
+<button onclikc={{action "resetData"}}>Reset</button>
+```
+
+controllers/someroute.js
+```js
+import { later } from "@ember/runloop";
+import Controller from "@ember/controller";
+/* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
+
+export default Controller.extend({
+
+ chart: null,
+
+ baseData:   
+    { 
+      columns: [
+        ["US", 64],
+        ["German", 36]
+      ],
+      type: "donut"
+    },
+ 
+ modelsGerman: [
+        ["Mercedes", 12],
+        ["Volkswagon", 54],
+        ["BMW", 34]
+      ],
+
+  modelsUS: [
+    ["Ford", 35],
+    ["Chevy", 26],
+    ["Tesla", 2],
+    ["Buick", 10],
+    ["Dodge", 27]
+  ],
+
+  actions: {
+     resetData() {
+      let c = this.chart;
+      c.load({ columns: this.baseData });
+      c.unload("Mercedes", "Volkswagon", "BMW", "Ford", "Chevy", "Tesla", "Buick", "Dodge");
+    },
+
+    loadUS() {
+      let c = this.chart;
+      c.load({ columns: this.modelsUS});
+      c.unload("US", "German");
+    },
+       
+    loadGerman() {
+      let c = this.chart;
+      c.load({ columns: this.modelsGerman});
+      c.unload("US", "German");
+    }
+  }
+});
+```
+
+### C3 Events
+c3 emits two types of events - [chart](https://c3js.org/reference.html#oninit) and [data](https://c3js.org/reference.html#data-onclick) events.  Chart events can be assigned to a closure action via a property.  Data events **must** be assigned an action in the data object.
+
+For connivence, the chart object is passed into all chart events.  An example of a chart and data event is shown below.  Note the use of `bind` for tying actions to data events. See the dummy app for more examples
+
+templates/application.hbs
+```hbs
+{{c3-chart 
+  data=data
+  oninit=(action 'init')
+  }}
+  ```
+controllers/application.js
+```js
+import Controller from "@ember/controller";
+import { computed } from "@ember/object";
+import { bind } from "@ember/runloop";
+
+export default Controller.extend({
+ data: computed(function() {
+    // iris data from R
+    return {
+      columns: [
+        ["data1", 30],
+        ["data2", 120],
+        ["data3", 10],
+        ["data4", 45],
+        ["data5", 90]
+      ],
+      type: "pie",
+      onclick: bind(this, this.actions.onClick)
+    };
+  }),
+
+ actions: {
+    // oninit chart event
+    init(chart){
+      console.log("chart inited")
+    },
+
+    // data event - triggered when data point clicked
+    onClick(d, i) {
+      alert(`Data ${d.name} has a value of ${d.value}`)
+    },
+  }
+});
 ```
 
 ### Helpful Links
@@ -79,26 +248,22 @@ See http://c3js.org/examples.html for examples of how to use C3.
 ## Development
 
 * `git clone` this repository
-* `npm install`
-* `bower install`
+* `npm install` or `yarn install`
 * `ember server`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
-## Running Tests
+### Running tests
 
-* `ember test`
-* `ember test --server`
+* `ember test` – Runs the test suite on the current Ember version
+* `ember test --server` – Runs the test suite in "watch mode"
+* `ember try:each` – Runs the test suite against multiple Ember versions
 
-## Building
+For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
 
-* `ember build`
+### Dummy app on gh-pages
+Use `npm run deploy` to build and deploy dummy app to the gh-pages branch using [ember-cli-github-pages](https://github.com/poetic/ember-cli-github-pages)
 
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+License
+------------------------------------------------------------------------------
 
-## Publishing to GitHub Pages
-
-See https://github.com/poetic/ember-cli-github-pages
-
-```bash
-ember github-pages:commit --message "Your commit message"
-```
+This project is licensed under the [MIT License](LICENSE.md).

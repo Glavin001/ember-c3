@@ -1,0 +1,28 @@
+{{#collapsable-panel as |panel|}}
+  {{#panel.header}}
+    <h3>C3 Data Events</h3>
+  {{/panel.header}}
+
+  {{#panel.content}}
+    <br />
+      <div class="text-center">
+      <p>Mouseover: {{hoverMsg}}</p>
+      <p>Mouse Click: {{message}}</p>
+    </div>
+    {{c3-chart data=data title=title padding=padding c3chart=chart}}
+  {{/panel.content}}
+{{/collapsable-panel}}
+
+<div class="container mt-2">
+  <span class="pull-left text-primary">Hover and click on pies to trigger events</span>
+</div>
+
+<div class="mt-5">
+  <h5>templates/events.hbs</h5>
+  {{code-snippet name="events.hbs"}}
+</div>
+
+<div class="mt-5">
+  <h5>controllers/events.js</h5>
+  {{code-snippet name="events.js"}}
+</div>

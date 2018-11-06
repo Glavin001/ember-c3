@@ -1,81 +1,77 @@
-import Controller from '@ember/controller';
-import { later } from '@ember/runloop';
-import { computed } from '@ember/object';
+import { later } from "@ember/runloop";
+import Controller from "@ember/controller";
+/* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
 export default Controller.extend({
 
-  init: function() {
-    this._super(...arguments);
-    later(() => {
-      this.set('columns', [
-        ['data', 10]
+  chart: null,
+
+  animate() {
+    
+    later(this, () => {
+      this.set("data.columns", [
+        ["data", 10]
       ]);
+      this.notifyPropertyChange("data");
     }, 1000);
 
-    later(() => {
-      this.set('columns', [
-        ['data', 50]
+    later(this, () => {
+      this.set("data.columns", [
+        ["data", 50]
       ]);
+      this.notifyPropertyChange("data");
     }, 2000);
 
-    later(() => {
-      this.set('columns', [
-        ['data', 70]
+    later(this, () => {
+      this.set("data.columns", [
+          ["data", 70]
       ]);
+      this.notifyPropertyChange("data");
     }, 3000);
 
-    later(() => {
-      this.set('columns', [
-        ['data', 0]
+    later(this, () => {
+      this.set("data.columns", [
+          ["data", 0]
       ]);
+      this.notifyPropertyChange("data");
     }, 4000);
 
-    setTimeout(() => {
-      this.set('columns', [
-        ['data', 100]
+    later(this, () => {
+      this.set("data.columns", [
+          ["data", 100]
       ]);
+      this.notifyPropertyChange("data");
     }, 5000);
 
   },
 
-  columns: computed(function() {
-    return [
-      ['data', 91.4]
-    ];
-  }),
+  data: {
+    columns: [
+      ["data", 91.4]
+    ],
+    type: "gauge"
+  },
 
-  data: computed('columns', function() {
-    return {
-      columns: this.get('columns'),
-      type: 'gauge'
-    };
-  }),
+  // the three color levels for the percentage values
+  color: {
+    pattern: ["#FF0000", "#F97600", "#F6C600", "#60B044"], 
+    threshold: {
+      values: [30, 60, 90, 100]
+    }
+  },
+  size: {
+    height: 180
+  },
 
-  gauge: computed(function() {
-    return {
-      //        label: {
-      //            format: function(value, ratio) {
-      //                return value;
-      //            },
-      //            show: false // to turn off the min/max labels.
-      //        },
-      //    min: 0, // 0 is default, //can handle negative min e.g. vacuum / voltage / current flow / rate of change
-      //    max: 100, // 100 is default
-      //    units: ' %',
-      //    width: 39 // for adjusting arc thickness
-    };
-  }),
+  // chart title
+  title: { text: "Percent complete"},
+  padding:  { top: 20 },
 
-  color: computed(function() {
-    return {
-      pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'], // the three color levels for the percentage values.
-      threshold: {
-        //            unit: 'value', // percentage is default
-        //            max: 200, // 100 is default
-        values: [30, 60, 90, 100]
-      }
-    };
-  }),
+  actions: {
+    animate(){
+      this.animate();
+    }
+  }
 
   size: computed(function() {
     return {
