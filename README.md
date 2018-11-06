@@ -1,13 +1,15 @@
 # Ember-C3 
 
-## THIS README IS FOR A FUTURE VERSION - See branch old-v031 for currently published version
+## THIS README IS FOR A FUTURE VERSION - See branch old-v031 for current published version
 
 [![npm version](https://badge.fury.io/js/ember-c3.svg)](http://badge.fury.io/js/ember-c3)
 [![Join the chat at https://gitter.im/Glavin001/ember-c3](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Glavin001/ember-c3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
  
 > Ember component library for [C3, a D3-based reusable chart library](https://github.com/masayuki0812/c3).
 
-**Forked Demo:** https://maxwondercorn.github.io/ember-c3/
+**Live Demo:** http://glavin001.github.io/ember-c3/
+
+**Future Features Demo:** https://maxwondercorn.github.io/ember-c3/
 
 Alternatively take a look at [Ember-NVD3](https://github.com/Glavin001/ember-nvd3) for your charting needs.
 
