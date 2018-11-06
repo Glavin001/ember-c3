@@ -1,8 +1,0 @@
-{
-  "name": "ember-c3",
-  "dependencies": {
-  },
-  "devDependencies": {
-    "jsoneditor": "~5.14.1"
-  }
-}
