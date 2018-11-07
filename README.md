@@ -262,6 +262,8 @@ export default Controller.extend({
 * `ember test --server` – Runs the test suite in "watch mode"
 * `ember try:each` – Runs the test suite against multiple Ember versions
 
+Note: C3 chart events `onresize` and `onresized` are not tested
+
 For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
 
 ### Dummy app on gh-pages
