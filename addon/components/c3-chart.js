@@ -56,7 +56,7 @@ export default Component.extend({
     chartConfig.bindto = this.element;
 
     // emit chart events to controller
-    chartConfig.oninit = () => this.oninit && this.oninit(this.c3chart);
+    chartConfig.oninit = () => this.oninit && this.oninit();
     chartConfig.onrendered = () => this.onrendered && this.onrendered(this.c3chart);
     chartConfig.onmouseover = () => this.onmouseover && this.onmouseover(this.c3chart);
     chartConfig.onmouseout = () => this.onmouseout && this.onmouseout(this.c3chart);

@@ -49,7 +49,7 @@ export default Controller.extend({
   padding: { top: 20, bottom: 5, right: 15 },
 
   actions: {
-    init(/* chart */) {
+    init() {
       this.set("pageTitle", "Chart Events - loading...");
       later(this, () => this.set("pageTitle", "C3 Chart Events"), 500);
     },
@@ -58,7 +58,7 @@ export default Controller.extend({
       document.getElementById(chart.element.id).classList.remove("demo-box");
       document
         .getElementById(chart.element.id)
-        .classList.add("demo-box-selected");
+        .classList.add("demo-chart-selected");
       this.set("pageTitle", "YTD Sales");
     },
 
@@ -66,7 +66,7 @@ export default Controller.extend({
       document.getElementById(chart.element.id).classList.add("demo-box");
       document
         .getElementById(chart.element.id)
-        .classList.remove("demo-box-selected");
+        .classList.remove("demo-chart-selected");
       this.set("pageTitle", "C3 Chart Events");
     },
 

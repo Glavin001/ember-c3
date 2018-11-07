@@ -1,6 +1,6 @@
 {
   "name": "ember-c3",
-  "version": "0.6.2",
+  "version": "0.6.5",
   "description": "Ember addon library for C3, a D3-based reusable chart library.",
   "keywords": [
     "ember-addon",
@@ -25,6 +25,10 @@
   "contributors": [
     "maxwondercorn <> (https://github.com/maxwondercorn)"
   ],
+  "ember-addon": {
+    "demoURL": "http://glavin001.github.io/ember-c3/",
+    "configPath": "tests/dummy/config"
+  },
   "scripts": {
     "build": "ember build",
     "lint:js": "eslint .",
@@ -75,8 +79,5 @@
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
-  },
-  "ember-addon": {
-    "configPath": "tests/dummy/config"
   }
 }
