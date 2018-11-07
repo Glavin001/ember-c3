@@ -1,13 +1,7 @@
 import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
 import hbs from "htmlbars-inline-precompile";
-import {
-  click,
-  render,
-  find,
-  findAll,
-  triggerEvent
-} from "@ember/test-helpers";
+import { click, render, find, findAll, triggerEvent } from "@ember/test-helpers";
 import { bind } from "@ember/runloop";
 
 module("Integration | Component | c3 chart", function(hooks) {
@@ -21,12 +15,7 @@ module("Integration | Component | c3 chart", function(hooks) {
       type: "pie"
     });
 
-    // const done = assert.async();
-
     await render(hbs`{{c3-chart data=this.data}}`);
-
-    // pauses for 20 seconds
-    // setTimeout(() => done(), 60000);
 
     assert.ok(find("svg"));
     assert.equal(
@@ -48,15 +37,10 @@ module("Integration | Component | c3 chart", function(hooks) {
 
     this.set("donut", { title: "Iris Petal Width" });
 
-    // const done = assert.async();
-
     await render(hbs`{{c3-chart data=data donut=donut}}`);
 
-    // // pauses for 60 seconds
-    // setTimeout(() => done(), 60000);
-
     assert.ok(find("svg"));
-    assert.ok(this.$("text").hasClass("c3-chart-arcs-title"), "Has title text");
+    assert.ok(find(".c3-chart-arcs-title"), "Has title text");
     assert.equal(
       find(".c3-chart-arcs-title").textContent,
       "Iris Petal Width",
@@ -81,17 +65,12 @@ module("Integration | Component | c3 chart", function(hooks) {
       text: "Percent Complete"
     });
 
-    // const done = assert.async();
-
     await render(
       hbs`{{c3-chart data=data title=title gauge=gauge color=color size=size}}`
     );
 
-    // pauses for 60 seconds
-    // setTimeout(() => done(), 60000);
-
     assert.ok(find("svg"));
-    assert.ok(this.$("text").hasClass("c3-title"), "Has title text");
+    assert.ok(find(".c3-title"), "Has title text");
     assert.equal(
       find(".c3-title").textContent,
       "Percent Complete",
@@ -133,14 +112,12 @@ module("Integration | Component | c3 chart", function(hooks) {
         text: "Internet Speeds"
       });
 
-
     await render(
       hbs`{{c3-chart data=data title=title gauge=gauge color=color size=size}}`
     );
 
-
     assert.ok(find("svg"));
-    assert.ok(this.$("text").hasClass("c3-title"), "Has title text");
+    assert.ok(find(".c3-title"), "Has title text");
     assert.equal(
       find(".c3-title").textContent,
       "Internet Speeds",
@@ -176,7 +153,7 @@ module("Integration | Component | c3 chart", function(hooks) {
     );
 
     assert.ok(find("svg"));
-    assert.ok(this.$("text").hasClass("c3-title"), "Has title text");
+    assert.ok(find(".c3-title"), "Has title text");
     assert.equal(
       find(".c3-title").textContent,
       "Regional Sales",
@@ -305,9 +282,13 @@ module("Integration | Component | c3 chart", function(hooks) {
     assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
     assert.equal(findAll("svg g").length, 75, "svg g elements");
 
-    await triggerEvent('svg', 'mouseleave');
-
+    await triggerEvent("svg", "mouseleave");
   });
+
+  /*********************************************************/
+  /*  Chart onresize and resized events are not tested     */
+  /*  Could not figoure out to trigger c3 charts to resize */
+  /*********************************************************/
 
   /********* chart data events *********/
 
@@ -325,12 +306,11 @@ module("Integration | Component | c3 chart", function(hooks) {
     });
 
     await render(hbs`{{c3-chart data=data}}`);
-// debugger
+    // debugger
     assert.ok(find("svg"));
     assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
     assert.equal(findAll("svg g").length, 70, "svg g elements");
-    
-    
+
     await click(".c3-arc-data1");
   });
 
@@ -354,7 +334,6 @@ module("Integration | Component | c3 chart", function(hooks) {
     assert.equal(findAll("svg g").length, 70, "svg g elements");
 
     await triggerEvent("g .c3-arc-data1", "mouseover");
-    
   });
 
   test("data onmouseout", async function(assert) {
@@ -377,6 +356,5 @@ module("Integration | Component | c3 chart", function(hooks) {
     assert.equal(findAll("svg g").length, 70, "svg g elements");
 
     await triggerEvent("g .c3-arc-data1", "mouseout");
-   
   });
 });
