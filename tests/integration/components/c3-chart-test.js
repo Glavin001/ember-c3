@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from "ember-qunit";
 import hbs from "htmlbars-inline-precompile";
-import { render, find, triggerEvent } from '@ember/test-helpers';
+import { render, find, findAll, triggerEvent } from '@ember/test-helpers';
 
 module("Integration | Component | c3 chart", function(hooks) {
   setupRenderingTest(hooks);
@@ -22,8 +22,8 @@ module("Integration | Component | c3 chart", function(hooks) {
     assert.ok(find("svg"));
 
     assert.ok(this.$("g").hasClass("c3-legend-item"), "Pie charte has lengend");
-    assert.equal(this.$(".c3-legend-item").length, 2, "Has 2 legend items");
-    assert.equal(this.$("svg g").length, 70, "svg g elements");
+    assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.equal(findAll("svg g").length, 70, "svg g elements");
   });
 
   test("it renders a donut chart", async function(assert) {
@@ -45,12 +45,12 @@ module("Integration | Component | c3 chart", function(hooks) {
 
     assert.ok(this.$("text").hasClass("c3-chart-arcs-title"), "Has title text");
     assert.equal(
-      this.$(".c3-chart-arcs-title").text(),
+      find(".c3-chart-arcs-title").textContent,
       "Iris Petal Width",
       "Text matches title"
     );
-    assert.equal(this.$(".c3-legend-item").length, 3, "Has 3 legend items");
-    assert.equal(this.$("svg g").length, 82, "svg g elements");
+    assert.equal(findAll(".c3-legend-item").length, 3, "Has 3 legend items");
+    assert.equal(findAll("svg g").length, 82, "svg g elements");
   });
 
   test("it renders a gauge chart", async function(assert) {
@@ -77,18 +77,17 @@ module("Integration | Component | c3 chart", function(hooks) {
 
     assert.ok(this.$("text").hasClass("c3-title"), "Has title text");
     assert.equal(
-      this.$(".c3-title").text(),
+      find(".c3-title").textContent,
       "Percent Complete",
       "Text matches title"
     );
-    assert.equal(this.$(".c3-legend-item").length, 1, "Has 1 legend items");
-    assert.equal(this.$("svg g").length, 60, "svg g elements");
+    assert.equal(findAll(".c3-legend-item").length, 1, "Has 1 legend items");
+    assert.equal(findAll("svg g").length, 60, "svg g elements");
   });
 
   test("it renders a timeseries chart", async function(assert) {
     this.set("data", {
       x: "x",
-      // xFormat: '%Y%m%d', // 'xFormat' can be used as custom format of 'x'
       columns: [
         [
           "x",
@@ -99,7 +98,6 @@ module("Integration | Component | c3 chart", function(hooks) {
           "2013-01-05",
           "2013-01-06"
         ],
-        // ['x', '20130101', '20130102', '20130103', '20130104', '20130105', '20130106'],
         ["data1", 30, 200, 100, 400, 150, 250],
         ["data2", 130, 340, 200, 500, 250, 350]
       ]
@@ -128,12 +126,12 @@ module("Integration | Component | c3 chart", function(hooks) {
 
     assert.ok(this.$("text").hasClass("c3-title"), "Has title text");
     assert.equal(
-      this.$(".c3-title").text(),
+      find(".c3-title").textContent,
       "Internet Speeds",
       "Text matches title"
     );
-    assert.equal(this.$(".c3-legend-item").length, 2, "Has 2 legend items");
-    assert.equal(this.$("svg g").length, 67, "svg g elements");
+    assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.equal(findAll("svg g").length, 67, "svg g elements");
   });
 
   test("it renders a bar chart", async function(assert) {
@@ -166,12 +164,12 @@ module("Integration | Component | c3 chart", function(hooks) {
 
     assert.ok(this.$("text").hasClass("c3-title"), "Has title text");
     assert.equal(
-      this.$(".c3-title").text(),
+      find(".c3-title").textContent,
       "Regional Sales",
       "Text matches title"
     );
-    assert.equal(this.$(".c3-legend-item").length, 2, "Has 2 legend items");
-    assert.equal(this.$("svg g").length, 75, "svg g elements");
+    assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.equal(findAll("svg g").length, 75, "svg g elements");
   });
 
   test("triggers action on chart init", async function(assert) {
@@ -198,8 +196,8 @@ module("Integration | Component | c3 chart", function(hooks) {
 
     assert.ok(find("svg"));
 
-    assert.equal(this.$(".c3-legend-item").length, 2, "Has 2 legend items");
-    assert.equal(this.$("svg g").length, 75, "svg g elements");
+    assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.equal(findAll("svg g").length, 75, "svg g elements");
   });
 
   test("triggers action on chart render", async function(assert) {
@@ -226,8 +224,8 @@ module("Integration | Component | c3 chart", function(hooks) {
 
     assert.ok(find("svg"));
 
-    assert.equal(this.$(".c3-legend-item").length, 2, "Has 2 legend items");
-    assert.equal(this.$("svg g").length, 75, "svg g elements");
+    assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.equal(findAll("svg g").length, 75, "svg g elements");
   });
 
   test("triggers action on chart mouseover", async function(assert) {
@@ -256,8 +254,8 @@ module("Integration | Component | c3 chart", function(hooks) {
 
     await triggerEvent('.c3 svg', 'mouseenter');
 
-    assert.equal(this.$(".c3-legend-item").length, 2, "Has 2 legend items");
-    assert.equal(this.$("svg g").length, 75, "svg g elements");
+    assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.equal(findAll("svg g").length, 75, "svg g elements");
   });
 
 
@@ -287,8 +285,8 @@ module("Integration | Component | c3 chart", function(hooks) {
 
     await triggerEvent('.c3 svg', 'mouseout');
 
-    assert.equal(this.$(".c3-legend-item").length, 2, "Has 2 legend items");
-    assert.equal(this.$("svg g").length, 75, "svg g elements");
+    assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.equal(findAll("svg g").length, 75, "svg g elements");
   });
 
 });
