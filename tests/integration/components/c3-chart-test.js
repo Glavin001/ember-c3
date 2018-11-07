@@ -21,7 +21,7 @@ module("Integration | Component | c3 chart", function(hooks) {
 
     assert.ok(find("svg"));
 
-    assert.ok(this.$("g").hasClass("c3-legend-item"), "Pie charte has lengend");
+    assert.equal(findAll("g .c3-legend-item").length, 2, "Pie charte has a legend");
     assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
     assert.equal(findAll("svg g").length, 70, "svg g elements");
   });
