@@ -49,7 +49,7 @@ export default Controller.extend({
   padding: { top: 20, bottom: 5, right: 15 },
 
   actions: {
-    init(/* chart */) {
+    init() {
       this.set("pageTitle", "Chart Events - loading...");
       later(this, () => this.set("pageTitle", "C3 Chart Events"), 500);
     },
