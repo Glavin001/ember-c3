@@ -34,14 +34,14 @@ export default Controller.extend({
           ["data", 0]
       ]);
       this.notifyPropertyChange("data");
-    }, 4000);
+    }, 2000);
 
     later(this, () => {
       this.set("data.columns", [
           ["data", 100]
       ]);
       this.notifyPropertyChange("data");
-    }, 2000);
+    }, 2500);
 
   },
 

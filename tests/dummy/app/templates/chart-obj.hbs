@@ -1,32 +1,43 @@
- {{#collapsable-panel as |panel|}}
+{{#collapsable-panel as |panel|}}
   {{#panel.header}}
-   <h3>{{chartTitle}}</h3>
+    <h3>
+      {{chartTitle}}
+    </h3>
   {{/panel.header}}
-
-  {{#panel.content}}
-    {{c3-chart data=data c3chart=chart}}
-  {{/panel.content}}
+  {{#panel.content}}{{c3-chart data=data c3chart=chart}}{{/panel.content}}
 {{/collapsable-panel}}
-
 <div class="container mt-2">
-  <button class="btn btn-sm btn-primary" onclick={{action "toggleLegend"}}>Toggle Legend</button>
-  <button class="btn btn-sm btn-primary" onclick={{action "toggleData3"}}>Toggle Data 3</button>
-  <button class="btn btn-sm btn-primary" onclick={{action "transform"}}>Transform</button>
+  <button class="btn btn-sm btn-primary" onclick={{action "toggleLegend"}}>
+    Toggle Legend
+  </button>
+  <button class="btn btn-sm btn-primary" onclick={{action "toggleData3"}}>
+    Toggle Data 3
+  </button>
+  <button class="btn btn-sm btn-primary" onclick={{action "transform"}}>
+    Transform
+  </button>
   {{#if isBar}}
-    <button class="btn btn-sm btn-primary" onclick={{action "stackBars"}}>Stack Bars</button>
+    <button class="btn btn-sm btn-primary" onclick={{action "stackBars"}}>
+      Stack Bars
+    </button>
   {{else}}
-    <button class="btn btn-sm btn-primary" onclick={{action "makeCombo"}}>Combo</button>
+    <button class="btn btn-sm btn-primary" onclick={{action "makeCombo"}}>
+      Combo
+    </button>
   {{/if}}
-  <button class="btn btn-sm btn-primary" onclick={{action "changeColors"}}>Change Colors</button>
+  <button class="btn btn-sm btn-primary" onclick={{action "changeColors"}}>
+    Change Colors
+  </button>
 </div>
-
-
 <div class="mt-5">
-  <h5>templates/index.hbs</h5>
+  <h5>
+    templates/index.hbs
+  </h5>
   {{code-snippet name="index.hbs"}}
 </div>
-
 <div class="mt-5">
-  <h5>controllers/index.js</h5>
+  <h5>
+    controllers/index.js
+  </h5>
   {{code-snippet name="chart-events.js"}}
 </div>
