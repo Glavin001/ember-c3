@@ -39,6 +39,8 @@
     "deploy": "ember build && ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\" && git push origin gh-pages:gh-pages"
   },
   "dependencies": {
+    "broccoli-funnel": "^2.0.1",
+    "broccoli-merge-trees": "^3.0.1",
     "c3": "^0.6.8",
     "d3": "^5.7.0",
     "ember-auto-import": "^1.2.15",
