@@ -8,15 +8,15 @@ All tags greater than 0.3.1 are internal to track changes to 1.0.0.  The last re
 * c3 and d3 latest versions
 * Add c3 chart property for api access
 * Add c3 title property
-* Add interaction property (pr [#81](https://github.com/Glavin001/ember-c3/pull/81))
+* Add interaction property (pr [#81](https://github.com/Glavin001/ember-c3/pull/81/files))
 * Upgrade ember-cli-babel to v7
-* Added integration tests for rendering and c3 events (prs [#79](https://github.com/Glavin001/ember-c3/pull/79) and [#82](https://github.com/Glavin001/ember-c3/pull/82))
+* Added integration tests for rendering and c3 events (prs [#79](https://github.com/Glavin001/ember-c3/pull/79/files) and [#82](https://github.com/Glavin001/ember-c3/pull/82/files))
 * Removed c3 and d3 bower dependencies
 * Document unloadDataBeforeChange
 * Reworked dummy app examples and added additional examples
-* Add logic to capture no data passed and provide dummy data to prevent c3 errors. See example (pr [#86](https://github.com/Glavin001/ember-c3/pull/86))
+* Add logic to capture no data passed and provide dummy data to prevent c3 errors. See example (pr [#86](https://github.com/Glavin001/ember-c3/pull/86/files)
 * fixed depreciation warnings
-* fixed reload during destroy issue (pr [#64](https://github.com/Glavin001/ember-c3/pull/64))
+* fixed reload during destroy issue (pr [#64](https://github.com/Glavin001/ember-c3/pull/64/files))
 * More details in readme
 
 
@@ -31,15 +31,15 @@ All tags greater than 0.3.1 are internal to track changes to 1.0.0.  The last re
 
 ## [v0.1.5](https://github.com/Glavin001/ember-c3/releases/tag/v0.1.5)  Release (July 14, 2015)
 
-* Merge pull request #15 from aaronrenner/master
+* Merge pull request [#15](https://github.com/Glavin001/ember-c3/pull/15/files) from aaronrenner/master
 
 ## [v0.1.4](https://github.com/Glavin001/ember-c3/releases/tag/v0.1.4)  Release (May 11, 2015)
 
-* Merge pull request #22 from thefrontside/built-element-prop-bugfix
+* Merge pull request [#22](https://github.com/Glavin001/ember-c3/pull/22/files) from thefrontside/built-element-prop-bugfix
 
 ## [v0.1.3](https://github.com/Glavin001/ember-c3/releases/tag/v0.1.3)  Release (July 21, 2014)
 
-* Merge pull request #7 from pitchtarget/remove-console-log
+* Merge pull request [#7](https://github.com/Glavin001/ember-c3/pull/7/files) from pitchtarget/remove-console-log
 
 ## [v0.1.2](https://github.com/Glavin001/ember-c3/releases/tag/v0.1.2)  Release (July 2, 2014)
 
