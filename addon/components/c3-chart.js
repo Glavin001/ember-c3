@@ -1,6 +1,7 @@
 import Component from "@ember/component";
 import { getProperties } from "@ember/object";
 import { debounce, later } from "@ember/runloop";
+import { isEmpty } from "@ember/utils";
 import c3 from "c3";
 
 export default Component.extend({
@@ -52,23 +53,50 @@ export default Component.extend({
     // get base c3 properties
     const chartConfig = getProperties(this, properties);
 
+    // If no data passed, set dummy
+    // data to prevent rendering errors
+    // A console error may still be generated
+    // but it won't crash ember
+    let cd = chartConfig.data;
+    if (isEmpty(cd))
+      chartConfig.data = {
+        xs: null,
+        columns: [],
+        empty: { label: { text: "No Data" } }
+      };
+    else if (
+      isEmpty(cd.url) &&
+      isEmpty(cd.json) &&
+      isEmpty(cd.rows) &&
+      isEmpty(cd.columns)
+    ) {
+      chartConfig.data.columns = [];
+      chartConfig.data.empty = { label: { text: "No Data" }};
+    }
+
     // bind c3 chart to component's DOM element
     chartConfig.bindto = this.element;
 
     // emit chart events to controller
     chartConfig.oninit = () => this.oninit && this.oninit();
-    chartConfig.onrendered = () => this.onrendered && this.onrendered(this.c3chart);
-    chartConfig.onmouseover = () => this.onmouseover && this.onmouseover(this.c3chart);
-    chartConfig.onmouseout = () => this.onmouseout && this.onmouseout(this.c3chart);
+    chartConfig.onrendered = () =>
+      this.onrendered && this.onrendered(this.c3chart);
+    chartConfig.onmouseover = () =>
+      this.onmouseover && this.onmouseover(this.c3chart);
+    chartConfig.onmouseout = () =>
+      this.onmouseout && this.onmouseout(this.c3chart);
     chartConfig.onresize = () => this.onresize && this.onresize(this.c3chart);
     chartConfig.onresize = () => this.onresize && this.onresize(this.c3chart);
-    chartConfig.onresized = () => this.onresized && this.onresized(this.c3chart);
-
+    chartConfig.onresized = () =>
+      this.onresized && this.onresized(this.c3chart);
+      
     // render the initial chart
     this.set("c3chart", c3.generate(chartConfig));
+
+    let cow = this.c3chart;
   },
 
-//  Component lifecycle hoiks
+  //  Component lifecycle hoiks
   didInsertElement() {
     this._super(...arguments);
     this._setupc3();

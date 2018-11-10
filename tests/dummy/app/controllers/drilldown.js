@@ -83,6 +83,8 @@ export default Controller.extend({
 
     resetData() {
       let c = this.chart;
+      document.getElementsByClassName("c3-title")[0].innerHTML =
+        "Flowers by Color";
       c.load({ columns: this.baseData });
       c.unload(
         this.unloadBlue.concat(this.unloadRed).concat(this.unloadYellow)
@@ -91,20 +93,24 @@ export default Controller.extend({
 
     drilldownBlue() {
       let c = this.chart;
+      document.getElementsByClassName("c3-title")[0].innerHTML = "Blue Flowers";
       c.load({ columns: this.blueFlowers });
       c.unload(["Blue Flowers", "Red Flowers", "Yellow Flowers"]);
     },
 
     drilldownRed() {
       let c = this.chart;
+      document.getElementsByClassName("c3-title")[0].innerHTML = "Red Flowers";
       c.load({ columns: this.redFlowers });
       c.unload(["Blue Flowers", "Red Flowers", "Yellow Flowers"]);
     },
 
     drilldownYellow() {
       let c = this.chart;
+      document.getElementsByClassName("c3-title")[0].innerHTML =
+        "Yellow Flowers";
       c.load({ columns: this.yellowFlowers });
       c.unload(["Blue Flowers", "Red Flowers", "Yellow Flowers"]);
-    },
+    }
   }
 });
