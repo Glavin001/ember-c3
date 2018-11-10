@@ -92,8 +92,6 @@ export default Component.extend({
       
     // render the initial chart
     this.set("c3chart", c3.generate(chartConfig));
-
-    let cow = this.c3chart;
   },
 
   //  Component lifecycle hoiks
