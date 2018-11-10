@@ -2,7 +2,7 @@
 
 All tags greater than 0.3.1 are internal to track changes to 1.0.0.  The last release prior to 1.0.0 is 0.3.1.  See issue [#77](https://github.com/Glavin001/ember-c3/issues/77) for details
 
-## Target 1.0.0
+## v1.0.0 (November 9, 2018)
 
 * Upgrade from ember 1.13 to 3.4 LTS
 * c3 and d3 latest versions
