@@ -1,5 +1,12 @@
 # Change Log
 
+## v1.1.0 (November 10, 2018)
+
+* Added dynamic title property (`dtitle`) so component can change title without manually using css
+* Modified drill down example to show use of `dtitle`
+* Added test for `dtitle`
+
+
 All tags greater than 0.3.1 are internal to track changes to 1.0.0.  The last release prior to 1.0.0 is 0.3.1.  See issue [#77](https://github.com/Glavin001/ember-c3/issues/77) for details
 
 ## v1.0.0 (November 9, 2018)

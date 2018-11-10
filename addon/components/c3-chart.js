@@ -1,7 +1,7 @@
 import Component from "@ember/component";
 import { getProperties } from "@ember/object";
 import { debounce, later } from "@ember/runloop";
-import { isEmpty } from "@ember/utils";
+import { isEmpty, isPresent } from "@ember/utils";
 import c3 from "c3";
 
 export default Component.extend({
@@ -25,12 +25,12 @@ export default Component.extend({
       chart.unload();
 
       // default animation is 350ms
-      // t/f data must by loaded after unload animation (350)
+      // data must by loaded after unload animation (350)
       // or chart will not properly render
 
       later(() => {
         chart.load(
-          // data, axis, color are only mutable elements
+          // data, axis, color are the only mutable elements
           this.data,
           this.axis,
           this.color
@@ -48,7 +48,7 @@ export default Component.extend({
       "grid", "legend", "tooltip", "subchart", "zoom",
       "point", "axis", "regions", "area", "size",
       "padding", "color", "transition", "title", "interaction"
-      ];
+    ];
 
     // get base c3 properties
     const chartConfig = getProperties(this, properties);
@@ -71,7 +71,7 @@ export default Component.extend({
       isEmpty(cd.columns)
     ) {
       chartConfig.data.columns = [];
-      chartConfig.data.empty = { label: { text: "No Data" }};
+      chartConfig.data.empty = { label: { text: "No Data" } };
     }
 
     // bind c3 chart to component's DOM element
@@ -89,22 +89,28 @@ export default Component.extend({
     chartConfig.onresize = () => this.onresize && this.onresize(this.c3chart);
     chartConfig.onresized = () =>
       this.onresized && this.onresized(this.c3chart);
-      
+
     // render the initial chart
     this.set("c3chart", c3.generate(chartConfig));
   },
 
-  //  Component lifecycle hoiks
   didInsertElement() {
     this._super(...arguments);
     this._setupc3();
   },
 
   didUpdateAttrs() {
-    // if data proprety is dependent on async relationships,
-    // animations can cause buggy renders, therefore debounce
-    // component update to ensure proper visualization
-    debounce(this, this._reload, 360);
+    this._super(...arguments);
+
+    // dynamic title property
+    if (isPresent(this.dtitle)) {
+      document.querySelector(`#${this.element.id} .c3-title`).innerHTML = this.dtitle.text;
+      this.c3chart.flush();
+    }
+
+    // don't refresh other properties if they cause side effects
+    if (isEmpty(this.dtitle) && (isPresent(this.dtitle) && this.dtitle.refresh))
+      debounce(this, this._reload, 360);
   },
 
   // execute teardown method

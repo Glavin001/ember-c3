@@ -13,6 +13,12 @@ export default Controller.extend({
     ["Yellow Flowers", 300]
   ],
 
+  whiteData: [["White Flowers", 60]],
+
+  unloadWhite: map("whiteData", function(item) {
+    return item[0];
+  }),
+
   blueFlowers: [
     ["Wolfsbane", 5],
     ["Cornflower", 17],
@@ -83,34 +89,45 @@ export default Controller.extend({
 
     resetData() {
       let c = this.chart;
-      document.getElementsByClassName("c3-title")[0].innerHTML =
-        "Flowers by Color";
+      this.set("dtitle", { text: "Flowers by Color", refresh: false });
       c.load({ columns: this.baseData });
       c.unload(
-        this.unloadBlue.concat(this.unloadRed).concat(this.unloadYellow)
+        this.unloadBlue
+          .concat(this.unloadRed)
+          .concat(this.unloadYellow)
+          .concat(this.unloadWhite)
       );
     },
 
     drilldownBlue() {
       let c = this.chart;
-      document.getElementsByClassName("c3-title")[0].innerHTML = "Blue Flowers";
+      this.set("dtitle", { text: "Four Colors", refresh: false });
       c.load({ columns: this.blueFlowers });
-      c.unload(["Blue Flowers", "Red Flowers", "Yellow Flowers"]);
+      c.unload(["Blue Flowers", "Red Flowers", "Yellow Flowers", "White Flowers"]);
     },
 
     drilldownRed() {
       let c = this.chart;
-      document.getElementsByClassName("c3-title")[0].innerHTML = "Red Flowers";
+      this.set("dtitle", { text: "Red Flowers", refresh: false });
       c.load({ columns: this.redFlowers });
-      c.unload(["Blue Flowers", "Red Flowers", "Yellow Flowers"]);
+      c.unload(["Blue Flowers", "Red Flowers", "Yellow Flowers", "White Flowers"]);
     },
 
     drilldownYellow() {
       let c = this.chart;
-      document.getElementsByClassName("c3-title")[0].innerHTML =
-        "Yellow Flowers";
+      this.set("dtitle", { text: "Yellow Flowers", refrehs: false });
       c.load({ columns: this.yellowFlowers });
-      c.unload(["Blue Flowers", "Red Flowers", "Yellow Flowers"]);
+      c.unload(["Blue Flowers", "Red Flowers", "Yellow Flowers", "White Flowers"]);
+    },
+
+    addWhite() {
+      this.set("dtitle", { text: "Four Colors", refresh: true });
+      this.chart.load({ columns: this.whiteData });
+    },
+
+    titleOnly() {
+      this.set("dtitle", { text: "Flowers are Colorful!!!", refresh: true });
     }
+
   }
 });
