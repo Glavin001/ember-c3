@@ -24,7 +24,7 @@ ember install ember-c3
 
 ## Usage
 
-For a complete set of examples, see the [dummy app in `tests/dummy/app/`](https://github.com/maxwondercorn/ember-c3/tree/master/tests/dummy/app)
+For a complete set of examples, see the [dummy app in `tests/dummy/app/`](https://github.com/Glavin001/ember-c3/tree/master/tests/dummy/app)
 
 <!-- (https://github.com/Glavin001/ember-c3/tree/master/tests/dummy/app). -->
 
@@ -203,7 +203,7 @@ templates/application.hbs
   data=data
   oninit=(action 'init')
   }}
-  ```
+```
 controllers/application.js
 ```js
 import Controller from "@ember/controller";
