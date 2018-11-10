@@ -1,9 +1,5 @@
 # Ember-C3 
 
-### THIS ADDON IS GOING THROUGH MAJOR UPDATES - The current version 0.3.1 published to NPM is the latest version.  Work is being done on master - v0.3.1 can be found [here](https://github.com/Glavin001/ember-c3/tree/old-v031)
-
-### The readme below does not reflect the current published version.  See issue [#77](https://github.com/Glavin001/ember-c3/issues/77) for upgrade checklist
-
 [![npm version](https://badge.fury.io/js/ember-c3.svg)](http://badge.fury.io/js/ember-c3)
 [![Join the chat at https://gitter.im/Glavin001/ember-c3](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Glavin001/ember-c3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
  
@@ -11,9 +7,11 @@
 
 **Live Demo:** http://glavin001.github.io/ember-c3/
 
-**Future Features Demo:** https://maxwondercorn.github.io/ember-c3/
-
 Alternatively take a look at [Ember-NVD3](https://github.com/Glavin001/ember-nvd3) for your charting needs.
+
+## Ember Versions
+
+This addon now uses ember-cli-babel version 7 which requires ember-cli 2.13 and above
 
 ---
 
@@ -32,17 +30,14 @@ For a complete set of examples, see the [dummy app in `tests/dummy/app/`](https:
 
 | Combination |
 | --- |
-| Demo: http://blog.glavin.org/ember-c3/#/ |
 | ![image](https://cloud.githubusercontent.com/assets/1885333/9792404/4e750a06-57b6-11e5-96c1-8a6cabdef4ac.png) |
 
 | Timeseries |
 | --- |
-| Demo: http://blog.glavin.org/ember-c3/#/timeseries |
 | ![ember-c3-timeseries-4](https://cloud.githubusercontent.com/assets/1885333/9792600/6032061c-57b7-11e5-9a2c-80e680d274a5.gif) |
 
 | Gauge | Pie | Donut |
 | --- | --- | --- |
-| Demo: http://blog.glavin.org/ember-c3/#/gauge | Demo: http://blog.glavin.org/ember-c3/#/pie | Demo: http://blog.glavin.org/ember-c3/#/donut |
 | ![ember-c3-gauge-2](https://cloud.githubusercontent.com/assets/1885333/9792503/c7ebc05a-57b6-11e5-8d43-116e9dd7c368.gif) | ![ember-c3-pie-1](https://cloud.githubusercontent.com/assets/1885333/9792639/8f90f5ee-57b7-11e5-859c-9a083255df4a.gif) | ![ember-c3-donut-1](https://cloud.githubusercontent.com/assets/1885333/9792665/ad4a6ee4-57b7-11e5-90d4-df152b24e4a3.gif)|
 
 ### Basic
