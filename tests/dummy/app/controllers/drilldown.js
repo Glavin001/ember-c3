@@ -121,12 +121,12 @@ export default Controller.extend({
     },
 
     addWhite() {
-      this.set("dtitle", { text: "Four Colors", refresh: true });
+      this.set("dtitle", { text: "Four Colors", refresh: false });
       this.chart.load({ columns: this.whiteData });
     },
 
     titleOnly() {
-      this.set("dtitle", { text: "Flowers are Colorful!!!", refresh: true });
+      this.set("dtitle", { text: "Flowers are Colorful!!!", refresh: false });
     }
 
   }

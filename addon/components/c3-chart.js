@@ -101,7 +101,7 @@ export default Component.extend({
 
   didUpdateAttrs() {
     this._super(...arguments);
-
+    
     // dynamic title property
     if (isPresent(this.dtitle)) {
       document.querySelector(`#${this.element.id} .c3-title`).innerHTML = this.dtitle.text;
@@ -109,7 +109,7 @@ export default Component.extend({
     }
 
     // don't refresh other properties if they cause side effects
-    if (isEmpty(this.dtitle) && (isPresent(this.dtitle) && this.dtitle.refresh))
+    if (isEmpty(this.dtitle) || (isPresent(this.dtitle) && this.dtitle.refresh))
       debounce(this, this._reload, 360);
   },
 
