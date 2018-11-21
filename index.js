@@ -12,13 +12,20 @@ module.exports = {
   },
 
   treeForVendor(vendorTree) {
+    let trees = [];
+
+    if (vendorTree)
+      trees.push(vendorTree);
+
     let cssTree = new Funnel(
       path.join(this.project.root, "node_modules", "c3"),
       {
         files: ["c3.css"]
       }
     );
-
-    return new MergeTrees([vendorTree, cssTree]);
+    
+    trees.push(cssTree);
+    
+    return new MergeTrees(trees);
   }
 };
