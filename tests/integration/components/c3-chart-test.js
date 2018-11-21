@@ -21,7 +21,7 @@ module("Integration | Component | c3 chart", function(hooks) {
     assert.equal(
       findAll("g .c3-legend-item").length,
       2,
-      "Pie charte has a legend"
+      "Pie chart has a legend"
     );
     assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
     assert.equal(findAll("svg g").length, 70, "svg g elements");
@@ -56,9 +56,6 @@ module("Integration | Component | c3 chart", function(hooks) {
     this.set("data", {
       columns: [["data", 91.4]],
       type: "gauge",
-      title: {
-        text: "Percent Complete"
-      }
     });
 
     this.set("title", {
@@ -108,7 +105,8 @@ module("Integration | Component | c3 chart", function(hooks) {
         }
       }
     }),
-      this.set("title", {
+    
+    this.set("title", {
         text: "Internet Speeds"
       });
 
@@ -357,4 +355,51 @@ module("Integration | Component | c3 chart", function(hooks) {
 
     await triggerEvent("g .c3-arc-data1", "mouseout");
   });
+
+  /*** Testing dtitle property ***/
+
+  test("Can dynamically change the title", async function(assert) {
+    assert.expect(7);
+
+    this.set("dtitle", null);
+
+    this.set("chartAction", () => {
+      this.set("dtitle", {text: "New Title", refresh: false})
+      assert.ok(true, "onclick action is called");
+    });
+
+    this.set("data", {
+      columns: [["data1", 30], ["data2", 120]],
+      type: "pie",
+      onclick: bind(this, this.chartAction)
+    });
+
+    this.set("title", {
+      text: "Percent Complete"
+    });
+
+    await render(hbs`{{c3-chart data=this.data title=title dtitle=dtitle}}`);
+
+    assert.ok(find("svg"));
+    assert.equal(
+      find(".c3-title").textContent,
+      "Percent Complete",
+      "Text matches title"
+    );
+    assert.equal(
+      findAll("g .c3-legend-item").length,
+      2,
+      "Pie chart has a legend"
+    );
+    assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.equal(findAll("svg g").length, 70, "svg g elements");
+
+    await click(".c3-arc-data1");
+
+    assert.equal(find(".c3-title").textContent,
+      "New Title",
+      "Pie chart title has changed"
+      );
+  });
+
 });

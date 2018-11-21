@@ -5,18 +5,21 @@
     </h3>
   {{/panel.header}}
   {{#panel.content}}
-    {{c3-chart data=data title=title padding=padding c3chart=chart}}
+    {{c3-chart data=data title=title dtitle=dtitle padding=padding c3chart=chart}}
   {{/panel.content}}
 {{/collapsable-panel}}
 <div class="container mt-2">
-  <span class="pull-left text-primary">
-    Click on pies to drill down
+  <span class="pull-right text-primary">
+    Click on pie segments to drill down
   </span>
-  <button
-    class="btn btn-sm btn-primary pull-right"
-    onclick={{action "resetData"}}
-  >
+  <button class="btn btn-sm btn-primary" onclick={{action "resetData"}}>
     Reset
+  </button>
+  <button class="btn btn-sm btn-primary" onclick={{action "addWhite"}}>
+    White Flowers
+  </button>
+  <button class="btn btn-sm btn-primary" onclick={{action "titleOnly"}}>
+    Change Title
   </button>
 </div>
 <div class="mt-5">
