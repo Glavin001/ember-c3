@@ -8,6 +8,7 @@ export default Component.extend({
   tagName: "div",
   classNames: ["c3-chart-component"],
   _transition: 350,
+  dtitle: null,
 
   // triggered when data is updated by didUpdateAttrs
   _reload() {
