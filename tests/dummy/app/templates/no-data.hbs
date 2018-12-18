@@ -1,27 +1,25 @@
 {{#collapsable-panel as |panel|}}
   {{#panel.header}}
-    <h3>
-      No Data
-    </h3>
+    <h3>No Data</h3>
   {{/panel.header}}
+
   {{#panel.content}}
     {{c3-chart data=data title=title padding=padding c3chart=chart}}
   {{/panel.content}}
 {{/collapsable-panel}}
+
 <div class="container mt-2">
   <button class="btn btn-sm btn-primary" onclick={{action "animate"}}>
     Add Data
   </button>
 </div>
+
 <div class="mt-5">
-  <h5>
-    templates/no-data.hbs
-  </h5>
+  <h5>templates/no-data.hbs</h5>
   {{code-snippet name="no-data.hbs"}}
 </div>
+
 <div class="mt-5">
-  <h5>
-    controllers/no-data.js
-  </h5>
+  <h5>controllers/no-data.js</h5>
   {{code-snippet name="no-data.js"}}
 </div>
