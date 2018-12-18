@@ -1,4 +1,8 @@
 # Change Log
+## v1.2.3 (December 18, 2018)
+
+* Refactored dummy app templates for easier reading on demo site
+* fixed broken element in guage demp
 
 ## v1.1.0 (November 10, 2018)
 
