@@ -1,8 +1,21 @@
 # Change Log
-## v1.2.3 (December 18, 2018)
+
+## v3.1 (December 18, 2018)
 
 * Refactored dummy app templates for easier reading on demo site
-* fixed broken element in guage demp
+* Bugfix - broken element in gauge demo
+
+## v1.2.2 (November 26, 2018)
+
+* Bumped Ember CLI
+
+## v1.2.1 (November 18, 2018)
+
+* Bugfix broccoli merge, empty vendor trees (resolves #90)
+
+## v1.2.0 (November 11, 2018)
+
+* Fixed issue with dtitle property
 
 ## v1.1.0 (November 10, 2018)
 
