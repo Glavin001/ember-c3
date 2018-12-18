@@ -1,13 +1,13 @@
 {{#collapsable-panel as |panel|}}
   {{#panel.header}}
-    <h3>
-      Drill Down
-    </h3>
+    <h3>Drill Down</h3>
   {{/panel.header}}
+
   {{#panel.content}}
     {{c3-chart data=data title=title dtitle=dtitle padding=padding c3chart=chart}}
   {{/panel.content}}
 {{/collapsable-panel}}
+
 <div class="container mt-2">
   <span class="pull-right text-primary">
     Click on pie segments to drill down
@@ -22,15 +22,13 @@
     Change Title
   </button>
 </div>
+
 <div class="mt-5">
-  <h5>
-    templates/drilldown.hbs
-  </h5>
+  <h5>templates/drilldown.hbs</h5>
   {{code-snippet name="drilldown.hbs"}}
 </div>
+
 <div class="mt-5">
-  <h5>
-    controllers/drilldown.js
-  </h5>
+  <h5>controllers/drilldown.js</h5>
   {{code-snippet name="drilldown.js"}}
 </div>

@@ -1,9 +1,8 @@
 {{#collapsable-panel as |panel|}}
   {{#panel.header}}
-    <h3>
-      Gauge Chart
-    </h3>
+    <h3>Gauge Chart</h3>
   {{/panel.header}}
+
   {{#panel.content}}
     {{c3-chart
       data=data
@@ -16,20 +15,19 @@
     }}
   {{/panel.content}}
 {{/collapsable-panel}}
+
 <div class="container mt-2">
   <button class="btn btn-sm btn-primary" onclick={{action "animate"}}>
     Animate
   </button>
-</div>
+</div
+
 <div class="mt-5">
-  <h5>
-    templates/gauge.hbs
-  </h5>
+  <h5>templates/gauge.hbs</h5>
   {{code-snippet name="gauge.hbs"}}
 </div>
+
 <div class="mt-5">
-  <h5>
-    controllers/gauge.js
-  </h5>
+  <h5>controllers/gauge.js</h5>
   {{code-snippet name="gauge.js"}}
 </div>
