@@ -16,6 +16,7 @@ Router.map(function() {
   this.route('chart-events');
   this.route('chart-obj');
   this.route('no-data');
+  this.route('d3');
 });
 
 export default Router;

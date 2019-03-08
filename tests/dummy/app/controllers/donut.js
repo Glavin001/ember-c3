@@ -3,7 +3,6 @@ import Controller from "@ember/controller";
 /* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
 export default Controller.extend({
-
   chart: null,
   
   animate() {

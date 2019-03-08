@@ -3,6 +3,7 @@ import { getProperties } from "@ember/object";
 import { debounce, later } from "@ember/runloop";
 import { isEmpty, isPresent } from "@ember/utils";
 import c3 from "c3";
+import d3 from "d3"; // eslint-disable-line no-unused-vars
 
 export default Component.extend({
   tagName: "div",

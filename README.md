@@ -52,7 +52,7 @@ Where `model` is your C3 data:
 
 See http://c3js.org/examples.html for examples of how to use C3.
 
-```hbs
+```handlebars
 {{c3-chart
   c3chart=chart
   data=model
@@ -136,11 +136,11 @@ The title can be set using the `.c3-title` class but that doesn't provide abstra
 
 The chart's initial title is set using the `title` parameter.  
 
-```hbs
+```handlebars
 {{c3-chart data=data title=title dtitle=dtitle}}
 ```
 
-```js
+```javascript
 import Controller from "@ember/controller";
 /* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
@@ -159,8 +159,8 @@ export default Controller.extend({
 ### C3 Methods
 If you assign a controller property to the c3chart property, you can use most of C3's api [methods](https://c3js.org/reference.html#api-focus).  Not all the methods have been tested.
 
-templates/someroute.hbs
-```
+templates/my-route.hbs
+```handlebars
 {{c3-chart data=mydata c3chart=chart}}
 
 <button onclick={{action "loadUS"}}>US Cars</button>
@@ -168,8 +168,8 @@ templates/someroute.hbs
 <button onclikc={{action "resetData"}}>Reset</button>
 ```
 
-controllers/someroute.js
-```js
+controllers/my-route.js
+```javascript
 import { later } from "@ember/runloop";
 import Controller from "@ember/controller";
 /* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
@@ -226,14 +226,14 @@ C3 emits two types of events - [chart](https://c3js.org/reference.html#oninit) a
 For connivence, the chart object is passed, with the exception of _oninit_ to chart events.  An example of a chart and data event is shown below.  Note the use of `bind` for tying actions to data events. See the dummy app for more examples
 
 templates/application.hbs
-```hbs
+```handlebars
 {{c3-chart 
   data=data
   oninit=(action 'init')
   }}
 ```
 controllers/application.js
-```js
+```javascript
 import Controller from "@ember/controller";
 import { computed } from "@ember/object";
 import { bind } from "@ember/runloop";
@@ -266,6 +266,13 @@ export default Controller.extend({
     },
   }
 });
+```
+### Accessing D3
+
+You can use the D3 library in your application by importing it where needed
+
+```javascript
+import d3 from "d3";
 ```
 
 ### Helpful Links

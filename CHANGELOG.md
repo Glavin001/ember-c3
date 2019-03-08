@@ -1,6 +1,16 @@
 # Change Log
 
-## v3.1 (December 18, 2018)
+## v1.3.0 (December 18, 2018)
+
+* Added import statement for D3 so it can be used in applications
+* Added D3 usage example to dummy application
+* Added D3 update to README
+* Updated ember and broccoli deps
+* Bumped c3 to 0.6.13
+* Bumped d3 to 5.9.1
+
+
+## v1.2.4 (December 18, 2018)
 
 * Refactored dummy app templates for easier reading on demo site
 * Bugfix - broken element in gauge demo
