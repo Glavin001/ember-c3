@@ -62,3 +62,10 @@ a.fa.fa-github.github {
   box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 70px 6px;
 }
 
+.bar {
+  fill: steelblue;
+}
+ 
+.bar:hover {
+  fill: orange;
+}
