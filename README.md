@@ -92,7 +92,7 @@ The properties match the corresponding C3 objects found in the [C3 Documentation
 
 The component properties break out the settings to simplify chart configuration.  Note: The chart type is **always** assigned in the chart data object.
 
-The properties with an asterisk are the only ones that are updated on the chart when a property change is triggered when `notifyPropertyChange` is called.  See examples in the dummy app.
+The properties with an asterisk are the only ones updated on the chart when a property change is triggered when `notifyPropertyChange` is called.  See examples in the dummy app.
 
 Property | Description | Example
 ---------|-------------|--------
@@ -132,9 +132,9 @@ The `dtitle` property is used to dynamically change a chart's title.  C3 doesn't
 
 The title can be set using the `.c3-title` class but that doesn't provide abstraction from c3 internals.
 
-`dtitle` gives some control over side effects using a parameter to control how the graph is refreshed.  An object is passed into `dtitle` and the second parameter `refresh` indicates whether all properties should be refreshed or only the chart title.  Setting `refresh` to false will only refresh the title and ignore changes to the data, colors and axis properties.  A short example is below.  See the drill down example to see `dttile` is used and potential side effects.
+`dtitle` gives you some control over side effects using a parameter to control how the graph is refreshed.  An object is passed into `dtitle` and the second parameter `refresh` indicates whether all properties should be refreshed or only the chart title.  Setting `refresh` to false will only refresh the title and ignore changes to the data, colors and axis properties.  A short example is below.  See the drill down example to see how `dttile` is used and potential side effects.
 
-The chart's initial title is still using the title parameter.  
+The chart's initial title is set using the `title` parameter.  
 
 ```hbs
 {{c3-chart data=data title=title dtitle=dtitle}}
@@ -157,7 +157,7 @@ export default Controller.extend({
 ```
 
 ### C3 Methods
-If you assign a controller property to the c3chart property, you can use most of the C3 api [methods](https://c3js.org/reference.html#api-focus).  Not all the methods have been tested.
+If you assign a controller property to the c3chart property, you can use most of C3's api [methods](https://c3js.org/reference.html#api-focus).  Not all the methods have been tested.
 
 templates/someroute.hbs
 ```
@@ -202,21 +202,19 @@ export default Controller.extend({
 
   actions: {
      resetData() {
-      let c = this.chart;
-      c.load({ columns: this.baseData });
-      c.unload("Mercedes", "Volkswagon", "BMW", "Ford", "Chevy", "Tesla", "Buick", "Dodge");
+      this.chart.load({ columns: this.baseData });
+      this.chart.unload("Mercedes", "Volkswagon", 
+      "BMW", "Ford", "Chevy", "Tesla", "Buick", "Dodge");
     },
 
     loadUS() {
-      let c = this.chart;
-      c.load({ columns: this.modelsUS});
-      c.unload("US", "German");
+      this.chart.load({ columns: this.modelsUS});
+      this.chart.unload("US", "German");
     },
        
     loadGerman() {
-      let c = this.chart;
-      c.load({ columns: this.modelsGerman});
-      c.unload("US", "German");
+      this.chart.load({ columns: this.modelsGerman});
+      this.chart.unload("US", "German");
     }
   }
 });
