@@ -18,7 +18,7 @@ module.exports = {
       trees.push(vendorTree);
 
     let cssTree = new Funnel(
-      path.join(this.project.root, "node_modules", "c3"),
+      path.resolve(require.resolve('c3'), '..'),
       {
         files: ["c3.css"]
       }
