@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.3.1 (May 22, 2019)
+
+* PR #97 monorepo support - @danwenzel
+
 ## v1.3.0 (December 18, 2018)
 
 * Added import statement for D3 so it can be used in applications
