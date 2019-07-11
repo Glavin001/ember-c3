@@ -1,5 +1,13 @@
 # Change Log
 
+## v2.0.0 (July 10, 2019)
+
+* Bumped c3/d3 and other dependencies 
+
+Breaking (potentially)
+
+* Dropped testing for and no longer supporting versions prior to Ember 2.18.  The next release will only test the last two LTS versions
+
 ## v1.3.1 (May 22, 2019)
 
 * PR #97 monorepo support - @danwenzel

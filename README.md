@@ -11,7 +11,7 @@ Alternatively take a look at [Ember-NVD3](https://github.com/Glavin001/ember-nvd
 
 ## Ember Versions
 
-This addon now uses ember-cli-babel version 7 which requires ember-cli 2.13 and above
+Ember 2.18 and above
 
 ---
 
