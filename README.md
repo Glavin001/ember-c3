@@ -48,6 +48,15 @@ Where `model` is your C3 data:
 {{c3-chart data=model}}
 ```
 
+Using angle bracket invocation (see note below):
+
+```handlebars
+<C3Chart @data={{model}} />
+```
+
+> Note: Angle brackets were available in Ember 3.4. An Ember bug prevented use of numbers in component names so <C3Chart /> will generate an error. The bug was fixed with PR [#17552](https://github.com/emberjs/ember.js/pull/17552) which was merged into Ember 3.8. Ember-C3 can use angle brackets only with ember source 3.8 and later 
+
+
 ### Advanced
 
 See http://c3js.org/examples.html for examples of how to use C3.

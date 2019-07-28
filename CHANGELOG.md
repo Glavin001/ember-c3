@@ -1,5 +1,10 @@
 # Change Log
 
+## v2.0.1 (July 28, 2019)
+
+* README - added example using angle bracket invocation
+* README - documented Ember bug re: angle bracket invocation doesn't work on components with numbers in their name.  Bug was fixed in Ember 3.8
+
 ## v2.0.0 (July 10, 2019)
 
 * Bumped c3/d3 and other dependencies 
