@@ -3,9 +3,6 @@ import { later } from "@ember/runloop";
 /* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
 export default Controller.extend({
-
-  chart: null,
-
   animate() {
     
     later(this, () => {
@@ -42,7 +39,6 @@ export default Controller.extend({
       ]);
       this.notifyPropertyChange("data");
     }, 2500);
-
   },
 
   data: {

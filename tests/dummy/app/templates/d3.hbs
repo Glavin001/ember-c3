@@ -1,18 +1,17 @@
-
-{{#collapsable-panel as |panel|}}
-  {{#panel.header}}
+<CollapsablePanel as |panel|>
+  <panel.header>
     <h3>Simple D3 demo</h3>
-  {{/panel.header}}
+  </panel.header>
 
-  {{#panel.content}}
+  <panel.content>
     <div class="row align-items-center justify-content-center">
       <h4>Today is a beautiful day!!</h4>
     </div>
     <div class="row align-items-center justify-content-center mt-3">
       <svg></svg>
     </div>
-  {{/panel.content}}
-{{/collapsable-panel}}
+  </panel.content>
+</CollapsablePanel>
 
 <div class="container mt-2">
   <button class="btn btn-sm btn-primary" onclick={{action "demoD3"}}>
@@ -22,13 +21,10 @@
 
 <div class="mt-5">
   <h5>templates/d3.hbs</h5>
-  {{code-snippet name="d3.hbs"}}
+  <CodeSnippet @name="d3.hbs" />
 </div>
 
 <div class="mt-5">
   <h5>controllers/d3.js</h5>
-  {{code-snippet name="d3.js"}}
+  <CodeSnippet @name="d3.js" />
 </div>
-
-
-

@@ -1,19 +1,23 @@
-{{#collapsable-panel as |panel|}}
-  {{#panel.header}}
+<CollapsablePanel as |panel|>
+  <panel.header>
     <h3>Combination Chart</h3>
-  {{/panel.header}}
+  </panel.header>
 
-  {{#panel.content}}
-    {{c3-chart data=model c3chart=chart}}
-  {{/panel.content}}
-{{/collapsable-panel}}
+  <panel.content>
+    <C3Chart 
+      @data={{this.model}} 
+      @c3chart={{this.chart}} 
+    />
+  </panel.content>
+</CollapsablePanel>
+
 
 <div class="mt-5">
   <h5>templates/index.hbs</h5>
-  {{code-snippet name="index.hbs"}}
+  <CodeSnippet @name="index.hbs" />
 </div>
 
 <div class="mt-5">
   <h5>controllers/index.js</h5>
-  {{code-snippet name="index.js"}}
+  <CodeSnippet @name="index.js" />
 </div>

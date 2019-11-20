@@ -1,12 +1,17 @@
-{{#collapsable-panel as |panel|}}
-  {{#panel.header}}
+<CollapsablePanel as |panel|>
+  <panel.header>
     <h3>Timeseries</h3>
-  {{/panel.header}}
+  </panel.header>
 
-  {{#panel.content}}
-    {{c3-chart data=data axis=axis title=title padding=padding c3chart=chart}}
-  {{/panel.content}}
-{{/collapsable-panel}}
+  <panel.content>
+    <C3Chart 
+      @data={{this.data}} 
+      @axis={{this.axis}} 
+      @title={{this.title}} 
+      @padding={{this.padding}}
+    />
+  </panel.content>
+</CollapsablePanel>
 
 <div class="container mt-2">
   <button class="btn btn-sm btn-primary" onclick={{action "animate"}}>
@@ -16,10 +21,10 @@
 
 <div class="mt-5">
   <h5>templates/timeseries.hbs</h5>
-  {{code-snippet name="timeseries.hbs"}}
+  <CodeSnippet @name="timeseries.hbs" />
 </div>
 
 <div class="mt-5">
   <h5>controllers/timeseries.js</h5>
-  {{code-snippet name="timeseries.js"}}
+  <CodeSnippet @name="timeseries.js" />
 </div>

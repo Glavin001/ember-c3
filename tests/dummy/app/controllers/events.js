@@ -6,7 +6,6 @@ import { bind } from "@ember/runloop";
 export default Controller.extend({
   message: null,
   hoverMsg: null,
-  chart: null,
   
   data: computed(function() {
     // iris data from R

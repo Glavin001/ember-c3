@@ -5,8 +5,6 @@ import { computed }  from "@ember/object";
 
 export default Controller.extend({
 
-  chart: null,
-
   animate () {
 
     later(this, () => {

@@ -5,8 +5,6 @@ import { map } from "@ember/object/computed";
 /* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
 export default Controller.extend({
-  chart: null,
-
   baseData: [
     ["Blue Flowers", 30],
     ["Red Flowers", 120],

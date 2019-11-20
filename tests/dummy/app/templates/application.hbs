@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  {{#link-to "index" class="navbar-brand"}}
+  <LinkTo @route="index" class="navbar-brand">
     <img src="images/ember-logo.png" alt="">
     <span>C3</span>
-  {{/link-to}}
+  </LinkTo>
   <button
     class="navbar-toggler"
     type="button"
@@ -17,59 +17,59 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        {{#link-to "index" classNames="nav-link"}}
+        <LinkTo @route="index" class="nav-link">
           Combination
-        {{/link-to}}
+        </LinkTo>
       </li>
       <li class="nav-item">
-        {{#link-to "gauge" classNames="nav-link"}}
+        <LinkTo @route="gauge" class="nav-link">
           Gauge
-        {{/link-to}}
+        </LinkTo>
       </li>
       <li class="nav-item">
-        {{#link-to "timeseries" classNames="nav-link"}}
+        <LinkTo @route="timeseries" class="nav-link">
           Timeseries
-        {{/link-to}}
+        </LinkTo>
       </li>
       <li class="nav-item">
-        {{#link-to "pie" classNames="nav-link"}}
+        <LinkTo @route="pie" class="nav-link">
           Pie
-        {{/link-to}}
+        </LinkTo>
       </li>
       <li class="nav-item">
-        {{#link-to "donut" classNames="nav-link"}}
+        <LinkTo @route="donut" class="nav-link">
           Donut
-        {{/link-to}}
+        </LinkTo>
       </li>
       <li class="nav-item">
-        {{#link-to "chart-events" classNames="nav-link"}}
+        <LinkTo @route="chart-events" class="nav-link">
           Chart Events
-        {{/link-to}}
+        </LinkTo>
       </li>
       <li class="nav-item">
-        {{#link-to "events" classNames="nav-link"}}
+        <LinkTo @route="events" class="nav-link">
           Data Events
-        {{/link-to}}
+        </LinkTo>
       </li>
       <li class="nav-item">
-        {{#link-to "chart-obj" classNames="nav-link"}}
+        <LinkTo @route="chart-obj" class="nav-link">
           Chart Object
-        {{/link-to}}
+        </LinkTo>
       </li>
       <li class="nav-item">
-        {{#link-to "drilldown" classNames="nav-link"}}
+        <LinkTo @route="drilldown" class="nav-link">
           Drill Down
-        {{/link-to}}
+        </LinkTo>
       </li>
       <li class="nav-item">
-        {{#link-to "no-data" classNames="nav-link"}}
+        <LinkTo @route="no-data" class="nav-link">
           No Data
-        {{/link-to}}
+        </LinkTo>
       </li>
       <li class="nav-item">
-        {{#link-to "d3" classNames="nav-link"}}
+        <LinkTo @route="d3" class="nav-link">
           D3 Demo
-        {{/link-to}}
+        </LinkTo>
       </li>
     </ul>
     v

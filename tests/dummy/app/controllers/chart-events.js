@@ -4,7 +4,6 @@ import { later } from "@ember/runloop";
 /* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
 export default Controller.extend({
-  chart: null,
   pageTitle: "C3 Chart Events",
   message: null,
 

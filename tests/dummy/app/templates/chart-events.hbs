@@ -1,31 +1,30 @@
-{{#collapsable-panel as |panel|}}
-  {{#panel.header}}
+<CollapsablePanel as |panel|>
+  <panel.header>
     <h3>
       {{pageTitle}}
       <span class="pull-right"> {{message}}</span>
     </h3>
-  {{/panel.header}}
+  </panel.header>
 
-  {{#panel.content}}
+  <panel.content>
     <div class="row align-items-center justify-content-center mb-3">
-      {{c3-chart
-        data=data
-        c3chart=chart
-        padding=padding
-        title=title
-        size=size
-        axis=axis
-        grid=grid
-        tooltip=tooltip
-        legend=legend
-        oninit=(action "init")
-        onmouseover=(action "mouseover")
-        onmouseout=(action "mouseout")
-        onresize=(action "resizing")
-      }}
+      <C3Chart
+        @data={{this.data}}
+        @padding={{this.padding}}
+        @title={{this.title}}
+        @size={{this.size}}
+        @axis={{this.axis}}
+        @grid={{this.grid}}
+        @tooltip={{this.tooltip}}
+        @legend={{this.legend}}
+        @oninit={{action "init"}}
+        @onmouseover={{action "mouseover"}}
+        @onmouseout={{action "mouseout"}}
+        @onresize={{action "resizing"}}
+      />
     </div>
-  {{/panel.content}}
-{{/collapsable-panel}}
+  </panel.content>
+</CollapsablePanel>
 
 <div class="container mt-2">
   <span class="pull-right text-primary">Hover over chart or resize window to trigger events</span>
@@ -33,10 +32,10 @@
 
 <div class="mt-5">
   <h5>templates/chart-events.hbs</h5>
-  {{code-snippet name="chart-events.hbs"}}
+  <CodeSnippet @name="chart-events.hbs" />
 </div>
 
 <div class="mt-5">
   <h5>controllers/index.js</h5>
-  {{code-snippet name="chart-events.js"}}
+  <CodeSnippet @name="chart-events.js" />
 </div>
