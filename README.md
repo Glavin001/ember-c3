@@ -120,11 +120,14 @@ The chart's initial title is set using the `title` parameter.
 
 ```javascript
 import Controller from "@ember/controller";
-/* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
 export default Controller.extend({
 
-  tile: { text: "Orignal title" },
+
+  init() {
+    this._super(...arguments);
+    this.title = this.tile || { text: "Orignal title" };
+  },
 
   actions: {
     changeTitle() {
@@ -148,50 +151,58 @@ templates/my-route.hbs
 
 controllers/my-route.js
 ```javascript
-import { later } from "@ember/runloop";
 import Controller from "@ember/controller";
-/* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
 export default Controller.extend({
- chart: null,
+  chart: null,
 
- baseData:   
-    { 
+  init() {
+    this._super(...arguments);
+    this.baseData = this.baseData || {
       columns: [
         ["US", 64],
         ["German", 36]
       ],
       type: "donut"
-    },
- 
- modelsGerman: [
-        ["Mercedes", 12],
-        ["Volkswagon", 54],
-        ["BMW", 34]
-      ],
+    };
 
-  modelsUS: [
-    ["Ford", 35],
-    ["Chevy", 26],
-    ["Tesla", 2],
-    ["Buick", 10],
-    ["Dodge", 27]
-  ],
+    this.modelsGerman = this.modelsGerman || [
+      ["Mercedes", 12],
+      ["Volkswagon", 54],
+      ["BMW", 34]
+    ];
+
+    this.modelsUS = this.modelsUS || [
+      ["Ford", 35],
+      ["Chevy", 26],
+      ["Tesla", 2],
+      ["Buick", 10],
+      ["Dodge", 27]
+    ];
+  },
 
   actions: {
-     resetData() {
+    resetData() {
       this.chart.load({ columns: this.baseData });
-      this.chart.unload("Mercedes", "Volkswagon", 
-      "BMW", "Ford", "Chevy", "Tesla", "Buick", "Dodge");
+      this.chart.unload(
+        "Mercedes",
+        "Volkswagon",
+        "BMW",
+        "Ford",
+        "Chevy",
+        "Tesla",
+        "Buick",
+        "Dodge"
+      );
     },
 
     loadUS() {
-      this.chart.load({ columns: this.modelsUS});
+      this.chart.load({ columns: this.modelsUS });
       this.chart.unload("US", "German");
     },
-       
+
     loadGerman() {
-      this.chart.load({ columns: this.modelsGerman});
+      this.chart.load({ columns: this.modelsGerman });
       this.chart.unload("US", "German");
     }
   }

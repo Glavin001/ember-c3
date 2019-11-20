@@ -1,12 +1,17 @@
 import Controller from "@ember/controller";
 import { computed } from "@ember/object";
 import { bind } from "@ember/runloop";
-/* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
 export default Controller.extend({
   message: null,
   hoverMsg: null,
-  
+
+  init() {
+    this._super(...arguments);
+    this.padding = this.padding || { top: 20 };
+    this.title = this.title || { text: "Click data 5 to Win!" };
+  },
+
   data: computed(function() {
     // iris data from R
     return {
@@ -24,10 +29,6 @@ export default Controller.extend({
     };
   }),
 
-  padding: { top: 20 },
-
-  title: { text: "Click data 5 to Win!" },
-
   actions: {
     myClick(d /* i */) {
       this.set("message", `${d.name}, value: ${d.value}`);
@@ -36,6 +37,6 @@ export default Controller.extend({
 
     myMouseover(d /* i */) {
       this.set("hoverMsg", `${d.name}, value: ${d.value}`);
-    },
+    }
   }
 });

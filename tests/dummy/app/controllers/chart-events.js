@@ -1,7 +1,6 @@
 import Controller from "@ember/controller";
 import { computed } from "@ember/object";
 import { later } from "@ember/runloop";
-/* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
 export default Controller.extend({
   pageTitle: "C3 Chart Events",
@@ -9,6 +8,35 @@ export default Controller.extend({
 
   init() {
     this._super(...arguments);
+
+    this.axis = this.axis || {
+      x: {
+        type: "category",
+        categories: ["Central", "East", "West"],
+        rotated: true
+      }
+    };
+
+    this.size = this.size || {
+      width: 650
+    };
+
+    this.grid = this.grid || {
+      y: {
+        lines: [{ value: 900, text: "Yearly Target" }]
+      }
+    };
+
+    this.legend = this.legend || {
+      hide: true
+    };
+
+    this.tooltip = this.tooltip || {
+      grouped: false
+    };
+
+    this.title = this.title || { text: "Regional Sales" };
+    this.padding = this.padding || { top: 20, bottom: 5, right: 15 };
   },
 
   jsonData: null,
@@ -23,29 +51,6 @@ export default Controller.extend({
       }
     };
   }),
-  axis: {
-    x: {
-      type: "category",
-      categories: ["Central", "East", "West"],
-      rotated: true
-    }
-  },
-  size: {
-    width: 650
-  },
-  grid: {
-    y: {
-      lines: [{ value: 900, text: "Yearly Target" }]
-    }
-  },
-  legend: {
-    hide: true
-  },
-  tooltip: {
-    grouped: false
-  },
-  title: { text: "Regional Sales" },
-  padding: { top: 20, bottom: 5, right: 15 },
 
   actions: {
     init() {
@@ -69,9 +74,9 @@ export default Controller.extend({
       this.set("pageTitle", "C3 Chart Events");
     },
 
-    resizing(/* chart */){
+    resizing(/* chart */) {
       this.set("message", "adjusting...");
-      later(() => this.set("message", ""), 700)
+      later(() => this.set("message", ""), 700);
     }
   }
 });

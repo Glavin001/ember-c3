@@ -1,10 +1,24 @@
 import { later } from "@ember/runloop";
 import Controller from "@ember/controller";
-/* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
 export default Controller.extend({
-  animate() {
+  init() {
+    this._super(...arguments);
+    this.data = this.data || {
+      columns: [
+        ["data1", 30],
+        ["data2", 120]
+      ],
+      type: "donut"
+    };
 
+    // chart title
+    this.title = this.title || { text: "Iris data from R" };
+    this.donut = this.donut || { title: "Iris Petal Width" };
+    this.padding = this.padding || { top: 20 };
+  },
+
+  animate() {
     this.data.columns.pop();
     this.notifyPropertyChange("data");
     this.data.columns.pop();
@@ -42,23 +56,9 @@ export default Controller.extend({
       500);
   },
 
-  data: {
-      columns: [
-        ["data1", 30],
-        ["data2", 120],
-      ],
-      type: "donut"
-    },
-
-  // chart title
-  title: { text: "Iris data from R" },
-  donut: { title: "Iris Petal Width" },
-  padding:  { top: 20 },
-
   actions: {
-    animate(){
+    animate() {
       this.animate();
     }
   }
-
 });

@@ -1,21 +1,23 @@
 import Controller from "@ember/controller";
-/* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
 export default Controller.extend({
   chart: null,
   chartTitle: "Chart Object",
 
-  data: {
-    columns: [
-      ["data1", 30, 20, 50, 40, 60, 50],
-      ["data2", 200, 130, 90, 240, 130, 220],
-      ["data3", 300, 200, 160, 400, 250, 250],
-      ["data4", 200, 130, 90, 240, 130, 220],
-      ["data5", 130, 120, 150, 140, 160, 150],
-      ["data6", 90, 70, 20, 50, 60, 120]
-    ],
-    type: "line",
-    groups: [["data1", "data2"]]
+  init() {
+    this._super(...arguments);
+    this.data = this.data || {
+      columns: [
+        ["data1", 30, 20, 50, 40, 60, 50],
+        ["data2", 200, 130, 90, 240, 130, 220],
+        ["data3", 300, 200, 160, 400, 250, 250],
+        ["data4", 200, 130, 90, 240, 130, 220],
+        ["data5", 130, 120, 150, 140, 160, 150],
+        ["data6", 90, 70, 20, 50, 60, 120]
+      ],
+      type: "line",
+      groups: [["data1", "data2"]]
+    };
   },
 
   actions: {
@@ -55,7 +57,11 @@ export default Controller.extend({
 
       if (this.isBar && !this.isStacked) {
         this.toggleProperty("isStacked");
-        c.groups([["data1", "data2"], ["data4", "data5"], ["data3", "data6"]]);
+        c.groups([
+          ["data1", "data2"],
+          ["data4", "data5"],
+          ["data3", "data6"]
+        ]);
       } else c.groups([["data1", "data2"]]);
     },
 
@@ -77,7 +83,7 @@ export default Controller.extend({
         data3: "#0000ff",
         data4: "#ff9900",
         data5: "#ff4dd2",
-        data6: "#ffff4d",
+        data6: "#ffff4d"
       });
     }
   }
