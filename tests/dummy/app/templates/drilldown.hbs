@@ -1,34 +1,40 @@
-{{#collapsable-panel as |panel|}}
-  {{#panel.header}}
+<CollapsablePanel as |panel|>
+  <panel.header>
     <h3>Drill Down</h3>
-  {{/panel.header}}
+  </panel.header>
 
-  {{#panel.content}}
-    {{c3-chart data=data title=title dtitle=dtitle padding=padding c3chart=chart}}
-  {{/panel.content}}
-{{/collapsable-panel}}
+  <panel.content>
+    <C3Chart 
+      @data={{this.data}}
+      @title={{this.title}}
+      @dtitle={{this.dtitle}}
+      @padding={{this.padding}}
+      @c3chart={{this.chart}}
+    />
+  </panel.content>
+</CollapsablePanel>
 
 <div class="container mt-2">
   <span class="pull-right text-primary">
     Click on pie segments to drill down
   </span>
-  <button class="btn btn-sm btn-primary" onclick={{action "resetData"}}>
+  <button class="btn btn-sm btn-primary" {{on "click" (action this.resetData)}}>
     Reset
   </button>
-  <button class="btn btn-sm btn-primary" onclick={{action "addWhite"}}>
+  <button class="btn btn-sm btn-primary" {{on "click" (action this.addWhite)}}>
     White Flowers
   </button>
-  <button class="btn btn-sm btn-primary" onclick={{action "titleOnly"}}>
+  <button class="btn btn-sm btn-primary" {{on "click" (action this.titleOnly)}}>
     Change Title
   </button>
 </div>
 
 <div class="mt-5">
   <h5>templates/drilldown.hbs</h5>
-  {{code-snippet name="drilldown.hbs"}}
+  <CodeSnippet @name="drilldown.hbs" />
 </div>
 
 <div class="mt-5">
   <h5>controllers/drilldown.js</h5>
-  {{code-snippet name="drilldown.js"}}
+  <CodeSnippet @name="drilldown.js" />
 </div>

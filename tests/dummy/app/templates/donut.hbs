@@ -1,25 +1,30 @@
-{{#collapsable-panel as |panel|}}
-  {{#panel.header}}
+<CollapsablePanel as |panel|>
+  <panel.header>
     <h3>Donut Chart</h3>
-  {{/panel.header}}
+  </panel.header>
 
-  {{#panel.content}}
-    {{c3-chart data=data donut=donut title=title padding=padding c3chart=chart}}
-  {{/panel.content}}
-{{/collapsable-panel}}
+  <panel.content>
+    <C3Chart 
+      @data={{this.data}} 
+      @donut={{this.donut}} 
+      @title={{this.title}} 
+      @padding={{this.padding}}
+    />
+  </panel.content>
+</CollapsablePanel>
 
 <div class="container mt-2">
-  <button class="btn btn-sm btn-primary" onclick={{action "animate"}}>
+  <button class="btn btn-sm btn-primary" {{on "click" (action this.animateChart)}}>
     Animate
   </button>
 </div>
 
 <div class="mt-5">
   <h5>templates/donut.hbs</h5>
-  {{code-snippet name="donut.hbs"}}
+  <CodeSnippet @name="donut.hbs" />
 </div>
 
 <div class="mt-5">
   <h5>controllers/donut.js</h5>
-  {{code-snippet name="donut.js"}}
+  <CodeSnippet @name="donut.js" />
 </div>

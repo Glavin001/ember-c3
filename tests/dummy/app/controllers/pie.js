@@ -1,14 +1,39 @@
+import classic from 'ember-classic-decorator';
+import { computed } from '@ember/object';
 import { bind, later } from "@ember/runloop";
 import Controller from "@ember/controller";
-import { computed }  from "@ember/object";
-/* eslint ember/avoid-leaking-state-in-ember-objects: "off" */
 
-export default Controller.extend({
+@classic
+export default class PieController extends Controller {
+  chart = null;
 
-  chart: null,
+  init() {
+    super.init(...arguments);
 
-  animate () {
+    // iris data from R
+    this.data = this.data || {
+      columns: [
+        ["data1", 30],
+        ["data2", 120]
+      ],
+      type: "pie",
+      onclick: this.onclick
+    };
 
+    this.title = this.title || { text: "Iris data from R" };
+    this.padding = this.padding || { top: 20 };
+  }
+
+  @computed
+  get onclick() {
+    return bind(this, this.myClick);
+  }
+
+  myClick(d) {
+    alert(`clicked ${d.name}`);
+  }
+
+  animateChart() {
     later(this, () => {
       this.data.columns.push(
         ["setosa", 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2,
@@ -37,29 +62,5 @@ export default Controller.extend({
       this.notifyPropertyChange("data");
     },
       500);
-  },
-
-  // iris data from R
-  data: {
-      columns: [
-        ["data1", 30],
-        ["data2", 120],
-      ],
-      type: "pie",
-  },
-
-  title: { text: "Iris data from R"},
-  padding:  { top: 20 },
-  onclick: computed(() => bind(this, this.actions.myClick)),
-
-  actions: {
-    myClick(d,  /*i */) {
-      alert(`clicked ${d.name}`)
-    },
-    
-    animate(){
-      this.animate();
-    }
   }
-
-});
+}

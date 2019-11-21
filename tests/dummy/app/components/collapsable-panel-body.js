@@ -1,13 +1,14 @@
+import classic from 'ember-classic-decorator';
+import { classNames, classNameBindings } from '@ember-decorators/component';
 import Component from "@ember/component";
-import layout from "../templates/components/collapsable-panel-body";
 
-export default Component.extend({
-  layout,
-  classNames: ["card-body border-bottom"],
-  classNameBindings: ["h0"],
-  h0: true,
+@classic
+@classNames("card-body border-bottom")
+@classNameBindings("h0")
+export default class CollapsablePanelBody extends Component {
+  h0 = true;
 
   didReceiveAttrs() {
     this.set("h0", !this.isOpen)
-  },
-});
+  }
+}
