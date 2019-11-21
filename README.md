@@ -3,11 +3,11 @@
 [![npm version](https://badge.fury.io/js/ember-c3.svg)](http://badge.fury.io/js/ember-c3)
 [![Join the chat at https://gitter.im/Glavin001/ember-c3](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Glavin001/ember-c3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
  
-> Ember component library for [C3, a D3-based reusable chart library](https://github.com/masayuki0812/c3).
+Ember component library for [C3, a D3-based reusable chart library](https://github.com/masayuki0812/c3).
 
-**Live Demo:** http://glavin001.github.io/ember-c3/
+**See the demo [here](http://glavin001.github.io/ember-c3/)** 
 
-Alternatively take a look at [Ember-NVD3](https://github.com/Glavin001/ember-nvd3) for your charting needs.
+<!-- Alternatively take a look at [Ember-NVD3](https://github.com/Glavin001/ember-nvd3) for your charting needs. -->
 
 ## Ember Versions
 
@@ -33,9 +33,11 @@ ember install ember-c3
 
 ## Usage
 
-For a complete set of examples, see the [dummy app in `tests/dummy/app/`](https://github.com/Glavin001/ember-c3/tree/master/tests/dummy/app)
+Component usage and properties are [below](#basic). The code for these example charts and more is in the [dummy app source code](https://github.com/Glavin001/ember-c3/tree/master/tests/dummy/app).
 
-<!-- (https://github.com/Glavin001/ember-c3/tree/master/tests/dummy/app). -->
+> The dummy app has been rewritten using native classes, decorators and Ember features available in Ember 3.12. If you want to see the same examples using the Ember object model and classic syntax look at the dummy app in an earlier version.
+
+------------------------------------------------------------------------------
 
 | Combination                                                                                                   |
 |---------------------------------------------------------------------------------------------------------------|
@@ -57,7 +59,7 @@ Where `this.model` is your C3 data and chart options:
 <C3Chart @data={{this.model}} />
 ```
 
-> Note: Angle brackets were available in Ember 3.4 but a bug prevented the use of numbers in component names until Ember 3.8. Ember-C3 can use angle brackets only with ember source 3.8 and later . Reference PR [#17552](https://github.com/emberjs/ember.js/pull/17552). 
+> Note: Angle brackets were available in Ember 3.4 but a bug prevented the use of numbers in component names until Ember 3.8. Ember-C3 can use angle brackets only with Ember 3.8 and later . Reference PR [#17552](https://github.com/emberjs/ember.js/pull/17552). 
 
 Using classic invocation:
 
@@ -70,15 +72,15 @@ Using classic invocation:
 See http://c3js.org/examples.html for examples of how to use C3.
 
 ### Component Properties
-The properties match the corresponding C3 objects found in the [C3 Documentation](https://c3js.org/gettingstarted.html#generate). As documented, most C3 settings (i.e. bar, axis, size, etc) can be included in the data object.
+The properties match the corresponding C3 options found in the [C3 Documentation](https://c3js.org/gettingstarted.html#generate). As documented, most C3 settings (i.e. bar, axis, size, etc) can be included in the data object.
 
-The component properties break out the settings to simplify chart configuration. Note: The chart type is **always** assigned in the chart data object.
+The component properties break out the settings to simplify chart configuration. Note: The chart type **must be** assigned in the chart data object.
 
-Properties marked with an asterisk (*) are the only ones that will update the chart when the property changes. See examples in the dummy app.
+Properties marked with an asterisk (*) will update the chart when the property changes. See examples in the dummy app.
 
 | Property    | Description                                                                                                                                                                                                                                    | Example                             |
 |-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
-| c3chart     | Points to the generated C3 chart. Any C3 api method can be used with this property                                                                                                                                                             | chart.hide("data1")                 |
+| c3chart     | Points to the generated C3 chart. Any C3 API method can be used with this property                                                                                                                                                             | chart.hide("data1")                 |
 | data*       | C3 data [object](https://c3js.org/gettingstarted.html#generate). `data` is mutable after the charge is created                                                                                                                                 |                                     |
 | axis*       | C3 axis [object](https://c3js.org/reference.html#axis-rotated). See C3 examples for combining with data object. Chart axis are mutable after the chart is created                                                                              |                                     |
 | bar         | Used to assign bar chart [properties](https://c3js.org/reference.html#bar-width)                                                                                                                                                               |                                     |
@@ -104,11 +106,11 @@ Properties marked with an asterisk (*) are the only ones that will update the ch
 
 
 ### dtitle
-The `dtitle` property is used to dynamically change a chart's title. C3 doesn't natively support this without forcing a chart redraw (.flush()) which can cause side effects. This especially true if the graph data is being dynamically changed using the api.
+The `dtitle` property is used to dynamically change a chart's title. C3 doesn't natively support this without forcing a chart redraw which can cause side effects. This is especially true if the graph data is being dynamically changed using C3's API.
 
 The title can be set using the `.c3-title` class but that doesn't provide abstraction from C3's internals.
 
-`dtitle` gives you some control over side effects using a parameter to control how the graph is refreshed. An object is passed into `dtitle` and the second parameter `refresh` indicates whether all properties should be refreshed or only the chart title.  
+`dtitle` gives you some control over side effects using a parameter to control how the graph is refreshed. An object with the new title and a `refresh` parameter is used to indicate whether all properties should be refreshed or only the chart title.  
 
 Setting `refresh` to false will only refresh the title and ignore changes to the data, colors and axis properties. A short example is below. See the drill down example to see how `dttile` is used and potential side effects.
 
@@ -116,14 +118,14 @@ The chart's initial title is set using the `title` parameter.
 
 ```handlebars
 <C3Chart @data={{this.data}} @title={{this.title}} @dtitle={{this.dtitle}} />
+
+<button onclick={{action "changeTitle"}}>Change Title</button>
 ```
 
 ```javascript
 import Controller from "@ember/controller";
 
 export default Controller.extend({
-
-
   init() {
     this._super(...arguments);
     this.title = this.tile || { text: "Orignal title" };
@@ -140,8 +142,9 @@ export default Controller.extend({
 ### C3 Methods
 If you assign a controller property to the c3chart property, you can use most of C3's api [methods](https://c3js.org/reference.html#api-focus).  Not all the methods have been tested.
 
-templates/my-route.hbs
+
 ```handlebars
+{{!-- templates/my-route.hbs --}}
 <C3Chart @data={{this.mydata}} @c3chart={{this.chart}} />
 
 <button onclick={{action "loadUS"}}>US Cars</button>
@@ -149,8 +152,8 @@ templates/my-route.hbs
 <button onclick={{action "resetData"}}>Reset</button>
 ```
 
-controllers/my-route.js
 ```javascript
+// controllers/my-route.js
 import Controller from "@ember/controller";
 
 export default Controller.extend({
@@ -224,23 +227,28 @@ The following C3 chart events are supported by `ember-c3`.
 | onresized   | Triggered when resizing is completed        | @onresized={{action "resized"}}     |
 
 
-For connivence, the chart object is passed with the exception of _oninit_ to chart events. An example of a chart and data event is shown below.  Note the use of `bind` for tying actions to data events. See the dummy app for more examples.
+For convenience, the chart object is passed to the trigger handler. The chart is not passed to _oninit_ because it hasn't been created yet. An example chart with data events is shown below. Note that `bind` is required for tying actions to data events. This example uses native classes.  See the dummy app for more examples.
 
-templates/application.hbs
 ```handlebars
+{{!-- templates/application.hbs --}}
 <C3Chart
   @data={{this.data}}
-  @oninit={{action 'init'}}
+  @oninit={{action this.setup}}
 />
 ```
-controllers/application.js
+
 ```javascript
+// controllers/application.js
+import classic from 'ember-classic-decorator';
 import Controller from "@ember/controller";
 import { computed } from "@ember/object";
 import { bind } from "@ember/runloop";
 
-export default Controller.extend({
- data: computed(function() {
+@classic
+export default class ApplicationController extends Controller {
+
+  @computed
+  get data() {
     // iris data from R
     return {
       columns: [
@@ -252,22 +260,20 @@ export default Controller.extend({
       ],
       type: "pie",
       // bind is required for data events
-      onclick: bind(this, this.actions.onClick)
+      onclick: bind(this, this.onClick)
     };
-  }),
+  }
 
- actions: {
     // oninit chart event
-    init(chart){
+    setup(){
       console.log("chart inited")
-    },
+    }
 
     // data event - triggered when data point clicked
     onClick(d, i) {
       alert(`Data ${d.name} has a value of ${d.value}`)
-    },
-  }
-});
+    }
+}
 ```
 ### Accessing D3
 
@@ -276,7 +282,7 @@ You can use the D3 library in your application by importing it where needed
 ```javascript
 import d3 from "d3";
 ```
-See the D3 example in the dummy app.
+See the D3 [example](https://github.com/Glavin001/ember-c3/blob/master/tests/dummy/app/controllers/d3.js) in the dummy app.
 
 ### Helpful Links
 

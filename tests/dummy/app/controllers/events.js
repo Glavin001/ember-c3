@@ -1,18 +1,21 @@
+import classic from 'ember-classic-decorator';
+import { computed } from '@ember/object';
 import Controller from "@ember/controller";
-import { computed } from "@ember/object";
 import { bind } from "@ember/runloop";
 
-export default Controller.extend({
-  message: null,
-  hoverMsg: null,
+@classic
+export default class EventsController extends Controller {
+  message = null;
+  hoverMsg = null;
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
     this.padding = this.padding || { top: 20 };
     this.title = this.title || { text: "Click data 5 to Win!" };
-  },
+  }
 
-  data: computed(function() {
+  @computed
+  get data() {
     // iris data from R
     return {
       columns: [
@@ -23,20 +26,17 @@ export default Controller.extend({
         ["data5", 90]
       ],
       type: "pie",
-      // https://balinterdi.com/blog/ember-dot-run-dot-bind/
-      onclick: bind(this, this.actions.myClick),
-      onmouseover: bind(this, this.actions.myMouseover)
+      onclick: bind(this, this.myClick),
+      onmouseover: bind(this, this.myMouseover)
     };
-  }),
-
-  actions: {
-    myClick(d /* i */) {
-      this.set("message", `${d.name}, value: ${d.value}`);
-      if (d.name == "data5") alert(`Data 5 - you're a winner`);
-    },
-
-    myMouseover(d /* i */) {
-      this.set("hoverMsg", `${d.name}, value: ${d.value}`);
-    }
   }
-});
+
+  myClick(d) {
+    this.set("message", `${d.name}, value: ${d.value}`);
+    if (d.name == "data5") alert(`Data 5 - you're a winner`);
+  }
+
+  myMouseover(d) {
+    this.set("hoverMsg", `${d.name}, value: ${d.value}`);
+  }
+}

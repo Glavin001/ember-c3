@@ -1,14 +1,15 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
+import { classNames } from '@ember-decorators/component';
 import Component from "@ember/component";
-import layout from "../templates/components/collapsable-panel";
 
-export default Component.extend({
-  isOpen: false,
-  layout,
-  classNames: ["card mt-2"],
+@classic
+@classNames("card mt-2")
+export default class CollapsablePanel extends Component {
+  isOpen = false;
 
-  actions: {
-    toggle() {
-      this.toggleProperty("isOpen");
-    }
+  @action
+  toggle() {
+    this.toggleProperty("isOpen");
   }
-});
+}

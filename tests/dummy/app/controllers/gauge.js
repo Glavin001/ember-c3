@@ -1,9 +1,11 @@
+import classic from 'ember-classic-decorator';
 import Controller from "@ember/controller";
 import { later } from "@ember/runloop";
 
-export default Controller.extend({
+@classic
+export default class GuageController extends Controller {
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
 
     this.data = this.data || {
       columns: [["data", 91.4]],
@@ -25,7 +27,7 @@ export default Controller.extend({
     // chart title
     this.title = this.title || { text: "Percent complete" };
     this.padding = this.padding || { top: 20 };
-  },
+  }
 
   animateChart() {
     later(this, () => {
@@ -62,11 +64,5 @@ export default Controller.extend({
       },
       2500
     );
-  },
-
-  actions: {
-    animate() {
-      this.animateChart();
-    }
   }
-});
+}

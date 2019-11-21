@@ -1,20 +1,22 @@
+import classic from 'ember-classic-decorator';
 import Route from "@ember/routing/route";
 
-export default Route.extend({
+@classic
+export default class ChartEventsRoute extends Route {
   model() {
     return data;
-  },
+  }
 
   setupController(controller, model) {
-    this._super(controller, model);
+    super.setupController(controller, model);
 
     let data = model.map(function(record){
       return { region: record.region, item: record.item, total: record.total}
     })
 
     controller.set("jsonData", data);
-  },
-});
+  }
+}
 
 let data = [
   {

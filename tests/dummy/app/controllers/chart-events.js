@@ -1,13 +1,15 @@
+import classic from 'ember-classic-decorator';
+import { computed } from '@ember/object';
 import Controller from "@ember/controller";
-import { computed } from "@ember/object";
 import { later } from "@ember/runloop";
 
-export default Controller.extend({
-  pageTitle: "C3 Chart Events",
-  message: null,
+@classic
+export default class ChartEventsController extends Controller {
+  pageTitle = "C3 Chart Events";
+  message = null;
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
 
     this.axis = this.axis || {
       x: {
@@ -37,11 +39,12 @@ export default Controller.extend({
 
     this.title = this.title || { text: "Regional Sales" };
     this.padding = this.padding || { top: 20, bottom: 5, right: 15 };
-  },
+  }
 
-  jsonData: null,
+  jsonData = null;
 
-  data: computed(function() {
+  @computed
+  get data() {
     return {
       json: this.jsonData,
       type: "bar",
@@ -50,33 +53,31 @@ export default Controller.extend({
         value: ["total"]
       }
     };
-  }),
-
-  actions: {
-    setup() {
-      this.set("pageTitle", "Chart Events - loading...");
-      later(this, () => this.set("pageTitle", "C3 Chart Events"), 500);
-    },
-
-    mouseover(chart) {
-      document.getElementById(chart.element.id).classList.remove("demo-box");
-      document
-        .getElementById(chart.element.id)
-        .classList.add("demo-chart-selected");
-      this.set("pageTitle", "YTD Sales");
-    },
-
-    mouseout(chart) {
-      document.getElementById(chart.element.id).classList.add("demo-box");
-      document
-        .getElementById(chart.element.id)
-        .classList.remove("demo-chart-selected");
-      this.set("pageTitle", "C3 Chart Events");
-    },
-
-    resizing(/* chart */) {
-      this.set("message", "adjusting...");
-      later(() => this.set("message", ""), 700);
-    }
   }
-});
+
+  setup() {
+    this.set("pageTitle", "Chart Events - loading...");
+    later(this, () => this.set("pageTitle", "C3 Chart Events"), 500);
+  }
+
+  mouseover(chart) {
+    document.getElementById(chart.element.id).classList.remove("demo-box");
+    document
+      .getElementById(chart.element.id)
+      .classList.add("demo-chart-selected");
+    this.set("pageTitle", "YTD Sales");
+  }
+
+  mouseout(chart) {
+    document.getElementById(chart.element.id).classList.add("demo-box");
+    document
+      .getElementById(chart.element.id)
+      .classList.remove("demo-chart-selected");
+    this.set("pageTitle", "C3 Chart Events");
+  }
+
+  resizing/* chart */() {
+    this.set("message", "adjusting...");
+    later(() => this.set("message", ""), 700);
+  }
+}

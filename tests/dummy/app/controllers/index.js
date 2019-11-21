@@ -1,5 +1,5 @@
 import Controller from "@ember/controller";
 
-export default Controller.extend({
-  chart: null
-});
+export default class IndexController extends Controller {
+  chart = null;
+}

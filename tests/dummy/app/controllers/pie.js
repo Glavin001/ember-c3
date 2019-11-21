@@ -1,12 +1,14 @@
+import classic from 'ember-classic-decorator';
+import { computed } from '@ember/object';
 import { bind, later } from "@ember/runloop";
 import Controller from "@ember/controller";
-import { computed } from "@ember/object";
 
-export default Controller.extend({
-  chart: null,
+@classic
+export default class PieController extends Controller {
+  chart = null;
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
 
     // iris data from R
     this.data = this.data || {
@@ -20,7 +22,16 @@ export default Controller.extend({
 
     this.title = this.title || { text: "Iris data from R" };
     this.padding = this.padding || { top: 20 };
-  },
+  }
+
+  @computed
+  get onclick() {
+    return bind(this, this.myClick);
+  }
+
+  myClick(d) {
+    alert(`clicked ${d.name}`);
+  }
 
   animateChart() {
     later(this, () => {
@@ -51,19 +62,5 @@ export default Controller.extend({
       this.notifyPropertyChange("data");
     },
       500);
-  },
-
-  onclick: computed(function() {
-    return bind(this, this.actions.myClick);
-  }),
-
-  actions: {
-    myClick(d /*i */) {
-      alert(`clicked ${d.name}`);
-    },
-
-    animate() {
-      this.animateChart();
-    }
   }
-});
+}

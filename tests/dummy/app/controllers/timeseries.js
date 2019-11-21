@@ -1,11 +1,13 @@
+import classic from 'ember-classic-decorator';
 import { later } from "@ember/runloop";
 import Controller from "@ember/controller";
 
-export default Controller.extend({
-  chart: null,
+@classic
+export default class TimeseriesController extends Controller {
+  chart = null;
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
     this.data = this.data || {
       x: "x",
       columns: [
@@ -35,7 +37,7 @@ export default Controller.extend({
     // chart title
     this.title = this.title || { text: "Downloads by Day" };
     this.padding = this.padding || { top: 20 };
-  },
+  }
 
   animateChart() {
     later(this, function() {
@@ -46,11 +48,5 @@ export default Controller.extend({
       },
       500
     );
-  },
-
-  actions: {
-    animate() {
-      this.animateChart();
-    }
   }
-});
+}
