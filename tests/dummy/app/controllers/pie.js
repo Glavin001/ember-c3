@@ -14,14 +14,15 @@ export default Controller.extend({
         ["data1", 30],
         ["data2", 120]
       ],
-      type: "pie"
+      type: "pie",
+      onclick: this.onclick
     };
 
     this.title = this.title || { text: "Iris data from R" };
     this.padding = this.padding || { top: 20 };
   },
 
-  animate() {
+  animateChart() {
     later(this, () => {
       this.data.columns.push(
         ["setosa", 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2,
@@ -53,7 +54,7 @@ export default Controller.extend({
   },
 
   onclick: computed(function() {
-    bind(this, this.actions.myClick);
+    return bind(this, this.actions.myClick);
   }),
 
   actions: {
@@ -62,7 +63,7 @@ export default Controller.extend({
     },
 
     animate() {
-      this.animate();
+      this.animateChart();
     }
   }
 });
