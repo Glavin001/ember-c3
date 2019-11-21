@@ -37,7 +37,7 @@ export default Controller.extend({
     this.padding = this.padding || { top: 20 };
   },
 
-  animate() {
+  animateChart() {
     later(this, function() {
         this.data.columns.push(["data3", 400, 500, 450, 700, 600, 500]);
         this.data.columns.push(["data4", 300, 235, 250, 750, 675, 590]);
@@ -50,7 +50,7 @@ export default Controller.extend({
 
   actions: {
     animate() {
-      this.animate();
+      this.animateChart();
     }
   }
 });

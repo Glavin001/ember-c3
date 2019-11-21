@@ -27,7 +27,7 @@ export default Controller.extend({
     this.padding = this.padding || { top: 20 };
   },
 
-  animate() {
+  animateChart() {
     later(this, () => {
         this.set("data.columns", [["data", 10]]);
         this.notifyPropertyChange("data");
@@ -66,7 +66,7 @@ export default Controller.extend({
 
   actions: {
     animate() {
-      this.animate();
+      this.animateChart();
     }
   }
 });
