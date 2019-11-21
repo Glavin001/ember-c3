@@ -53,7 +53,7 @@ export default Controller.extend({
   }),
 
   actions: {
-    init() {
+    setup() {
       this.set("pageTitle", "Chart Events - loading...");
       later(this, () => this.set("pageTitle", "C3 Chart Events"), 500);
     },
