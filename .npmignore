@@ -15,6 +15,7 @@
 /.gitignore
 /.watchmanconfig
 /.travis.yml
+/.vscode
 /bower.json
 /config/ember-try.js
 /CONTRIBUTING.md
