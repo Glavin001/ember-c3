@@ -1,25 +1,22 @@
-import classic from 'ember-classic-decorator';
 import { later } from "@ember/runloop";
+import { action } from "@ember/object";
 import Controller from "@ember/controller";
 
-@classic
 export default class DonutController extends Controller {
-  init() {
-    super.init(...arguments);
-    this.data = this.data || {
-      columns: [
-        ["data1", 30],
-        ["data2", 120]
-      ],
-      type: "donut"
-    };
+  data = {
+    columns: [
+      ["data1", 30],
+      ["data2", 120]
+    ],
+    type: "donut"
+  };
 
-    // chart title
-    this.title = this.title || { text: "Iris data from R" };
-    this.donut = this.donut || { title: "Iris Petal Width" };
-    this.padding = this.padding || { top: 20 };
-  }
+  // chart title
+  title = { text: "Iris data from R" };
+  donut = { title: "Iris Petal Width" };
+  padding = { top: 20 };
 
+  @action
   animateChart() {
     this.data.columns.pop();
     this.notifyPropertyChange("data");

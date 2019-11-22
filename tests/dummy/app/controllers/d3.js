@@ -1,9 +1,9 @@
-import classic from 'ember-classic-decorator';
 import Controller from "@ember/controller";
+import { action } from "@ember/object";
 import d3 from "d3";
 
-@classic
 export default class D3Controller extends Controller {
+  @action
   demoD3() {
     d3.select("h4").style("color", "red");
     d3.select("h4").style("font-size", "35px");

@@ -1,45 +1,39 @@
-import classic from 'ember-classic-decorator';
-import { computed } from '@ember/object';
+import { computed } from "@ember/object";
 import Controller from "@ember/controller";
 import { later } from "@ember/runloop";
 
-@classic
 export default class ChartEventsController extends Controller {
   pageTitle = "C3 Chart Events";
   message = null;
 
-  init() {
-    super.init(...arguments);
+  axis = {
+    x: {
+      type: "category",
+      categories: ["Central", "East", "West"],
+      rotated: true
+    }
+  };
 
-    this.axis = this.axis || {
-      x: {
-        type: "category",
-        categories: ["Central", "East", "West"],
-        rotated: true
-      }
-    };
+  size = {
+    width: 650
+  };
 
-    this.size = this.size || {
-      width: 650
-    };
+  grid = {
+    y: {
+      lines: [{ value: 900, text: "Yearly Target" }]
+    }
+  };
 
-    this.grid = this.grid || {
-      y: {
-        lines: [{ value: 900, text: "Yearly Target" }]
-      }
-    };
+  legend = {
+    hide: true
+  };
 
-    this.legend = this.legend || {
-      hide: true
-    };
+  tooltip = {
+    grouped: false
+  };
 
-    this.tooltip = this.tooltip || {
-      grouped: false
-    };
-
-    this.title = this.title || { text: "Regional Sales" };
-    this.padding = this.padding || { top: 20, bottom: 5, right: 15 };
-  }
+  title = { text: "Regional Sales" };
+  padding = { top: 20, bottom: 5, right: 15 };
 
   jsonData = null;
 
@@ -76,7 +70,7 @@ export default class ChartEventsController extends Controller {
     this.set("pageTitle", "C3 Chart Events");
   }
 
-  resizing/* chart */() {
+  resizing /* chart */() {
     this.set("message", "adjusting...");
     later(() => this.set("message", ""), 700);
   }

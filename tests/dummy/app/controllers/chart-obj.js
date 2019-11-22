@@ -1,27 +1,25 @@
-import classic from 'ember-classic-decorator';
+import { action } from "@ember/object";
 import Controller from "@ember/controller";
 
-@classic
 export default class ChartObjController extends Controller {
   chart = null;
   chartTitle = "Chart Object";
 
-  init() {
-    super.init(...arguments);
-    this.data = this.data || {
-      columns: [
-        ["data1", 30, 20, 50, 40, 60, 50],
-        ["data2", 200, 130, 90, 240, 130, 220],
-        ["data3", 300, 200, 160, 400, 250, 250],
-        ["data4", 200, 130, 90, 240, 130, 220],
-        ["data5", 130, 120, 150, 140, 160, 150],
-        ["data6", 90, 70, 20, 50, 60, 120]
-      ],
-      type: "line",
-      groups: [["data1", "data2"]]
-    };
-  }
+  data = this.data || {
+    columns: [
+      ["data1", 30, 20, 50, 40, 60, 50],
+      ["data2", 200, 130, 90, 240, 130, 220],
+      ["data3", 300, 200, 160, 400, 250, 250],
+      ["data4", 200, 130, 90, 240, 130, 220],
+      ["data5", 130, 120, 150, 140, 160, 150],
+      ["data6", 90, 70, 20, 50, 60, 120]
+    ],
+    type: "line",
+    groups: [["data1", "data2"]]
+  };
 
+
+  @action
   toggleLegend() {
     let c = this.chart;
     this.toggleProperty("legendVisible");
@@ -30,6 +28,7 @@ export default class ChartObjController extends Controller {
     else c.legend.hide();
   }
 
+  @action
   toggleData3() {
     let c = this.chart;
     this.toggleProperty("graphVisible");
@@ -38,6 +37,7 @@ export default class ChartObjController extends Controller {
     else c.hide("data3");
   }
 
+  @action
   transform() {
     let c = this.chart;
     this.toggleProperty("isBar");
@@ -53,6 +53,7 @@ export default class ChartObjController extends Controller {
     }
   }
 
+  @action
   stackBars() {
     let c = this.chart;
 
@@ -66,15 +67,17 @@ export default class ChartObjController extends Controller {
     } else c.groups([["data1", "data2"]]);
   }
 
+  @action
   makeCombo() {
     let c = this.chart;
     c.transform("bar");
     c.transform("spline", "data3");
     c.transform("line", "data4");
     c.transform("area", "data6");
-    this.set("chartTitle", "Chart Object - Combo Chart");
+    this.set('chartTitle', 'Chart Object - Combo Chart')
   }
 
+  @action
   changeColors() {
     let c = this.chart;
 

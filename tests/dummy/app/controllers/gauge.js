@@ -1,34 +1,31 @@
-import classic from 'ember-classic-decorator';
 import Controller from "@ember/controller";
 import { later } from "@ember/runloop";
+import { action } from "@ember/object";
 
-@classic
 export default class GuageController extends Controller {
-  init() {
-    super.init(...arguments);
+  data = {
+    columns: [["data", 91.4]],
+    type: "gauge"
+  };
 
-    this.data = this.data || {
-      columns: [["data", 91.4]],
-      type: "gauge"
-    };
+  // the three color levels for the percentage values
+  color = {
+    pattern: ["#FF0000", "#F97600", "#F6C600", "#60B044"],
+    threshold: {
+      values: [30, 60, 90, 100]
+    }
+  };
 
-    // the three color levels for the percentage values
-    this.color = this.color || {
-      pattern: ["#FF0000", "#F97600", "#F6C600", "#60B044"],
-      threshold: {
-        values: [30, 60, 90, 100]
-      }
-    };
+  size = {
+    height: 180
+  };
 
-    this.size = this.size || {
-      height: 180
-    };
+  // chart title
+  title = { text: "Percent complete" };
+  padding = { top: 20 };
 
-    // chart title
-    this.title = this.title || { text: "Percent complete" };
-    this.padding = this.padding || { top: 20 };
-  }
-
+ 
+  @action
   animateChart() {
     later(this, () => {
         this.set("data.columns", [["data", 10]]);

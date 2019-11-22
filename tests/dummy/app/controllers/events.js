@@ -1,18 +1,13 @@
-import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
 import Controller from "@ember/controller";
 import { bind } from "@ember/runloop";
 
-@classic
 export default class EventsController extends Controller {
   message = null;
   hoverMsg = null;
 
-  init() {
-    super.init(...arguments);
-    this.padding = this.padding || { top: 20 };
-    this.title = this.title || { text: "Click data 5 to Win!" };
-  }
+  padding = this.padding || { top: 20 };
+  title = this.title || { text: "Click data 5 to Win!" };
 
   @computed
   get data() {

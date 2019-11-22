@@ -1,28 +1,23 @@
-import classic from 'ember-classic-decorator';
-import { computed } from '@ember/object';
+import { computed } from "@ember/object";
 import { bind, later } from "@ember/runloop";
+import { action } from "@ember/object";
 import Controller from "@ember/controller";
 
-@classic
 export default class PieController extends Controller {
   chart = null;
 
-  init() {
-    super.init(...arguments);
+  // iris data from R
+  data = this.data || {
+    columns: [
+      ["data1", 30],
+      ["data2", 120]
+    ],
+    type: "pie",
+    onclick: this.onclick
+  };
 
-    // iris data from R
-    this.data = this.data || {
-      columns: [
-        ["data1", 30],
-        ["data2", 120]
-      ],
-      type: "pie",
-      onclick: this.onclick
-    };
-
-    this.title = this.title || { text: "Iris data from R" };
-    this.padding = this.padding || { top: 20 };
-  }
+  title = { text: "Iris data from R" };
+  padding = { top: 20 };
 
   @computed
   get onclick() {
@@ -33,6 +28,7 @@ export default class PieController extends Controller {
     alert(`clicked ${d.name}`);
   }
 
+  @action
   animateChart() {
     later(this, () => {
       this.data.columns.push(

@@ -1,48 +1,50 @@
-import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
 import { map } from '@ember/object/computed';
 import { bind } from "@ember/runloop";
+import { action } from "@ember/object";
 import Controller from "@ember/controller";
 
-@classic
 export default class DrilldownController extends Controller {
+
+  baseData = [
+    ["Blue Flowers", 30],
+    ["Red Flowers", 120],
+    ["Yellow Flowers", 300]
+  ];
+
+  blueFlowers = [
+    ["Wolfsbane", 5],
+    ["Cornflower", 17],
+    ["Hydrangea", 24],
+    ["Triteleia", 51],
+    ["Vanda", 3]
+  ];
+
+  redFlowers = [
+    ["Chrysanthemum", 15],
+    ["Poppy", 2],
+    ["Peony", 34],
+    ["Azalea", 37],
+    ["Gloxinia", 5]
+  ];
+
+  yellowFlowers = [
+    ["Marigold", 25],
+    ["Yarrow", 10],
+    ["Begonia", 21],
+    ["Daisy", 39],
+    ["Snapdragon", 5]
+  ];
+
+  whiteData = [["White Flowers", 60]];
+
+  // chart title
+  title =  { text: "Flowers by Color" };
+  padding = { top: 20 };
+
   init() {
     super.init(...arguments);
-    this.baseData = this.baseData || [
-      ["Blue Flowers", 30],
-      ["Red Flowers", 120],
-      ["Yellow Flowers", 300]
-    ];
-
-    this.blueFlowers = this.blueFlowers || [
-      ["Wolfsbane", 5],
-      ["Cornflower", 17],
-      ["Hydrangea", 24],
-      ["Triteleia", 51],
-      ["Vanda", 3]
-    ];
-
-    this.redFlowers = this.redFlowers || [
-      ["Chrysanthemum", 15],
-      ["Poppy", 2],
-      ["Peony", 34],
-      ["Azalea", 37],
-      ["Gloxinia", 5]
-    ];
-
-    this.yellowFlowers = this.yellowFlowers || [
-      ["Marigold", 25],
-      ["Yarrow", 10],
-      ["Begonia", 21],
-      ["Daisy", 39],
-      ["Snapdragon", 5]
-    ];
-
-    this.whiteData = this.whiteData || [["White Flowers", 60]];
-
-    // chart title
-    this.title = this.title || { text: "Flowers by Color" };
-    this.padding = this.padding || { top: 20 };
+   
   }
 
   @map("whiteData", function(item) {
@@ -95,15 +97,18 @@ export default class DrilldownController extends Controller {
     }
   }
 
+  @action
   addWhite() {
     this.set("dtitle", { text: "Four Colors", refresh: false });
     this.chart.load({ columns: this.whiteData });
   }
 
+  @action
   titleOnly() {
     this.set("dtitle", { text: "Flowers are Colorful!!!", refresh: false });
   }
 
+  @action
   resetData() {
     let c = this.chart;
     this.set("dtitle", { text: "Flowers by Color", refresh: false });
