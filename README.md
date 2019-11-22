@@ -128,10 +128,8 @@ import { computed } from "@ember/object";
 import { action } from "@ember/object";
 
 export default class ApplicationController extends Controller {
-  constructor() {
-    super(...arguments);
-    this.title = { text: "Coffee Brewing" };
-  }
+ 
+  title = { text: "Coffee Brewing" };
 
   @computed
   get graphData() {
