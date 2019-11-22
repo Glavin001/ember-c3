@@ -117,99 +117,112 @@ Setting `refresh` to false will only refresh the title and ignore changes to the
 The chart's initial title is set using the `title` parameter.  
 
 ```handlebars
-<C3Chart @data={{this.data}} @title={{this.title}} @dtitle={{this.dtitle}} />
+<C3Chart @data={{this.graphData}} @title={{this.title}} @dtitle={{this.dtitle}} />
 
-<button onclick={{action "changeTitle"}}>Change Title</button>
+<button {{on "click" this.changeTitle}}>Change Title</button>
 ```
 
 ```javascript
 import Controller from "@ember/controller";
+import { computed } from "@ember/object";
+import { action } from "@ember/object";
 
-export default Controller.extend({
-  init() {
-    this._super(...arguments);
-    this.title = this.tile || { text: "Orignal title" };
-  },
-
-  actions: {
-    changeTitle() {
-      this.set("dtitle", { text: "Updated title", refresh: false });
-    }
+export default class ApplicationController extends Controller {
+  constructor() {
+    super(...arguments);
+    this.title = { text: "Coffee Brewing" };
   }
-})
+
+  @computed
+  get graphData() {
+    return {
+      columns: [
+        ["Cold Brewed", 12],
+        ["Drip", 67],
+        ["French Press", 14],
+        ["Iced", 38],
+        ["Percolated", 64]
+      ],
+      type: "pie"
+    };
+  }
+
+  @action
+  changeTitle() {
+    this.set("dtitle", { text: "Making coffee!", refresh: false });
+  }
+}
 ```
 
 ### C3 Methods
 If you assign a controller property to the c3chart property, you can use most of C3's api [methods](https://c3js.org/reference.html#api-focus).  Not all the methods have been tested.
 
-
 ```handlebars
-{{!-- templates/my-route.hbs --}}
-<C3Chart @data={{this.mydata}} @c3chart={{this.chart}} />
+{{!-- templates/application.hbs --}}
+<C3Chart @data={{this.baseData}} @c3chart={{this.chart}} />
 
-<button onclick={{action "loadUS"}}>US Cars</button>
-<button onclick={{action "loadGerman"}}>German Cars</button>
-<button onclick={{action "resetData"}}>Reset</button>
+<button {{on "click" this.loadUS}}>US Cars</button>
+<button {{on "click" this.loadGerman}}>German Cars</button>
+<button {{on "click" this.resetData}}>Reset</button>
 ```
 
 ```javascript
-// controllers/my-route.js
+// controllers/application.js
+import { action } from "@ember/object";
 import Controller from "@ember/controller";
 
-export default Controller.extend({
-  chart: null,
+export default class ApplicationController extends Controller {
+  chart = null;
 
-  init() {
-    this._super(...arguments);
-    this.baseData = this.baseData || {
-      columns: [
-        ["US", 64],
-        ["German", 36]
-      ],
-      type: "donut"
-    };
+  baseData = {
+    columns: [
+      ["US", 64],
+      ["German", 36]
+    ],
+    type: "donut"
+  };
 
-    this.modelsGerman = this.modelsGerman || [
-      ["Mercedes", 12],
-      ["Volkswagon", 54],
-      ["BMW", 34]
-    ];
+  modelsGerman = [
+    ["Mercedes", 12],
+    ["Volkswagon", 54],
+    ["BMW", 34]
+  ];
 
-    this.modelsUS = this.modelsUS || [
-      ["Ford", 35],
-      ["Chevy", 26],
-      ["Tesla", 2],
-      ["Buick", 10],
-      ["Dodge", 27]
-    ];
-  },
+  modelsUS = [
+    ["Ford", 35],
+    ["Chevy", 26],
+    ["Tesla", 2],
+    ["Buick", 10],
+    ["Dodge", 27]
+  ];
 
-  actions: {
-    resetData() {
-      this.chart.load({ columns: this.baseData });
-      this.chart.unload(
-        "Mercedes",
-        "Volkswagon",
-        "BMW",
-        "Ford",
-        "Chevy",
-        "Tesla",
-        "Buick",
-        "Dodge"
-      );
-    },
-
-    loadUS() {
-      this.chart.load({ columns: this.modelsUS });
-      this.chart.unload("US", "German");
-    },
-
-    loadGerman() {
-      this.chart.load({ columns: this.modelsGerman });
-      this.chart.unload("US", "German");
-    }
+  @action
+  resetData() {
+    this.chart.load(this.baseData);
+    this.chart.unload([
+      "Mercedes",
+      "Volkswagon",
+      "BMW",
+      "Ford",
+      "Chevy",
+      "Tesla",
+      "Buick",
+      "Dodge"
+    ]);
   }
-});
+
+  @action
+  loadUS() {
+    this.chart.load({ columns: this.modelsUS });
+    this.chart.unload("US", "German");
+  }
+
+  @action
+  loadGerman() {
+    this.chart.load({ columns: this.modelsGerman });
+    this.chart.unload("US", "German");
+  }
+}
 ```
 
 ### C3 Events
@@ -239,12 +252,10 @@ For convenience, the chart object is passed to the trigger handler. The chart is
 
 ```javascript
 // controllers/application.js
-import classic from 'ember-classic-decorator';
 import Controller from "@ember/controller";
 import { computed } from "@ember/object";
 import { bind } from "@ember/runloop";
 
-@classic
 export default class ApplicationController extends Controller {
 
   @computed
@@ -264,15 +275,15 @@ export default class ApplicationController extends Controller {
     };
   }
 
-    // oninit chart event
-    setup(){
-      console.log("chart inited")
-    }
+  // oninit chart event
+  setup() {
+    console.log("chart inited")
+  }
 
-    // data event - triggered when data point clicked
-    onClick(d, i) {
-      alert(`Data ${d.name} has a value of ${d.value}`)
-    }
+  // data event - triggered when data point clicked
+  onClick(d, i) {
+    alert(`Data ${d.name} has a value of ${d.value}`)
+  }
 }
 ```
 ### Accessing D3
