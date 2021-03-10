@@ -46,12 +46,12 @@
     "commitLimit": false
   },
   "dependencies": {
-    "broccoli-funnel": "^2.0.2",
-    "broccoli-merge-trees": "^3.0.2",
+    "broccoli-funnel": "^3.0.3",
+    "broccoli-merge-trees": "^4.2.0",
     "c3": "^0.7.11",
     "d3": "^5.14.1",
-    "ember-auto-import": "^1.5.3",
-    "ember-cli-babel": "^7.13.0"
+    "ember-auto-import": "^1.10.1",
+    "ember-cli-babel": "^7.23.1"
   },
   "devDependencies": {
     "@ember/jquery": "^1.1.0",
@@ -88,6 +88,7 @@
     "eslint-plugin-node": "^10.0.0",
     "loader.js": "^4.7.0",
     "popper.js": "^1.16.0",
+    "qunit-dom": "^1.6.0",
     "sass": "^1.23.7"
   },
   "engines": {
