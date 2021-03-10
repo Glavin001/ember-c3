@@ -1,4 +1,4 @@
-<CollapsablePanel as |panel|>
+<Panel as |panel|>
   <panel.header>
     <h3>Drill Down</h3>
   </panel.header>
@@ -12,19 +12,19 @@
       @c3chart={{this.chart}}
     />
   </panel.content>
-</CollapsablePanel>
+</Panel>
 
 <div class="container mt-2">
   <span class="pull-right text-primary">
     Click on pie segments to drill down
   </span>
-  <button class="btn btn-sm btn-primary" {{on "click" this.resetData}}>
+  <button type="button" class="btn btn-sm btn-primary" {{on "click" this.resetData}}>
     Reset
   </button>
-  <button class="btn btn-sm btn-primary" {{on "click" this.addWhite}}>
+  <button type="button" class="btn btn-sm btn-primary" {{on "click" this.addWhite}}>
     White Flowers
   </button>
-  <button class="btn btn-sm btn-primary" {{on "click" this.titleOnly}}>
+  <button type="button" class="btn btn-sm btn-primary" {{on "click" this.titleOnly}}>
     Change Title
   </button>
 </div>

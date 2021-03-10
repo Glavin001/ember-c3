@@ -1,8 +1,8 @@
-<CollapsablePanel as |panel|>
+<Panel as |panel|>
   <panel.header>
     <h3>
-      {{pageTitle}}
-      <span class="pull-right"> {{message}}</span>
+      {{this.pageTitle}}
+      <span class="pull-right"> {{this.message}}</span>
     </h3>
   </panel.header>
 
@@ -24,7 +24,7 @@
       />
     </div>
   </panel.content>
-</CollapsablePanel>
+</Panel>
 
 <div class="container mt-2">
   <span class="pull-right text-primary">Hover over chart or resize window to trigger events</span>
