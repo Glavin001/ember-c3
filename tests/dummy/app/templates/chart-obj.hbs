@@ -1,4 +1,4 @@
-<CollapsablePanel as |panel|>
+<Panel as |panel|>
   <panel.header>
     <h3>{{chartTitle}}</h3>
   </panel.header>
@@ -9,7 +9,7 @@
       @c3chart={{this.chart}} 
     />
   </panel.content>
-</CollapsablePanel>
+</Panel>
 
 <div class="container mt-2">
   <button type="button" class="btn btn-sm btn-primary" {{on "click" this.toggleLegend}}>
