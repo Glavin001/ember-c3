@@ -1,6 +1,6 @@
 <Panel as |panel|>
   <panel.header>
-    <h3>{{chartTitle}}</h3>
+    <h3>{{this.chartTitle}}</h3>
   </panel.header>
 
   <panel.content>
@@ -22,7 +22,7 @@
     Transform
   </button>
 
-  {{#if isBar}}
+  {{#if this.isBar}}
     <button type="button" class="btn btn-sm btn-primary" {{on "click" this.stackBars}}>
       Stack Bars
     </button>
