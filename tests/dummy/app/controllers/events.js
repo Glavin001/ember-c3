@@ -1,7 +1,9 @@
 import { computed } from '@ember/object';
 import Controller from "@ember/controller";
 import { bind } from "@ember/runloop";
+import classic from 'ember-classic-decorator';
 
+@classic
 export default class EventsController extends Controller {
   message = null;
   hoverMsg = null;

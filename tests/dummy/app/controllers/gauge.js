@@ -1,7 +1,9 @@
 import Controller from "@ember/controller";
 import { later } from "@ember/runloop";
 import { action } from "@ember/object";
+import classic from 'ember-classic-decorator';
 
+@classic
 export default class GuageController extends Controller {
   data = {
     columns: [["data", 91.4]],

@@ -1,6 +1,8 @@
 import { action } from "@ember/object";
 import Controller from "@ember/controller";
+import classic from 'ember-classic-decorator';
 
+@classic
 export default class ChartObjController extends Controller {
   chart = null;
   chartTitle = "Chart Object";

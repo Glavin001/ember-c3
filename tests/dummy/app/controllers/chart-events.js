@@ -1,7 +1,9 @@
 import { computed } from "@ember/object";
 import Controller from "@ember/controller";
 import { later } from "@ember/runloop";
+import classic from 'ember-classic-decorator';
 
+@classic
 export default class ChartEventsController extends Controller {
   pageTitle = "C3 Chart Events";
   message = null;

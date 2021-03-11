@@ -3,7 +3,9 @@ import { map } from '@ember/object/computed';
 import { bind } from "@ember/runloop";
 import { action } from "@ember/object";
 import Controller from "@ember/controller";
+import classic from 'ember-classic-decorator';
 
+@classic
 export default class DrilldownController extends Controller {
 
   baseData = [

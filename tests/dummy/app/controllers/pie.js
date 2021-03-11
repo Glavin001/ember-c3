@@ -1,8 +1,10 @@
 import { computed } from "@ember/object";
 import { bind, later } from "@ember/runloop";
 import { action } from "@ember/object";
+import classic from 'ember-classic-decorator';
 import Controller from "@ember/controller";
 
+@classic
 export default class PieController extends Controller {
   chart = null;
 

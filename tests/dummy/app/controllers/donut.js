@@ -1,7 +1,9 @@
 import { later } from "@ember/runloop";
 import { action } from "@ember/object";
 import Controller from "@ember/controller";
+import classic from 'ember-classic-decorator';
 
+@classic
 export default class DonutController extends Controller {
   data = {
     columns: [

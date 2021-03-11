@@ -1,7 +1,9 @@
 import { later } from "@ember/runloop";
 import { action } from "@ember/object";
+import classic from 'ember-classic-decorator';
 import Controller from "@ember/controller";
 
+@classic
 export default class TimeseriesController extends Controller {
   chart = null;
 
