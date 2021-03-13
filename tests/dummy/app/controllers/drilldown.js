@@ -1,4 +1,3 @@
-import { computed } from '@ember/object';
 import { map } from '@ember/object/computed';
 import { bind } from "@ember/runloop";
 import { action } from "@ember/object";
@@ -44,11 +43,6 @@ export default class DrilldownController extends Controller {
   title =  { text: "Flowers by Color" };
   padding = { top: 20 };
 
-  init() {
-    super.init(...arguments);
-   
-  }
-
   @map("whiteData", function(item) {
     return item[0];
   })
@@ -70,7 +64,6 @@ export default class DrilldownController extends Controller {
   unloadYellow;
 
   // iris data from R
-  @computed
   get data() {
     return {
       columns: [
@@ -83,6 +76,13 @@ export default class DrilldownController extends Controller {
     };
   }
 
+  // get chart object
+  @action
+  getChart(chart) {
+    this.chart = chart;
+  }
+ 
+  @action
   myClick(d) {
     switch (d.name) {
       case "Blue Flowers":
@@ -112,10 +112,9 @@ export default class DrilldownController extends Controller {
 
   @action
   resetData() {
-    let c = this.chart;
     this.set("dtitle", { text: "Flowers by Color", refresh: false });
-    c.load({ columns: this.baseData });
-    c.unload(
+    this.chart.load({ columns: this.baseData });
+    this.chart.unload(
       this.unloadBlue
         .concat(this.unloadRed)
         .concat(this.unloadYellow)
@@ -124,10 +123,9 @@ export default class DrilldownController extends Controller {
   }
 
   drilldownBlue() {
-    let c = this.chart;
     this.set("dtitle", { text: "Four Colors", refresh: false });
-    c.load({ columns: this.blueFlowers });
-    c.unload([
+    this.chart.load({ columns: this.blueFlowers });
+    this.chart.unload([
       "Blue Flowers",
       "Red Flowers",
       "Yellow Flowers",
@@ -136,10 +134,9 @@ export default class DrilldownController extends Controller {
   }
 
   drilldownRed() {
-    let c = this.chart;
     this.set("dtitle", { text: "Red Flowers", refresh: false });
-    c.load({ columns: this.redFlowers });
-    c.unload([
+    this.chart.load({ columns: this.redFlowers });
+    this.chart.unload([
       "Blue Flowers",
       "Red Flowers",
       "Yellow Flowers",
@@ -148,10 +145,9 @@ export default class DrilldownController extends Controller {
   }
 
   drilldownYellow() {
-    let c = this.chart;
     this.set("dtitle", { text: "Yellow Flowers", refrehs: false });
-    c.load({ columns: this.yellowFlowers });
-    c.unload([
+    this.chart.load({ columns: this.yellowFlowers });
+    this.chart.unload([
       "Blue Flowers",
       "Red Flowers",
       "Yellow Flowers",
