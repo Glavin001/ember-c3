@@ -20,36 +20,38 @@ export default class ChartObjController extends Controller {
     groups: [["data1", "data2"]]
   };
 
-
+  // get chart object
+  @action
+  getChart(chart) {
+    this.chart = chart;
+  }
+  
   @action
   toggleLegend() {
-    let c = this.chart;
     this.toggleProperty("legendVisible");
 
-    if (this.legendVisible) c.legend.show();
-    else c.legend.hide();
+    if (this.legendVisible) this.chart.legend.show();
+    else this.chart.legend.hide();
   }
 
   @action
   toggleData3() {
-    let c = this.chart;
     this.toggleProperty("graphVisible");
 
-    if (this.graphVisible) c.show("data3");
-    else c.hide("data3");
+    if (this.graphVisible) this.chart.show("data3");
+    else this.chart.hide("data3");
   }
 
   @action
   transform() {
-    let c = this.chart;
     this.toggleProperty("isBar");
 
     if (this.isBar) {
-      c.transform("bar");
+      this.chart.transform("bar");
       this.set("chartTitle", "Chart Object - Bar Chart");
     } else {
-      c.transform("line");
-      c.groups([["data1", "data2"]]);
+      this.chart.transform("line");
+      this.chart.groups([["data1", "data2"]]);
       this.set("isStacked", false);
       this.set("chartTitle", "Chart Object");
     }
@@ -57,33 +59,29 @@ export default class ChartObjController extends Controller {
 
   @action
   stackBars() {
-    let c = this.chart;
 
     if (this.isBar && !this.isStacked) {
       this.toggleProperty("isStacked");
-      c.groups([
+      this.chart.groups([
         ["data1", "data2"],
         ["data4", "data5"],
         ["data3", "data6"]
       ]);
-    } else c.groups([["data1", "data2"]]);
+    } else this.chart.groups([["data1", "data2"]]);
   }
 
   @action
   makeCombo() {
-    let c = this.chart;
-    c.transform("bar");
-    c.transform("spline", "data3");
-    c.transform("line", "data4");
-    c.transform("area", "data6");
+    this.chart.transform("bar");
+    this.chart.transform("spline", "data3");
+    this.chart.transform("line", "data4");
+    this.chart.transform("area", "data6");
     this.set('chartTitle', 'Chart Object - Combo Chart')
   }
 
   @action
   changeColors() {
-    let c = this.chart;
-
-    c.data.colors({
+    this.chart.data.colors({
       data1: "#ff0000",
       data2: "#00ff00",
       data3: "#0000ff",
