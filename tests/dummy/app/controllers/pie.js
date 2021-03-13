@@ -1,4 +1,3 @@
-import { computed } from "@ember/object";
 import { bind, later } from "@ember/runloop";
 import { action } from "@ember/object";
 import classic from 'ember-classic-decorator';
@@ -21,7 +20,7 @@ export default class PieController extends Controller {
   title = { text: "Iris data from R" };
   padding = { top: 20 };
 
-  @computed
+  // event handlers
   get onclick() {
     return bind(this, this.myClick);
   }
