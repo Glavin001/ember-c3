@@ -1,4 +1,3 @@
-import { computed } from '@ember/object';
 import Controller from "@ember/controller";
 import { bind } from "@ember/runloop";
 import classic from 'ember-classic-decorator';
@@ -11,7 +10,6 @@ export default class EventsController extends Controller {
   padding = this.padding || { top: 20 };
   title = this.title || { text: "Click data 5 to Win!" };
 
-  @computed
   get data() {
     // iris data from R
     return {
