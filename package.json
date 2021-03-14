@@ -88,7 +88,8 @@
     "eslint-plugin-node": "^10.0.0",
     "loader.js": "^4.7.0",
     "popper.js": "^1.16.0",
-    "sass": "^1.23.7"
+    "sass": "^1.23.7",
+    "qunit-dom": "^1.6.0"
   },
   "engines": {
     "node": "8.* || >= 10.*"
