@@ -88,7 +88,6 @@ export default Component.extend({
     chartConfig.onmouseout = () =>
       this.onmouseout && this.onmouseout(this.c3chart);
     chartConfig.onresize = () => this.onresize && this.onresize(this.c3chart);
-    chartConfig.onresize = () => this.onresize && this.onresize(this.c3chart);
     chartConfig.onresized = () =>
       this.onresized && this.onresized(this.c3chart);
 
