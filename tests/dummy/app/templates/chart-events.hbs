@@ -17,10 +17,11 @@
         @grid={{this.grid}}
         @tooltip={{this.tooltip}}
         @legend={{this.legend}}
-        @oninit={{action this.setup}}
-        @onmouseover={{action this.mouseover}}
-        @onmouseout={{action this.mouseout}}
-        @onresize={{action this.resizing}}
+        @c3Chart={{this.getChart}}
+        @oninit={{this.setup}}
+        @onmouseover={{this.mouseover}}
+        @onmouseout={{this.mouseout}}
+        @onresize={{this.resizing}}
       />
     </div>
   </panel.content>
