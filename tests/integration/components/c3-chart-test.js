@@ -18,13 +18,13 @@ module("Integration | Component | c3 chart", function(hooks) {
     await render(hbs`{{c3-chart data=this.data}}`);
 
     assert.ok(find("svg"));
-    assert.equal(
+    assert.strictEqual(
       findAll("g .c3-legend-item").length,
       2,
       "Pie chart has a legend"
     );
-    assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
-    assert.equal(findAll("svg g").length, 67, "svg g elements");
+    assert.strictEqual(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.strictEqual(findAll("svg g").length, 67, "svg g elements");
   });
 
   test("it renders a donut chart", async function(assert) {
@@ -41,13 +41,13 @@ module("Integration | Component | c3 chart", function(hooks) {
 
     assert.ok(find("svg"));
     assert.ok(find(".c3-chart-arcs-title"), "Has title text");
-    assert.equal(
+    assert.strictEqual(
       find(".c3-chart-arcs-title").textContent,
       "Iris Petal Width",
       "Text matches title"
     );
-    assert.equal(findAll(".c3-legend-item").length, 3, "Has 3 legend items");
-    assert.equal(findAll("svg g").length, 79, "svg g elements");
+    assert.strictEqual(findAll(".c3-legend-item").length, 3, "Has 3 legend items");
+    assert.strictEqual(findAll("svg g").length, 79, "svg g elements");
   });
 
   test("it renders a gauge chart", async function(assert) {
@@ -68,13 +68,13 @@ module("Integration | Component | c3 chart", function(hooks) {
 
     assert.ok(find("svg"));
     assert.ok(find(".c3-title"), "Has title text");
-    assert.equal(
+    assert.strictEqual(
       find(".c3-title").textContent,
       "Percent Complete",
       "Text matches title"
     );
-    assert.equal(findAll(".c3-legend-item").length, 1, "Has 1 legend items");
-    assert.equal(findAll("svg g").length, 57, "svg g elements");
+    assert.strictEqual(findAll(".c3-legend-item").length, 1, "Has 1 legend items");
+    assert.strictEqual(findAll("svg g").length, 57, "svg g elements");
   });
 
   test("it renders a timeseries chart", async function(assert) {
@@ -116,13 +116,13 @@ module("Integration | Component | c3 chart", function(hooks) {
 
     assert.ok(find("svg"));
     assert.ok(find(".c3-title"), "Has title text");
-    assert.equal(
+    assert.strictEqual(
       find(".c3-title").textContent,
       "Internet Speeds",
       "Text matches title"
     );
-    assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
-    assert.equal(findAll("svg g").length, 64, "svg g elements");
+    assert.strictEqual(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.strictEqual(findAll("svg g").length, 64, "svg g elements");
   });
 
   test("it renders a bar chart", async function(assert) {
@@ -152,13 +152,13 @@ module("Integration | Component | c3 chart", function(hooks) {
 
     assert.ok(find("svg"));
     assert.ok(find(".c3-title"), "Has title text");
-    assert.equal(
+    assert.strictEqual(
       find(".c3-title").textContent,
       "Regional Sales",
       "Text matches title"
     );
-    assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
-    assert.equal(findAll("svg g").length, 67, "svg g elements");
+    assert.strictEqual(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.strictEqual(findAll("svg g").length, 67, "svg g elements");
   });
 
   /********** c3 chart events *********/
@@ -188,8 +188,8 @@ module("Integration | Component | c3 chart", function(hooks) {
                         }}`);
 
     assert.ok(find("svg"));
-    assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
-    assert.equal(findAll("svg g").length, 67, "svg g elements");
+    assert.strictEqual(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.strictEqual(findAll("svg g").length, 67, "svg g elements");
   });
 
   test("triggers action on chart render", async function(assert) {
@@ -204,7 +204,7 @@ module("Integration | Component | c3 chart", function(hooks) {
     });
 
     this.set("chartAction", chart => {
-      assert.equal(typeof chart, "object", "onrender action is called");
+      assert.strictEqual(typeof chart, "object", "onrender action is called");
     });
 
     await render(hbs`{{c3-chart 
@@ -217,8 +217,8 @@ module("Integration | Component | c3 chart", function(hooks) {
                         }}`);
 
     assert.ok(find("svg"));
-    assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
-    assert.equal(findAll("svg g").length, 67, "svg g elements");
+    assert.strictEqual(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.strictEqual(findAll("svg g").length, 67, "svg g elements");
   });
 
   test("triggers action on chart mouseover", async function(assert) {
@@ -233,7 +233,7 @@ module("Integration | Component | c3 chart", function(hooks) {
     });
 
     this.set("chartAction", chart => {
-      assert.equal(typeof chart, "object", "onmouseover action is called");
+      assert.strictEqual(typeof chart, "object", "onmouseover action is called");
     });
 
     await render(hbs`{{c3-chart 
@@ -246,8 +246,8 @@ module("Integration | Component | c3 chart", function(hooks) {
                         }}`);
 
     assert.ok(find("svg"));
-    assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
-    assert.equal(findAll("svg g").length, 67, "svg g elements");
+    assert.strictEqual(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.strictEqual(findAll("svg g").length, 67, "svg g elements");
 
     await triggerEvent("svg", "mouseenter");
   });
@@ -264,7 +264,7 @@ module("Integration | Component | c3 chart", function(hooks) {
     });
 
     this.set("chartAction", chart => {
-      assert.equal(typeof chart, "object", "onmouseout action is called");
+      assert.strictEqual(typeof chart, "object", "onmouseout action is called");
     });
 
     await render(hbs`{{c3-chart 
@@ -277,8 +277,8 @@ module("Integration | Component | c3 chart", function(hooks) {
                         }}`);
 
     assert.ok(find("svg"));
-    assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
-    assert.equal(findAll("svg g").length, 67, "svg g elements");
+    assert.strictEqual(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.strictEqual(findAll("svg g").length, 67, "svg g elements");
 
     await triggerEvent("svg", "mouseleave");
   });
@@ -306,8 +306,8 @@ module("Integration | Component | c3 chart", function(hooks) {
     await render(hbs`{{c3-chart data=data}}`);
     // debugger
     assert.ok(find("svg"));
-    assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
-    assert.equal(findAll("svg g").length, 67, "svg g elements");
+    assert.strictEqual(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.strictEqual(findAll("svg g").length, 67, "svg g elements");
 
     await click(".c3-arc-data1");
   });
@@ -328,8 +328,8 @@ module("Integration | Component | c3 chart", function(hooks) {
     await render(hbs`{{c3-chart data=data}}`);
 
     assert.ok(find("svg"));
-    assert.equal(findAll(".c3-legend-item").length, 2, "Has 3 legend items");
-    assert.equal(findAll("svg g").length, 67, "svg g elements");
+    assert.strictEqual(findAll(".c3-legend-item").length, 2, "Has 3 legend items");
+    assert.strictEqual(findAll("svg g").length, 67, "svg g elements");
 
     await triggerEvent("g .c3-arc-data1", "mouseover");
   });
@@ -350,8 +350,8 @@ module("Integration | Component | c3 chart", function(hooks) {
     await render(hbs`{{c3-chart data=data}}`);
 
     assert.ok(find("svg"));
-    assert.equal(findAll(".c3-legend-item").length, 2, "Has 3 legend items");
-    assert.equal(findAll("svg g").length, 67, "svg g elements");
+    assert.strictEqual(findAll(".c3-legend-item").length, 2, "Has 3 legend items");
+    assert.strictEqual(findAll("svg g").length, 67, "svg g elements");
 
     await triggerEvent("g .c3-arc-data1", "mouseout");
   });
@@ -381,22 +381,22 @@ module("Integration | Component | c3 chart", function(hooks) {
     await render(hbs`{{c3-chart data=this.data title=title dtitle=dtitle}}`);
 
     assert.ok(find("svg"));
-    assert.equal(
+    assert.strictEqual(
       find(".c3-title").textContent,
       "Percent Complete",
       "Text matches title"
     );
-    assert.equal(
+    assert.strictEqual(
       findAll("g .c3-legend-item").length,
       2,
       "Pie chart has a legend"
     );
-    assert.equal(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
-    assert.equal(findAll("svg g").length, 67, "svg g elements");
+    assert.strictEqual(findAll(".c3-legend-item").length, 2, "Has 2 legend items");
+    assert.strictEqual(findAll("svg g").length, 67, "svg g elements");
 
     await click(".c3-arc-data1");
 
-    assert.equal(find(".c3-title").textContent,
+    assert.strictEqual(find(".c3-title").textContent,
       "New Title",
       "Pie chart title has changed"
       );
