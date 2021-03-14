@@ -32,14 +32,9 @@ label {
   }
 }
 
-a.fa.fa-github.github {
-  font-size: 28px;
-  text-decoration: none;
-  color: rgba(0, 0, 0, 0.5);
-
-  &:hover {
-    color: rgba(0, 0, 0, 0.7);
-  }
+.github {
+  height: 28px;
+  padding-left: 10px;
 }
 
 .h0 {
