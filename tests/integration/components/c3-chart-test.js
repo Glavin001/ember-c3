@@ -18,7 +18,7 @@ module('Integration | Component | c3 chart', function (hooks) {
       type: 'pie'
     });
 
-    await render(hbs`{{c3-chart data=this.data}}`);
+    await render(hbs`<C3Chart @data={{this.data}} />`);
 
     assert.dom('svg').exists();
     assert.strictEqual(
@@ -48,7 +48,7 @@ module('Integration | Component | c3 chart', function (hooks) {
 
     this.set('donut', { title: 'Iris Petal Width' });
 
-    await render(hbs`{{c3-chart data=data donut=donut}}`);
+    await render(hbs`<C3Chart @data={{this.data}} @donut={{this.donut}} />`);
 
     assert.dom('svg').exists();
     assert
@@ -76,7 +76,7 @@ module('Integration | Component | c3 chart', function (hooks) {
     });
 
     await render(
-      hbs`{{c3-chart data=data title=title gauge=gauge color=color size=size}}`
+      hbs`<C3Chart @data={{this.data}} @title={{this.title}} @gauge={{this.gauge}} @color={{this.color}} @size={{this.size}} />`
     );
 
     assert.dom('svg').exists();
@@ -123,7 +123,12 @@ module('Integration | Component | c3 chart', function (hooks) {
       });
 
     await render(
-      hbs`{{c3-chart data=data title=title gauge=gauge color=color size=size}}`
+      hbs`<C3Chart 
+          @data={{this.data}} 
+          @title={{this.title}} 
+          @guage={{this.guage}} 
+          @color={{this.color}} 
+          @size={{this.size}} />`
     );
 
     assert.dom('svg').exists();
@@ -159,7 +164,12 @@ module('Integration | Component | c3 chart', function (hooks) {
     });
 
     await render(
-      hbs`{{c3-chart data=data title=title gauge=gauge color=color size=size}}`
+      hbs`<C3Chart 
+             @data={{this.data}} 
+             @title={{this.title}} 
+             @guage={{this.guage}} 
+             @color={{this.color}} 
+             @size={{this.size}} />`
     );
 
     assert.dom('svg').exists();
@@ -190,14 +200,14 @@ module('Integration | Component | c3 chart', function (hooks) {
       assert.ok(true, 'onintit action is called');
     });
 
-    await render(hbs`{{c3-chart 
-                        data=data 
-                        title=title 
-                        gauge=gauge 
-                        color=color 
-                        size=size
-                        onmouseover=(action chartAction)
-                        }}`);
+    await render(hbs`<C3Chart 
+                        @data={{this.data}} 
+                        @title={{this.title}} 
+                        @gauge={{this.gauge}} 
+                        @color={{this.color}} 
+                        @size={{this.size}}
+                        @onmouseover={{action chartAction}}
+                         />`);
 
     assert.dom('svg').exists();
     assert.strictEqual(
@@ -223,14 +233,14 @@ module('Integration | Component | c3 chart', function (hooks) {
       assert.strictEqual(typeof chart, 'object', 'onrender action is called');
     });
 
-    await render(hbs`{{c3-chart 
-                        data=data 
-                        title=title 
-                        gauge=gauge 
-                        color=color 
-                        size=size
-                        onrender=(action chartAction)
-                        }}`);
+    await render(hbs`<C3Chart 
+                        @data={{this.data}} 
+                        @title={{this.title}} 
+                        @gauge={{this.gauge}} 
+                        @color={{this.color}} 
+                        @size={{this.size}}
+                        @onrender={{action chartAction}}
+                         />`);
 
     assert.dom('svg').exists();
     assert.strictEqual(
@@ -260,14 +270,14 @@ module('Integration | Component | c3 chart', function (hooks) {
       );
     });
 
-    await render(hbs`{{c3-chart 
-                        data=data 
-                        title=title 
-                        gauge=gauge 
-                        color=color 
-                        size=size
-                        onmouseover=(action chartAction)
-                        }}`);
+    await render(hbs`<C3Chart 
+                        @data={{this.data}} 
+                        @title={{this.title}} 
+                        @guage={{this.guage}} 
+                        @color={{this.color}} 
+                        @size={{this.size}}
+                        @onmouseover={{action chartAction}}
+                         />`);
 
     assert.dom('svg').exists();
     assert.strictEqual(
@@ -295,14 +305,14 @@ module('Integration | Component | c3 chart', function (hooks) {
       assert.strictEqual(typeof chart, 'object', 'onmouseout action is called');
     });
 
-    await render(hbs`{{c3-chart 
-                        data=data 
-                        title=title 
-                        gauge=gauge 
-                        color=color 
-                        size=size
-                        onmouseout=(action chartAction)
-                        }}`);
+    await render(hbs`<C3Chart 
+                        @data={{this.data}} 
+                        @title={{this.title}} 
+                        @gauge={{this.gauge}} 
+                        @color={{this.color}} 
+                        @size={{this.size}}
+                        @onmouseout={{action chartAction}}
+                         />`);
 
     assert.dom('svg').exists();
     assert.strictEqual(
@@ -338,7 +348,7 @@ module('Integration | Component | c3 chart', function (hooks) {
       onclick: bind(this, this.chartAction)
     });
 
-    await render(hbs`{{c3-chart data=data}}`);
+    await render(hbs`<C3Chart @data={{this.data}} />`);
     // debugger
     assert.dom('svg').exists();
     assert.strictEqual(
@@ -367,7 +377,7 @@ module('Integration | Component | c3 chart', function (hooks) {
       onmouseover: bind(this, this.chartAction)
     });
 
-    await render(hbs`{{c3-chart data=data}}`);
+    await render(hbs`<C3Chart @data={{this.data}} />`);
 
     assert.dom('svg').exists();
     assert.strictEqual(
@@ -396,7 +406,7 @@ module('Integration | Component | c3 chart', function (hooks) {
       onmouseout: bind(this, this.chartAction)
     });
 
-    await render(hbs`{{c3-chart data=data}}`);
+    await render(hbs`<C3Chart @data={{this.data}} />`);
 
     assert.dom('svg').exists();
     assert.strictEqual(
@@ -434,7 +444,7 @@ module('Integration | Component | c3 chart', function (hooks) {
       text: 'Percent Complete'
     });
 
-    await render(hbs`{{c3-chart data=this.data title=title dtitle=dtitle}}`);
+    await render(hbs`<C3Chart @data={{this.data}} @title={{this.title}} @dtitle={{this.dtitle}} />`);
 
     assert.dom('svg').exists();
     assert
