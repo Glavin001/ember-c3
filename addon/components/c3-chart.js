@@ -86,9 +86,10 @@ export default class C3Component extends Component {
     // animation tranisiton - we handle transistion not c3
     // same funtionality as the c3 transition setting
     this.transition = this.args.transition;
-    debugger;
+
     // emit chart events to host app
 
+    // oninit
     this.config.oninit = () => this.oninit && this.oninit();
 
     // onrendered

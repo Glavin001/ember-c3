@@ -284,7 +284,7 @@ module('Integration | Component | c3 chart', function(hooks) {
     });
 
     await render(hbs`{{c3-chart data=data}}`);
-    // debugger
+ 
     assert.dom('svg').exists();
     assert.dom('.c3-legend-item').exists({ count: 2 }, 'Has 2 legend items');
     assert.dom('svg g').exists({ count: 74 }, 'svg g elements');
