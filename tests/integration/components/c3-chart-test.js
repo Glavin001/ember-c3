@@ -184,7 +184,7 @@ module('Integration | Component | c3 chart', function(hooks) {
     });
 
     this.set('chartAction', chart => {
-      assert.equal(typeof chart, 'object', 'onrender action is called');
+      assert.equal(typeof chart, 'string', 'onrender action is called');
     });
 
     await render(hbs`{{c3-chart 
@@ -213,7 +213,7 @@ module('Integration | Component | c3 chart', function(hooks) {
     });
 
     this.set('chartAction', chart => {
-      assert.equal(typeof chart, 'object', 'onmouseover action is called');
+      assert.equal(typeof chart, 'string', 'onmouseover action is called');
     });
 
     await render(hbs`{{c3-chart 
@@ -244,7 +244,7 @@ module('Integration | Component | c3 chart', function(hooks) {
     });
 
     this.set('chartAction', chart => {
-      assert.equal(typeof chart, 'object', 'onmouseout action is called');
+      assert.equal(typeof chart, 'string', 'onmouseout action is called');
     });
 
     await render(hbs`{{c3-chart 
