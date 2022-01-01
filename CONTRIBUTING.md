@@ -26,6 +26,5 @@ Note: C3 chart events `onresize` and `onresized` are not tested
 * Visit the dummy application at [http://localhost:4200](http://localhost:4200).
 
 For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
-
 ### Dummy app on gh-pages
 Use `npm run deploy` to build and deploy dummy app to the gh-pages branch using [ember-cli-github-pages](https://github.com/poetic/ember-cli-github-pages)
