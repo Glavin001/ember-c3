@@ -1,8 +1,8 @@
 <CollapsablePanel as |panel|>
   <panel.header>
     <h3>
-      {{pageTitle}}
-      <span class="pull-right"> {{message}}</span>
+      {{this.pageTitle}}
+      <span class="pull-right"> {{this.message}}</span>
     </h3>
   </panel.header>
 
@@ -17,10 +17,10 @@
         @grid={{this.grid}}
         @tooltip={{this.tooltip}}
         @legend={{this.legend}}
-        @oninit={{action this.setup}}
-        @onmouseover={{action this.mouseover}}
-        @onmouseout={{action this.mouseout}}
-        @onresize={{action this.resizing}}
+        @oninit={{this.setup}}
+        @onmouseover={{this.mouseover}}
+        @onmouseout={{this.mouseout}}
+        @onresize={{this.resizing}}
       />
     </div>
   </panel.content>
