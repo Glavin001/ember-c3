@@ -1,6 +1,7 @@
 import { bind } from '@ember/runloop';
 import Controller from '@ember/controller';
 import { task, timeout } from 'ember-concurrency';
+import { notifyPropertyChange } from '@ember/object';
 
 export default class NoDataController extends Controller {
   // No data for graph
@@ -55,6 +56,6 @@ export default class NoDataController extends Controller {
           2.3, 1.8
         ]);
         
-    this.notifyPropertyChange('data');
+        notifyPropertyChange(this, 'data');
   }
 }

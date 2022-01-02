@@ -1,5 +1,7 @@
 import Controller from '@ember/controller';
 import { task, timeout } from 'ember-concurrency';
+import { set } from '@ember/object';
+import { notifyPropertyChange } from '@ember/object';
 
 export default class GuageController extends Controller {
   data = {
@@ -27,27 +29,27 @@ export default class GuageController extends Controller {
   *animateChart() {
     yield timeout(500);
 
-    this.set('data.columns', [['data', 10]]);
-    this.notifyPropertyChange('data');
+    set(this, 'data.columns', [['data', 10]]);
+    notifyPropertyChange(this, 'data');
 
     yield timeout(500);
 
-    this.set('data.columns', [['data', 50]]);
-    this.notifyPropertyChange('data');
+    set(this, 'data.columns', [['data', 50]]);
+    notifyPropertyChange(this, 'data');
 
     yield timeout(500);
 
-    this.set('data.columns', [['data', 70]]);
-    this.notifyPropertyChange('data');
+    set(this, 'data.columns', [['data', 70]]);
+    notifyPropertyChange(this, 'data');
 
     yield timeout(500);
 
-    this.set('data.columns', [['data', 0]]);
-    this.notifyPropertyChange('data');
+    set(this, 'data.columns', [['data', 0]]);
+    notifyPropertyChange(this, 'data');
 
     yield timeout(500);
 
-    this.set('data.columns', [['data', 100]]);
-    this.notifyPropertyChange('data');
+    set(this, 'data.columns', [['data', 100]]);
+    notifyPropertyChange(this, 'data');
   }
 }

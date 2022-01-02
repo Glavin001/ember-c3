@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { task, timeout } from 'ember-concurrency';
+import { notifyPropertyChange } from '@ember/object';
 
 export default class DonutController extends Controller {
   data = {
@@ -18,11 +19,11 @@ export default class DonutController extends Controller {
   @task
   *animateChart() {
     this.data.columns.pop();
-    this.notifyPropertyChange('data');
+    notifyPropertyChange(this, 'data');
     this.data.columns.pop();
-    this.notifyPropertyChange('data');
+    notifyPropertyChange(this, 'data');
     this.data.columns.pop();
-    this.notifyPropertyChange('data');
+    notifyPropertyChange(this, 'data');
 
     yield timeout(500);
 
@@ -56,6 +57,6 @@ export default class DonutController extends Controller {
           2.3, 1.8
         ]);
 
-    this.notifyPropertyChange('data');
+        notifyPropertyChange(this, 'data');
   }
 }
