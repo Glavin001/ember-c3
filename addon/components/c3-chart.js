@@ -49,13 +49,29 @@ export default class C3Component extends Component {
       empty: { label: { text: 'No Data' } }
     };
 
-    // test permutations of data passing
-    const test = this.args.data;
-    const dataExists = test?.url || test?.json || test?.rows || test?.columns;
+    // Do we have a data object?
+    let dataObject = this.data;
 
-    if (!dataExists) {
+    if (!dataObject) {
       this.config.data = dummyData;
-    } else this.config.data = this.args.data;
+    }
+
+    // Does data object have a data source?
+    if (dataObject) {
+      const isSourcePresent =
+        isPresent(this.data.url) ||
+        isPresent(this.data.json) ||
+        isPresent(this.data.rows) ||
+        isPresent(this.data.columns);
+
+      // If no source add empty source
+      // else use passed data argument
+      if (!isSourcePresent) {
+        dataObject.columns = [];
+        dataObject.empty == { label: { text: 'No Data' } };
+        this.config.data = dataObject;
+      } else this.config.data = this.data;
+    }
 
     this.config.axis = this.args.axis;
     this.config.color = this.args.color;
