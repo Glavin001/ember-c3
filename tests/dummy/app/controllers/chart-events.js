@@ -1,16 +1,16 @@
-import { computed } from "@ember/object";
-import Controller from "@ember/controller";
-import { later } from "@ember/runloop";
+import Controller from '@ember/controller';
+import { later } from '@ember/runloop';
 import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 export default class ChartEventsController extends Controller {
-  pageTitle = "C3 Chart Events";
-  message = null;
+  @tracked pageTitle = 'C3 Chart Events';
+  @tracked message;
 
   axis = {
     x: {
-      type: "category",
-      categories: ["Central", "East", "West"],
+      type: 'category',
+      categories: ['Central', 'East', 'West'],
       rotated: true
     }
   };
@@ -21,7 +21,7 @@ export default class ChartEventsController extends Controller {
 
   grid = {
     y: {
-      lines: [{ value: 900, text: "Yearly Target" }]
+      lines: [{ value: 900, text: 'Yearly Target' }]
     }
   };
 
@@ -33,50 +33,46 @@ export default class ChartEventsController extends Controller {
     grouped: false
   };
 
-  title = { text: "Regional Sales" };
+  title = { text: 'Regional Sales' };
   padding = { top: 20, bottom: 5, right: 15 };
 
   jsonData = null;
 
-  @computed
   get data() {
     return {
-      json: this.jsonData,
-      type: "bar",
+      json: this.model,
+      type: 'bar',
       keys: {
-        x: "region",
-        value: ["total"]
+        x: 'region',
+        value: ['total']
       }
     };
   }
 
   @action
   setup() {
-    this.set("pageTitle", "Chart Events - loading...");
-    later(this, () => this.set("pageTitle", "C3 Chart Events"), 500);
+    this.pageTitle = 'Chart Events - loading...';
+    later(this, () => this.pageTitle = 'C3 Chart Events', 500);
   }
 
   @action
   mouseover(chartId) {
-    document.getElementById(chartId).classList.remove("demo-box");
-    document
-      .getElementById(chartId)
-      .classList.add("demo-chart-selected");
-    this.set("pageTitle", "YTD Sales");
+    document.getElementById(chartId).classList.remove('demo-box');
+    document.getElementById(chartId).classList.add('demo-chart-selected');
+    this.pageTitle = 'YTD Sales';
   }
 
   @action
   mouseout(chartId) {
-    document.getElementById(chartId).classList.add("demo-box");
-    document
-      .getElementById(chartId)
-      .classList.remove("demo-chart-selected");
-    this.set("pageTitle", "C3 Chart Events");
+    document.getElementById(chartId).classList.add('demo-box');
+    document.getElementById(chartId).classList.remove('demo-chart-selected');
+    this.pageTitle = 'C3 Chart Events';
   }
 
+  // chart resizing
   @action
   resizing(/* chartId */) {
-    this.set("message", "adjusting...");
-    later(() => this.set("message", ""), 700);
+    this.message = 'adjusting...';
+    later(() => this.message = '', 700);
   }
 }

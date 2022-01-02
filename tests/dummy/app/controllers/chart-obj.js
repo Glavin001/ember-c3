@@ -1,9 +1,14 @@
 import { action } from "@ember/object";
 import Controller from "@ember/controller";
+import { tracked } from "@glimmer/tracking";
 
 export default class ChartObjController extends Controller {
   chart = null;
-  chartTitle = "Chart Object";
+  @tracked chartTitle = "Chart Object";
+  @tracked isBar = false;
+  @tracked isStacked = false;
+  @tracked graphVisible = true;
+  @tracked legendVisible = true;
 
   data = this.data || {
     columns: [
@@ -18,7 +23,7 @@ export default class ChartObjController extends Controller {
     groups: [["data1", "data2"]]
   };
 
-  // get chart object
+  // get chart object from component
   @action
   getChart(chart) {
     this.chart = chart;
@@ -27,7 +32,7 @@ export default class ChartObjController extends Controller {
   @action
   toggleLegend() {
     let c = this.chart;
-    this.toggleProperty("legendVisible");
+    this.legendVisible = !this.legendVisible;
 
     if (this.legendVisible) c.legend.show();
     else c.legend.hide();
@@ -36,7 +41,7 @@ export default class ChartObjController extends Controller {
   @action
   toggleData3() {
     let c = this.chart;
-    this.toggleProperty("graphVisible");
+    this.graphVisible = !this.graphVisible;
 
     if (this.graphVisible) c.show("data3");
     else c.hide("data3");
@@ -45,16 +50,16 @@ export default class ChartObjController extends Controller {
   @action
   transform() {
     let c = this.chart;
-    this.toggleProperty("isBar");
+    this.isBar = !this.isBar;
 
     if (this.isBar) {
       c.transform("bar");
-      this.set("chartTitle", "Chart Object - Bar Chart");
+      this.chartTitle = "Chart Object - Bar Chart";
     } else {
       c.transform("line");
       c.groups([["data1", "data2"]]);
-      this.set("isStacked", false);
-      this.set("chartTitle", "Chart Object");
+      this.isStacked = false;
+      this.chartTitle = "Chart Object";
     }
   }
 
@@ -63,7 +68,9 @@ export default class ChartObjController extends Controller {
     let c = this.chart;
 
     if (this.isBar && !this.isStacked) {
-      this.toggleProperty("isStacked");
+
+      this.isStacked = !this.isStacked;
+      
       c.groups([
         ["data1", "data2"],
         ["data4", "data5"],
@@ -79,7 +86,7 @@ export default class ChartObjController extends Controller {
     c.transform("spline", "data3");
     c.transform("line", "data4");
     c.transform("area", "data6");
-    this.set('chartTitle', 'Chart Object - Combo Chart');
+    this.chartTitle = "Chart Object - Combo Chart";
   }
 
   @action

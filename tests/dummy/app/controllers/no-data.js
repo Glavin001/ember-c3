@@ -1,4 +1,3 @@
-import { computed } from "@ember/object";
 import { bind, later } from "@ember/runloop";
 import { action } from "@ember/object";
 import Controller from "@ember/controller";
@@ -13,13 +12,13 @@ export default class NoDataController extends Controller {
   title = { text: "Iris data from R" };
   padding = { top: 20 };
 
-  @computed
+ // binding here versus on data object
   get onclick() {
     return bind(this, this.myClick);
   }
 
-  myClick(d /*i */) {
-    alert(`clicked ${d.name}`);
+  myClick(data /*, elem */) {
+    alert(`clicked ${data.name}`);
   }
 
   @action

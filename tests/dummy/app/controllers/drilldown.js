@@ -1,10 +1,11 @@
-import { computed } from '@ember/object';
 import { map } from '@ember/object/computed';
 import { bind } from "@ember/runloop";
 import { action } from "@ember/object";
 import Controller from "@ember/controller";
+import { tracked } from '@glimmer/tracking';
 
 export default class DrilldownController extends Controller {
+  @tracked dtitle;
 
   baseData = [
     ["Blue Flowers", 30],
@@ -67,14 +68,13 @@ export default class DrilldownController extends Controller {
   })
   unloadYellow;
 
-  // get chart object
+  // get chart object from component
   @action
   getChart(chart) {
     this.chart = chart;
   }
 
   // iris data from R
-  @computed
   get data() {
     return {
       columns: [
@@ -87,8 +87,8 @@ export default class DrilldownController extends Controller {
     };
   }
 
-  myClick(d) {
-    switch (d.name) {
+  myClick(data) {
+    switch (data.name) {
       case "Blue Flowers":
         this.drilldownBlue();
         break;
@@ -105,19 +105,19 @@ export default class DrilldownController extends Controller {
 
   @action
   addWhite() {
-    this.set("dtitle", { text: "Four Colors", refresh: false });
+    this.dtitle = { text: "Four Colors", refresh: false };
     this.chart.load({ columns: this.whiteData });
   }
 
   @action
   titleOnly() {
-    this.set("dtitle", { text: "Flowers are Colorful!!!", refresh: false });
+    this.dtitle = { text: "Flowers are Colorful!!!", refresh: false };
   }
 
   @action
   resetData() {
     let c = this.chart;
-    this.set("dtitle", { text: "Flowers by Color", refresh: false });
+    this.dtitle = { text: "Flowers by Color", refresh: false };
     c.load({ columns: this.baseData });
     c.unload(
       this.unloadBlue
@@ -129,7 +129,7 @@ export default class DrilldownController extends Controller {
 
   drilldownBlue() {
     let c = this.chart;
-    this.set("dtitle", { text: "Four Colors", refresh: false });
+    this.dtitle = { text: "Four Colors", refresh: false };
     c.load({ columns: this.blueFlowers });
     c.unload([
       "Blue Flowers",
@@ -141,7 +141,7 @@ export default class DrilldownController extends Controller {
 
   drilldownRed() {
     let c = this.chart;
-    this.set("dtitle", { text: "Red Flowers", refresh: false });
+    this.dtitle = { text: "Red Flowers", refresh: false };
     c.load({ columns: this.redFlowers });
     c.unload([
       "Blue Flowers",
@@ -153,7 +153,7 @@ export default class DrilldownController extends Controller {
 
   drilldownYellow() {
     let c = this.chart;
-    this.set("dtitle", { text: "Yellow Flowers", refrehs: false });
+    this.dtitle = { text: "Yellow Flowers", refrehs: false };
     c.load({ columns: this.yellowFlowers });
     c.unload([
       "Blue Flowers",

@@ -1,4 +1,3 @@
-import { computed } from "@ember/object";
 import { bind, later } from "@ember/runloop";
 import { action } from "@ember/object";
 import Controller from "@ember/controller";
@@ -19,13 +18,12 @@ export default class PieController extends Controller {
   title = { text: "Iris data from R" };
   padding = { top: 20 };
 
-  @computed
   get onclick() {
     return bind(this, this.myClick);
   }
 
-  myClick(d) {
-    alert(`clicked ${d.name}`);
+  myClick(data) {
+    alert(`clicked ${data.name}`);
   }
 
   @action
