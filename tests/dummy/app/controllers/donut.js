@@ -1,32 +1,33 @@
-import { later } from "@ember/runloop";
-import { action } from "@ember/object";
-import Controller from "@ember/controller";
+import Controller from '@ember/controller';
+import { task, timeout } from 'ember-concurrency';
 
 export default class DonutController extends Controller {
   data = {
     columns: [
-      ["data1", 30],
-      ["data2", 120]
+      ['data1', 30],
+      ['data2', 120]
     ],
-    type: "donut"
+    type: 'donut'
   };
 
   // chart title
-  title = { text: "Iris data from R" };
-  donut = { title: "Iris Petal Width" };
+  title = { text: 'Iris data from R' };
+  donut = { title: 'Iris Petal Width' };
   padding = { top: 20 };
 
-  @action
-  animateChart() {
+  @task
+  *animateChart() {
     this.data.columns.pop();
-    this.notifyPropertyChange("data");
+    this.notifyPropertyChange('data');
     this.data.columns.pop();
-    this.notifyPropertyChange("data");
+    this.notifyPropertyChange('data');
     this.data.columns.pop();
-    this.notifyPropertyChange("data");
+    this.notifyPropertyChange('data');
 
-    later(this, () => {
-      this.data.columns.push(
+    yield timeout(500);
+
+    // prettier-ignore
+    this.data.columns.push(
         ["setosa", 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2,
           0.2, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.4, 0.4, 0.3,
           0.3, 0.3, 0.2, 0.4, 0.2, 0.5, 0.2, 0.2, 0.4, 0.2,
@@ -34,7 +35,9 @@ export default class DonutController extends Controller {
           0.2, 0.2, 0.3, 0.3, 0.2, 0.6, 0.4, 0.3, 0.2, 0.2,
           0.2, 0.2
         ]);
-      this.data.columns.push(
+
+    // prettier-ignore
+    this.data.columns.push(
         ["versicolor", 1.4, 1.5, 1.5, 1.3, 1.5, 1.3, 1.6, 1.0,
           1.3, 1.4, 1.0, 1.5, 1.0, 1.4, 1.3, 1.4, 1.5, 1.0,
           1.5, 1.1, 1.8, 1.3, 1.5, 1.2, 1.3, 1.4, 1.4, 1.7,
@@ -42,7 +45,9 @@ export default class DonutController extends Controller {
           1.3, 1.3, 1.2, 1.4, 1.2, 1.0, 1.3, 1.2, 1.3, 1.3,
           1.1, 1.3
         ]);
-      this.data.columns.push(
+
+    // prettier-ignore
+    this.data.columns.push(
         ["virginica", 2.5, 1.9, 2.1, 1.8, 2.2, 2.1, 1.7, 1.8,
           1.8, 2.5, 2.0, 1.9, 2.1, 2.0, 2.4, 2.3, 1.8, 2.2,
           2.3, 1.5, 2.3, 2.0, 2.0, 1.8, 2.1, 1.8, 1.8, 1.8,
@@ -50,8 +55,7 @@ export default class DonutController extends Controller {
           1.8, 2.1, 2.4, 2.3, 1.9, 2.3, 2.5, 2.3, 1.9, 2.0,
           2.3, 1.8
         ]);
-      this.notifyPropertyChange("data");
-    },
-      500);
+
+    this.notifyPropertyChange('data');
   }
 }

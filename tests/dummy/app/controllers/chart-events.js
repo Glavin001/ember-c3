@@ -1,7 +1,7 @@
-import Controller from '@ember/controller';
-import { later } from '@ember/runloop';
 import { action } from '@ember/object';
+import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
+import { task, timeout } from 'ember-concurrency';
 
 export default class ChartEventsController extends Controller {
   @tracked pageTitle = 'C3 Chart Events';
@@ -49,10 +49,16 @@ export default class ChartEventsController extends Controller {
     };
   }
 
+  // get chart object from component
   @action
-  setup() {
-    this.pageTitle = 'Chart Events - loading...';
-    later(this, () => this.pageTitle = 'C3 Chart Events', 500);
+  getChart(chart) {
+    this.chart = chart;
+  }
+
+  @task *setup() {
+    this.message = 'loading...';
+    yield timeout(1200);
+    this.message = '';
   }
 
   @action
@@ -70,9 +76,9 @@ export default class ChartEventsController extends Controller {
   }
 
   // chart resizing
-  @action
-  resizing(/* chartId */) {
+  @task *resizing(/* chartId */) {
     this.message = 'adjusting...';
-    later(() => this.message = '', 700);
+    yield timeout(700);
+    this.message = '';
   }
 }
