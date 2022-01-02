@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { click, render, findAll, triggerEvent } from '@ember/test-helpers';
+import { click, render, triggerEvent } from '@ember/test-helpers';
 import { bind } from '@ember/runloop';
 
 module('Integration | Component | c3 chart', function (hooks) {
@@ -21,17 +21,9 @@ module('Integration | Component | c3 chart', function (hooks) {
     await render(hbs`<C3Chart @data={{this.data}} />`);
 
     assert.dom('svg').exists();
-    assert.strictEqual(
-      findAll('g .c3-legend-item').length,
-      2,
-      'Pie chart has a legend'
-    );
-    assert.strictEqual(
-      findAll('.c3-legend-item').length,
-      2,
-      'Has 2 legend items'
-    );
-    assert.strictEqual(findAll('svg g').length, 67, 'svg g elements');
+    assert.dom('g .c3-legend-item').exists({ count: 2 }, 'Pie chart has a legend');
+    assert.dom('.c3-legend-item').exists({ count: 2 }, 'Has 2 legend items');
+    assert.dom('svg g').exists({ count: 67 }, 'svg g elements');
   });
 
   test('it renders a donut chart', async function (assert) {
@@ -55,12 +47,8 @@ module('Integration | Component | c3 chart', function (hooks) {
       .dom('.c3-chart-arcs-title')
       .hasText('Iris Petal Width', 'Text matches title');
 
-    assert.strictEqual(
-      findAll('.c3-legend-item').length,
-      3,
-      'Has 3 legend items'
-    );
-    assert.strictEqual(findAll('svg g').length, 79, 'svg g elements');
+    assert.dom('.c3-legend-item').exists({ count: 3 }, 'Has 3 legend items');
+    assert.dom('svg g').exists({ count: 79 }, 'svg g elements');
   });
 
   test('it renders a gauge chart', async function (assert) {
@@ -82,12 +70,8 @@ module('Integration | Component | c3 chart', function (hooks) {
     assert.dom('svg').exists();
     assert.dom('.c3-title').exists('Has title text');
     assert.dom('.c3-title').hasText('Percent Complete', 'Text matches title');
-    assert.strictEqual(
-      findAll('.c3-legend-item').length,
-      1,
-      'Has 1 legend items'
-    );
-    assert.strictEqual(findAll('svg g').length, 57, 'svg g elements');
+    assert.dom('.c3-legend-item').exists({ count: 1 }, 'Has 1 legend items');
+    assert.dom('svg g').exists({ count: 57 }, 'svg g elements');
   });
 
   test('it renders a timeseries chart', async function (assert) {
@@ -134,12 +118,8 @@ module('Integration | Component | c3 chart', function (hooks) {
     assert.dom('svg').exists();
     assert.dom('.c3-title').exists('Has title text');
     assert.dom('.c3-title').hasText('Internet Speeds', 'Text matches title');
-    assert.strictEqual(
-      findAll('.c3-legend-item').length,
-      2,
-      'Has 2 legend items'
-    );
-    assert.strictEqual(findAll('svg g').length, 64, 'svg g elements');
+    assert.dom('.c3-legend-item').exists({ count: 2 }, 'Has 2 legend items');
+    assert.dom('svg g').exists({ count: 64 }, 'svg g elements');
   });
 
   test('it renders a bar chart', async function (assert) {
@@ -175,12 +155,8 @@ module('Integration | Component | c3 chart', function (hooks) {
     assert.dom('svg').exists();
     assert.dom('.c3-title').exists('Has title text');
     assert.dom('.c3-title').hasText('Regional Sales', 'Text matches title');
-    assert.strictEqual(
-      findAll('.c3-legend-item').length,
-      2,
-      'Has 2 legend items'
-    );
-    assert.strictEqual(findAll('svg g').length, 67, 'svg g elements');
+    assert.dom('.c3-legend-item').exists({ count: 2 }, 'Has 2 legend items');
+    assert.dom('svg g').exists({ count: 67 }, 'svg g elements');
   });
 
   /********** c3 chart events *********/
@@ -210,12 +186,8 @@ module('Integration | Component | c3 chart', function (hooks) {
                          />`);
 
     assert.dom('svg').exists();
-    assert.strictEqual(
-      findAll('.c3-legend-item').length,
-      2,
-      'Has 2 legend items'
-    );
-    assert.strictEqual(findAll('svg g').length, 67, 'svg g elements');
+    assert.dom('.c3-legend-item').exists({ count: 2 }, 'Has 2 legend items');
+    assert.dom('svg g').exists({ count: 67 }, 'svg g elements');
   });
 
   test('triggers action on chart render', async function (assert) {
@@ -243,12 +215,8 @@ module('Integration | Component | c3 chart', function (hooks) {
                          />`);
 
     assert.dom('svg').exists();
-    assert.strictEqual(
-      findAll('.c3-legend-item').length,
-      2,
-      'Has 2 legend items'
-    );
-    assert.strictEqual(findAll('svg g').length, 67, 'svg g elements');
+    assert.dom('.c3-legend-item').exists({ count: 2 }, 'Has 2 legend items');
+    assert.dom('svg g').exists({ count: 67 }, 'svg g elements');
   });
 
   test('triggers action on chart mouseover', async function (assert) {
@@ -280,12 +248,8 @@ module('Integration | Component | c3 chart', function (hooks) {
                          />`);
 
     assert.dom('svg').exists();
-    assert.strictEqual(
-      findAll('.c3-legend-item').length,
-      2,
-      'Has 2 legend items'
-    );
-    assert.strictEqual(findAll('svg g').length, 67, 'svg g elements');
+    assert.dom('.c3-legend-item').exists({ count: 2 }, 'Has 2 legend items');
+    assert.dom('svg g').exists({ count: 67 }, 'svg g elements');
 
     await triggerEvent('svg', 'mouseenter');
   });
@@ -315,12 +279,8 @@ module('Integration | Component | c3 chart', function (hooks) {
                          />`);
 
     assert.dom('svg').exists();
-    assert.strictEqual(
-      findAll('.c3-legend-item').length,
-      2,
-      'Has 2 legend items'
-    );
-    assert.strictEqual(findAll('svg g').length, 67, 'svg g elements');
+    assert.dom('.c3-legend-item').exists({ count: 2 }, 'Has 2 legend items');
+    assert.dom('svg g').exists({ count: 67 }, 'svg g elements');
 
     await triggerEvent('svg', 'mouseleave');
   });
@@ -351,12 +311,8 @@ module('Integration | Component | c3 chart', function (hooks) {
     await render(hbs`<C3Chart @data={{this.data}} />`);
     // debugger
     assert.dom('svg').exists();
-    assert.strictEqual(
-      findAll('.c3-legend-item').length,
-      2,
-      'Has 2 legend items'
-    );
-    assert.strictEqual(findAll('svg g').length, 67, 'svg g elements');
+    assert.dom('.c3-legend-item').exists({ count: 2 }, 'Has 2 legend items');
+    assert.dom('svg g').exists({ count: 67 }, 'svg g elements');
 
     await click('.c3-arc-data1');
   });
@@ -380,12 +336,8 @@ module('Integration | Component | c3 chart', function (hooks) {
     await render(hbs`<C3Chart @data={{this.data}} />`);
 
     assert.dom('svg').exists();
-    assert.strictEqual(
-      findAll('.c3-legend-item').length,
-      2,
-      'Has 3 legend items'
-    );
-    assert.strictEqual(findAll('svg g').length, 67, 'svg g elements');
+    assert.dom('.c3-legend-item').exists({ count: 2 }, 'Has 3 legend items');
+    assert.dom('svg g').exists({ count: 67 }, 'svg g elements');
 
     await triggerEvent('g .c3-arc-data1', 'mouseover');
   });
@@ -409,12 +361,8 @@ module('Integration | Component | c3 chart', function (hooks) {
     await render(hbs`<C3Chart @data={{this.data}} />`);
 
     assert.dom('svg').exists();
-    assert.strictEqual(
-      findAll('.c3-legend-item').length,
-      2,
-      'Has 3 legend items'
-    );
-    assert.strictEqual(findAll('svg g').length, 67, 'svg g elements');
+    assert.dom('.c3-legend-item').exists({ count: 2 }, 'Has 3 legend items');
+    assert.dom('svg g').exists({ count: 67 }, 'svg g elements');
 
     await triggerEvent('g .c3-arc-data1', 'mouseout');
   });
@@ -450,17 +398,9 @@ module('Integration | Component | c3 chart', function (hooks) {
     assert
       .dom('.c3-title')
       .containsText('Percent Complete', 'Text matches title');
-    assert.strictEqual(
-      findAll('g .c3-legend-item').length,
-      2,
-      'Pie chart has a legend'
-    );
-    assert.strictEqual(
-      findAll('.c3-legend-item').length,
-      2,
-      'Has 2 legend items'
-    );
-    assert.strictEqual(findAll('svg g').length, 67, 'svg g elements');
+    assert.dom('g .c3-legend-item').exists({ count: 2 }, 'Pie chart has a legend');
+    assert.dom('.c3-legend-item').exists({ count: 2 }, 'Has 2 legend items');
+    assert.dom('svg g').exists({ count: 67 }, 'svg g elements');
 
     await click('.c3-arc-data1');
 
