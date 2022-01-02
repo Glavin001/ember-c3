@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/ember-c3.svg)](http://badge.fury.io/js/ember-c3)
 [![Join the chat at https://gitter.im/Glavin001/ember-c3](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Glavin001/ember-c3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Ember component for
+Ember component library for
 [C3, a D3-based reusable chart library](https://github.com/masayuki0812/c3).
 
 **See the demo [here](http://glavin001.github.io/ember-c3/)**
@@ -120,34 +120,34 @@ The chart's initial title is set using the `title` parameter.
   @dtitle={{this.dtitle}}
 />
 
-<button {{on "click" this.changeTitle}}>Change Title</button>
+<button {{on 'click' this.changeTitle}}>Change Title</button>
 ```
 
 ```javascript
-import Controller from "@ember/controller";
-import { action } from "@ember/object";
-import { tracked } from "@glimmer/tracking";
+import Controller from '@ember/controller';
+import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 export default class ApplicationController extends Controller {
-  @tracked title = { text: "Coffee Brewing" };
+  @tracked title = { text: 'Coffee Brewing' };
   @tracked dtitle;
 
   get graphData() {
     return {
       columns: [
-        ["Cold Brewed", 12],
-        ["Drip", 67],
-        ["French Press", 14],
-        ["Iced", 38],
-        ["Percolated", 64]
+        ['Cold Brewed', 12],
+        ['Drip', 67],
+        ['French Press', 14],
+        ['Iced', 38],
+        ['Percolated', 64]
       ],
-      type: "pie"
+      type: 'pie'
     };
   }
 
   @action
   changeTitle() {
-    this.dtitle = { text: "Making coffee!", refresh: false };
+    this.dtitle = { text: 'Making coffee!', refresh: false };
   }
 }
 ```
@@ -162,66 +162,66 @@ methods have been tested.
 {{! templates/application.hbs }}
 <C3Chart @data={{this.baseData}} @c3chart={{this.chart}} />
 
-<button {{on "click" this.loadUS}}>US Cars</button>
-<button {{on "click" this.loadGerman}}>German Cars</button>
-<button {{on "click" this.resetData}}>Reset</button>
+<button {{on 'click' this.loadUS}}>US Cars</button>
+<button {{on 'click' this.loadGerman}}>German Cars</button>
+<button {{on 'click' this.resetData}}>Reset</button>
 ```
 
 ```javascript
 // controllers/application.js
-import { action } from "@ember/object";
-import Controller from "@ember/controller";
+import { action } from '@ember/object';
+import Controller from '@ember/controller';
 
 export default class ApplicationController extends Controller {
   chart = null;
 
   baseData = {
     columns: [
-      ["US", 64],
-      ["German", 36]
+      ['US', 64],
+      ['German', 36]
     ],
-    type: "donut"
+    type: 'donut'
   };
 
   modelsGerman = [
-    ["Mercedes", 12],
-    ["Volkswagon", 54],
-    ["BMW", 34]
+    ['Mercedes', 12],
+    ['Volkswagon', 54],
+    ['BMW', 34]
   ];
 
   modelsUS = [
-    ["Ford", 35],
-    ["Chevy", 26],
-    ["Tesla", 2],
-    ["Buick", 10],
-    ["Dodge", 27]
+    ['Ford', 35],
+    ['Chevy', 26],
+    ['Tesla', 2],
+    ['Buick', 10],
+    ['Dodge', 27]
   ];
 
   @action
   resetData() {
     this.chart.load(this.baseData);
     this.chart.unload([
-      "Mercedes",
-      "Volkswagon",
-      "BMW",
-      "Ford",
-      "Chevy",
-      "Tesla",
-      "Buick",
-      "Dodge"
+      'Mercedes',
+      'Volkswagon',
+      'BMW',
+      'Ford',
+      'Chevy',
+      'Tesla',
+      'Buick',
+      'Dodge'
     ]);
   }
 
   @action
   loadUS() {
     this.chart.load({ columns: this.modelsUS });
-    this.chart.unload("US", "German");
+    this.chart.unload('US', 'German');
   }
 
   @action
   loadGerman() {
     this.chart.load({ columns: this.modelsGerman });
-    this.chart.unload("US", "German");
+    this.chart.unload('US', 'German');
   }
 }
 ```
@@ -247,15 +247,15 @@ Chart events supported by `ember-c3`.
 
 Functions will receive the chart's `div` element id which can be used to modify
 or decorate the chart. The `@oninit` event does not receive the id because the
-chart has not been created yet. See how chart events can be used in the dummy
-app.
+chart has not been created yet. See how chart events can be used in the dummy app. 
 
 C3 data events such as `onclick`, `onmouseover` and `onmouseout` are overridden
 in the chart configuration or data settings. Data events supply the data names
 and values based on mouse location.
 
-An data events example is shown below. Note that data functions require `bind`.
-This example uses native classes. See the dummy app for more examples.
+An data events example is shown below. Note that data functions
+require `bind`. This example uses native classes. See the dummy app for more
+examples.
 
 ```handlebars
 {{! templates/application.hbs }}
@@ -264,22 +264,22 @@ This example uses native classes. See the dummy app for more examples.
 
 ```javascript
 // controllers/application.js
-import { action } from "@ember/object";
-import Controller from "@ember/controller";
-import { bind } from "@ember/runloop";
+import { action } from '@ember/object';
+import Controller from '@ember/controller';
+import { bind } from '@ember/runloop';
 
 export default class ApplicationController extends Controller {
   get data() {
     // iris data from R
     return {
       columns: [
-        ["data1", 30],
-        ["data2", 120],
-        ["data3", 10],
-        ["data4", 45],
-        ["data5", 90]
+        ['data1', 30],
+        ['data2', 120],
+        ['data3', 10],
+        ['data4', 45],
+        ['data5', 90]
       ],
-      type: "pie",
+      type: 'pie',
       // override component onclick event handler
       // bind is required for data events
       onclick: bind(this, this.onClick)
@@ -289,7 +289,7 @@ export default class ApplicationController extends Controller {
   // oninit chart event
   @action
   setup() {
-    console.log("chart inited");
+    console.log('chart inited');
   }
 
   // data event - triggered when pie slice is clicked
@@ -304,7 +304,7 @@ export default class ApplicationController extends Controller {
 You can use the D3 library in your application by importing it where needed
 
 ```javascript
-import d3 from "d3";
+import d3 from 'd3';
 ```
 
 See the D3
