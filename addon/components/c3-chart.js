@@ -1,122 +1,215 @@
-import Component from "@ember/component";
-import { getProperties } from "@ember/object";
-import { debounce, later } from "@ember/runloop";
-import { isEmpty, isPresent } from "@ember/utils";
-import c3 from "c3";
-import d3 from "d3"; // eslint-disable-line no-unused-vars
+import Component from '@glimmer/component';
+import { isEmpty, isPresent } from '@ember/utils';
+import { guidFor } from '@ember/object/internals';
+import { action } from '@ember/object';
+import { task, timeout } from 'ember-concurrency';
 
-export default Component.extend({
-  tagName: "div",
-  classNames: ["c3-chart-component"],
-  _transition: 350,
-  dtitle: null,
+import c3 from 'c3';
 
-  // triggered when data is updated by didUpdateAttrs
-  _reload() {
-    // didUpdateAttrs() can schedule _reload when the component is being destroyed
-    // this prevents the reload and an error being spit out into the console
-    if (this.isDestroying || this.isDestroyed) {
-      return;
-    }
+// make d3 available for direct use
+import d3 from 'd3'; // eslint-disable-line no-unused-vars
 
-    const chart = this.c3chart;
+/** Class ember-c3 */
+export default class C3Component extends Component {
+  chartId = `c3-${guidFor(this)}`;
 
-    // if data should not be appended
-    // e.g. when using a pie or donut chart
-    if (this.unloadDataBeforeChange) {
-      chart.unload();
+  /**
+   * chart configuration objed
+   * @member {Object}
+   */
+  config = {};
 
-      // default animation is 350ms
-      // data must by loaded after unload animation (350)
-      // or chart will not properly render
+  /**
+   * Delay time to refresh c3 chart
+   * @member {number}
+   */
+  _transition = 350;
 
-      later(() => {
-        chart.load(
-          // data, axis, color are the only mutable elements
-          this.data,
-          this.axis,
-          this.color
-        );
-      }, this.transition || this._transition);
-    } else {
-      chart.load(this.data, this.axis, this.color);
-    }
-  },
+  /**
+   * Dynamic title for chart
+   * @member {String}
+   */
+  dtitle = null;
 
-  // triggered when component added by didInsertElement
-  _setupc3() {
-    let properties = [
-      "data", "line", "bar", "pie", "donut", "gauge",
-      "grid", "legend", "tooltip", "subchart", "zoom",
-      "point", "axis", "regions", "area", "size",
-      "padding", "color", "transition", "title", "interaction"
-    ];
+  /**
+   * Create a c3 chart
+   * @param {proxy} Component arguments - this.args proxy
+   */
+  constructor() {
+    super(...arguments);
 
-    // get base c3 properties
-    const chartConfig = getProperties(this, properties);
+    // bind c3 chart to component's element
+    this.config.bindto = this.chartId;
 
-    // If no data passed, set dummy
+    // if data is not provided use dummy
     // data to prevent rendering errors
-    // A console error may still be generated
-    // but it won't crash ember
-    let cd = chartConfig.data;
-    if (isEmpty(cd))
-      chartConfig.data = {
-        xs: null,
-        columns: [],
-        empty: { label: { text: "No Data" } }
-      };
-    else if (
-      isEmpty(cd.url) &&
-      isEmpty(cd.json) &&
-      isEmpty(cd.rows) &&
-      isEmpty(cd.columns)
-    ) {
-      chartConfig.data.columns = [];
-      chartConfig.data.empty = { label: { text: "No Data" } };
-    }
+    const dummyData = {
+      xs: null,
+      columns: [],
+      empty: { label: { text: 'No Data' } }
+    };
 
-    // bind c3 chart to component's DOM element
-    chartConfig.bindto = this.element;
+    // test permutations of data passing
+    const test = this.args.data;
+    const dataExists = test?.url || test?.json || test?.rows || test?.columns;
 
-    // emit chart events to controller
-    chartConfig.oninit = () => this.oninit && this.oninit();
-    chartConfig.onrendered = () =>
-      this.onrendered && this.onrendered(this.c3chart);
-    chartConfig.onmouseover = () =>
-      this.onmouseover && this.onmouseover(this.c3chart);
-    chartConfig.onmouseout = () =>
-      this.onmouseout && this.onmouseout(this.c3chart);
-    chartConfig.onresize = () => this.onresize && this.onresize(this.c3chart);
-    chartConfig.onresized = () =>
-      this.onresized && this.onresized(this.c3chart);
+    if (!dataExists) {
+      this.config.data = dummyData;
+    } else this.config.data = this.args.data;
 
-    // render the initial chart
-    this.set("c3chart", c3.generate(chartConfig));
-  },
+    this.config.axis = this.args.axis;
+    this.config.color = this.args.color;
 
-  didInsertElement() {
-    this._super(...arguments);
-    this._setupc3();
-  },
+    // chart type arguments
+    this.config.color = this.args.color;
+    this.config.line = this.args.line;
+    this.config.bar = this.args.bar;
+    this.config.pie = this.args.pie;
+    this.config.donut = this.args.donut;
+    this.config.guage = this.args.gauge;
 
-  didUpdateAttrs() {
-    this._super(...arguments);
-    
-    // dynamic title property
-    if (isPresent(this.dtitle)) {
-      document.querySelector(`#${this.element.id} .c3-title`).innerHTML = this.dtitle.text;
-      this.c3chart.flush();
-    }
+    // chart parameter arguments
+    this.config.grid = this.args.grid;
+    this.config.legend = this.args.legend;
+    this.config.tooltip = this.args.tooltip;
+    this.config.subchart = this.args.subchart;
+    this.config.zoom = this.args.zoom;
+    this.config.point = this.args.point;
+    this.config.regions = this.args.regions;
+    this.config.area = this.args.area;
+    this.config.size = this.args.size;
+    this.config.padding = this.args.padding;
 
-    // don't refresh other properties if they cause side effects
-    if (isEmpty(this.dtitle) || (isPresent(this.dtitle) && this.dtitle.refresh))
-      debounce(this, this._reload, 360);
-  },
+    this.config.title = this.args.title;
+    this.config.interaction = this.args.interaction;
 
-  // execute teardown method
-  willDestroyElement() {
-    this._super(...arguments);
-    this.c3chart.destroy();
+    // animation tranisiton - we handle transistion not c3
+    // same funtionality as the c3 transition setting
+    this.transition = this.args.transition;
+
+    // emit chart events to host app
+
+    // oninit
+    this.config.oninit = () => this.args.oninit && this.args.oninit();
+
+    // onrendered
+    this.config.onrendered = () =>
+      this.args.onrendered && this.args.onrendered(this.chartId);
+
+    // onmouseover
+    this.config.onmouseover = () =>
+      this.args.onmouseover && this.args.onmouseover(this.chartId);
+
+    // onmouseout
+    this.config.onmouseout = () =>
+      this.args.onmouseout && this.args.onmouseout(this.chartId);
+
+    // onresize
+    this.config.onresize = () =>
+      this.args.onresize && this.args.onresize(this.chartId);
+
+    // onresized
+    this.config.onresized = () =>
+      this.args.onresized && this.args.onresized(this.chartId);
   }
-});
+
+  /**
+   * Get the graph data
+   * @return {object} Graph data
+   */
+  get data() {
+    return this.args.data;
+  }
+
+  /**
+   * Get the graph's color object
+   * @return {oject} Graph axis
+   */
+  get axis() {
+    return this.args.axis;
+  }
+
+  /**
+   * Get the graph's color object
+   * @return {number} Graph color(s)
+   */
+  get color() {
+    return this.args.color;
+  }
+
+  /**
+   * Get the dynamic title argument
+   *
+   * Used to set graph title
+   *
+   * {
+   *  title: <String>,
+   *  refresh: <Boolean>
+   * }
+   *
+   * @return {object} Dynamic title
+   */
+  get title() {
+    return this.args.dtitle;
+  }
+
+  /**
+   * Called from {{did-insert}} modifier
+   */
+  @action
+  setupChart() {
+    // bind to component's element
+    this.config.bindto = document.getElementById(this.chartId);
+
+    // generate the chart
+    this.chart = c3.generate(this.config);
+
+    // provide chart obj - args is proxy, no optional chaining
+    if (this.args.c3Chart) this.args.c3Chart(this.chart);
+  }
+
+  /**
+   * Called from {{did-update}} modifier
+   * updates on changes to data, axis, color or dtitle
+   */
+  @action
+  refreshChart() {
+    // c3 chart title
+    const element = document.querySelector(`#${this.chartId} .c3-title`);
+
+    // change title to this.args.dtitle present
+    if (isPresent(this.title)) {
+      element.innerHTML = this.title.text;
+      this.chart.flush();
+    }
+
+    // do not refresh other properties if they cause side effects
+    if (isEmpty(this.title) || (isPresent(this.title) && this.title.refresh))
+      this.chartReload.perform();
+  }
+
+  /**
+   * unloads/reloads data using C3 methods
+   */
+  @task *chartReload() {
+    // if data should not be appended
+    if (this.unloadDataBeforeChange) {
+      this.chart.unload();
+
+      // user specified or internal time
+      const time = this.transition ?? this._transition;
+      yield timeout(time);
+
+      // data, axis, color are the only mutable elements
+      this.chart.load(this.data, this.axis, this.color);
+    } else this.chart.load(this.data, this.axis, this.color);
+  }
+
+  /**
+   * Component life-cycle hook
+   */
+  willDestroy() {
+    super.willDestroy(...arguments);
+    this.chart.destroy();
+  }
+}

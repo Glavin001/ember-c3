@@ -18,6 +18,11 @@ export default class ChartObjController extends Controller {
     groups: [["data1", "data2"]]
   };
 
+  // get chart object
+  @action
+  getChart(chart) {
+    this.chart = chart;
+  }
 
   @action
   toggleLegend() {
@@ -74,7 +79,7 @@ export default class ChartObjController extends Controller {
     c.transform("spline", "data3");
     c.transform("line", "data4");
     c.transform("area", "data6");
-    this.set('chartTitle', 'Chart Object - Combo Chart')
+    this.set('chartTitle', 'Chart Object - Combo Chart');
   }
 
   @action

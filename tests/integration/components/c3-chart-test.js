@@ -162,7 +162,7 @@ module('Integration | Component | c3 chart', function (hooks) {
   /********** c3 chart events *********/
 
   test('triggers action on chart init', async function (assert) {
-    assert.expect(3);
+    assert.expect(4);
 
     this.set('data', {
       columns: [
@@ -182,7 +182,7 @@ module('Integration | Component | c3 chart', function (hooks) {
                         @gauge={{this.gauge}} 
                         @color={{this.color}} 
                         @size={{this.size}}
-                        @onmouseover={{action chartAction}}
+                        @oninit={{this.chartAction}}
                          />`);
 
     assert.dom('svg').exists();
@@ -211,7 +211,7 @@ module('Integration | Component | c3 chart', function (hooks) {
                         @gauge={{this.gauge}} 
                         @color={{this.color}} 
                         @size={{this.size}}
-                        @onrender={{action chartAction}}
+                        @onrender={{this.chartAction}}
                          />`);
 
     assert.dom('svg').exists();
@@ -233,7 +233,7 @@ module('Integration | Component | c3 chart', function (hooks) {
     this.set('chartAction', (chart) => {
       assert.strictEqual(
         typeof chart,
-        'object',
+        'string',
         'onmouseover action is called'
       );
     });
@@ -244,7 +244,7 @@ module('Integration | Component | c3 chart', function (hooks) {
                         @guage={{this.guage}} 
                         @color={{this.color}} 
                         @size={{this.size}}
-                        @onmouseover={{action chartAction}}
+                        @onmouseover={{this.chartAction}}
                          />`);
 
     assert.dom('svg').exists();
@@ -266,7 +266,7 @@ module('Integration | Component | c3 chart', function (hooks) {
     });
 
     this.set('chartAction', (chart) => {
-      assert.strictEqual(typeof chart, 'object', 'onmouseout action is called');
+      assert.strictEqual(typeof chart, 'string', 'onmouseout action is called');
     });
 
     await render(hbs`<C3Chart 
@@ -275,7 +275,7 @@ module('Integration | Component | c3 chart', function (hooks) {
                         @gauge={{this.gauge}} 
                         @color={{this.color}} 
                         @size={{this.size}}
-                        @onmouseout={{action chartAction}}
+                        @onmouseout={{this.chartAction}}
                          />`);
 
     assert.dom('svg').exists();

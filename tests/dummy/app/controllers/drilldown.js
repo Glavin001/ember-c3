@@ -67,6 +67,12 @@ export default class DrilldownController extends Controller {
   })
   unloadYellow;
 
+  // get chart object
+  @action
+  getChart(chart) {
+    this.chart = chart;
+  }
+
   // iris data from R
   @computed
   get data() {

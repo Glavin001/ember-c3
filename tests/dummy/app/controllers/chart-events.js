@@ -57,25 +57,25 @@ export default class ChartEventsController extends Controller {
   }
 
   @action
-  mouseover(chart) {
-    document.getElementById(chart.element.id).classList.remove("demo-box");
+  mouseover(chartId) {
+    document.getElementById(chartId).classList.remove("demo-box");
     document
-      .getElementById(chart.element.id)
+      .getElementById(chartId)
       .classList.add("demo-chart-selected");
     this.set("pageTitle", "YTD Sales");
   }
 
   @action
-  mouseout(chart) {
-    document.getElementById(chart.element.id).classList.add("demo-box");
+  mouseout(chartId) {
+    document.getElementById(chartId).classList.add("demo-box");
     document
-      .getElementById(chart.element.id)
+      .getElementById(chartId)
       .classList.remove("demo-chart-selected");
     this.set("pageTitle", "C3 Chart Events");
   }
 
   @action
-  resizing /* chart */() {
+  resizing(/* chartId */) {
     this.set("message", "adjusting...");
     later(() => this.set("message", ""), 700);
   }
