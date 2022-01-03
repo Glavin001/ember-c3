@@ -68,7 +68,7 @@ export default class C3Component extends Component {
       // else use passed data argument
       if (!isSourcePresent) {
         dataObject.columns = [];
-        dataObject.empty == { label: { text: 'No Data' } };
+        dataObject.empty = { label: { text: 'No Data' } };
         this.config.data = dataObject;
       } else this.config.data = this.data;
     }
