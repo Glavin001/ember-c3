@@ -10,13 +10,13 @@ module('Integration | Component | c3 chart', function (hooks) {
   test('it renders a pie chart', async function (assert) {
     assert.expect(4);
 
-    this.set('data', {
+    this.data = {
       columns: [
         ['data1', 30],
         ['data2', 120]
       ],
       type: 'pie'
-    });
+    };
 
     await render(hbs`<C3Chart @data={{this.data}} />`);
 
@@ -29,16 +29,16 @@ module('Integration | Component | c3 chart', function (hooks) {
   test('it renders a donut chart', async function (assert) {
     assert.expect(4);
 
-    this.set('data', {
+    this.data = {
       columns: [
         ['data1', 30],
         ['data2', 120],
         ['data3', 95]
       ],
       type: 'donut'
-    });
+    };
 
-    this.set('donut', { title: 'Iris Petal Width' });
+    this.donut = { title: 'Iris Petal Width' };
 
     await render(hbs`<C3Chart @data={{this.data}} @donut={{this.donut}} />`);
 
@@ -54,14 +54,12 @@ module('Integration | Component | c3 chart', function (hooks) {
   test('it renders a gauge chart', async function (assert) {
     assert.expect(5);
 
-    this.set('data', {
+    this.data = {
       columns: [['data', 91.4]],
       type: 'gauge'
-    });
+    };
 
-    this.set('title', {
-      text: 'Percent Complete'
-    });
+    this.title = { text: 'Percent Complete' };
 
     await render(
       hbs`<C3Chart @data={{this.data}} @title={{this.title}} @gauge={{this.gauge}} @color={{this.color}} @size={{this.size}} />`
@@ -77,7 +75,7 @@ module('Integration | Component | c3 chart', function (hooks) {
   test('it renders a timeseries chart', async function (assert) {
     assert.expect(5);
 
-    this.set('data', {
+    this.data = {
       x: 'x',
       columns: [
         [
@@ -92,7 +90,7 @@ module('Integration | Component | c3 chart', function (hooks) {
         ['data1', 30, 200, 100, 400, 150, 250],
         ['data2', 130, 340, 200, 500, 250, 350]
       ]
-    });
+    };
 
     this.set('axis', {
       x: {
@@ -125,23 +123,21 @@ module('Integration | Component | c3 chart', function (hooks) {
   test('it renders a bar chart', async function (assert) {
     assert.expect(5);
 
-    this.set('data', {
+    this.data = {
       columns: [
         ['data1', 30, 200, 100, 400, 150, 250],
         ['data2', 130, 100, 140, 200, 150, 50]
       ],
       type: 'bar'
-    });
+    };
 
-    this.set('bar', {
+    this.bar = {
       width: {
         ratio: 0.5
       }
-    });
+    };
 
-    this.set('title', {
-      text: 'Regional Sales'
-    });
+    this.title = { text: 'Regional Sales' };
 
     await render(
       hbs`<C3Chart 
@@ -164,17 +160,17 @@ module('Integration | Component | c3 chart', function (hooks) {
   test('triggers action on chart init', async function (assert) {
     assert.expect(4);
 
-    this.set('data', {
+    this.data = {
       columns: [
         ['data1', 30, 200, 100, 400, 150, 250],
         ['data2', 130, 100, 140, 200, 150, 50]
       ],
       type: 'bar'
-    });
+    };
 
-    this.set('chartAction', () => {
+    this.chartAction = () => {
       assert.ok(true, 'onintit action is called');
-    });
+    };
 
     await render(hbs`<C3Chart 
                         @data={{this.data}} 
@@ -193,17 +189,17 @@ module('Integration | Component | c3 chart', function (hooks) {
   test('triggers action on chart render', async function (assert) {
     assert.expect(3);
 
-    this.set('data', {
+    this.data = {
       columns: [
         ['data1', 30, 200, 100, 400, 150, 250],
         ['data2', 130, 100, 140, 200, 150, 50]
       ],
       type: 'bar'
-    });
+    };
 
-    this.set('chartAction', (chart) => {
+    this.chartAction = chart => {
       assert.strictEqual(typeof chart, 'object', 'onrender action is called');
-    });
+    };
 
     await render(hbs`<C3Chart 
                         @data={{this.data}} 
@@ -222,21 +218,21 @@ module('Integration | Component | c3 chart', function (hooks) {
   test('triggers action on chart mouseover', async function (assert) {
     assert.expect(4);
 
-    this.set('data', {
+    this.data = {
       columns: [
         ['data1', 30, 200, 100, 400, 150, 250],
         ['data2', 130, 100, 140, 200, 150, 50]
       ],
       type: 'bar'
-    });
+    };
 
-    this.set('chartAction', (chart) => {
+    this.chartAction = chart => {
       assert.strictEqual(
         typeof chart,
         'string',
         'onmouseover action is called'
       );
-    });
+    };
 
     await render(hbs`<C3Chart 
                         @data={{this.data}} 
@@ -257,17 +253,17 @@ module('Integration | Component | c3 chart', function (hooks) {
   test('triggers action on chart mouseout', async function (assert) {
     assert.expect(4);
 
-    this.set('data', {
+    this.data = {
       columns: [
         ['data1', 30, 200, 100, 400, 150, 250],
         ['data2', 130, 100, 140, 200, 150, 50]
       ],
       type: 'bar'
-    });
+    };
 
-    this.set('chartAction', (chart) => {
+    this.chartAction = chart => {
       assert.strictEqual(typeof chart, 'string', 'onmouseout action is called');
-    });
+    };
 
     await render(hbs`<C3Chart 
                         @data={{this.data}} 
@@ -295,18 +291,18 @@ module('Integration | Component | c3 chart', function (hooks) {
   test('data onClick', async function (assert) {
     assert.expect(4);
 
-    this.set('chartAction', () => {
+    this.chartAction = () => {
       assert.ok(true, 'onclick action is called');
-    });
+    };
 
-    this.set('data', {
+    this.data = {
       columns: [
         ['data1', 30],
         ['data2', 120]
       ],
       type: 'pie',
       onclick: bind(this, this.chartAction)
-    });
+    };
 
     await render(hbs`<C3Chart @data={{this.data}} />`);
     // debugger
@@ -320,18 +316,18 @@ module('Integration | Component | c3 chart', function (hooks) {
   test('data onmouseover', async function (assert) {
     assert.expect(4);
 
-    this.set('chartAction', () => {
+    this.chartAction = () => {
       assert.ok(true, 'onmouseover action is called');
-    });
+    };
 
-    this.set('data', {
+    this.data = {
       columns: [
         ['data1', 30],
         ['data2', 120]
       ],
       type: 'pie',
       onmouseover: bind(this, this.chartAction)
-    });
+    };
 
     await render(hbs`<C3Chart @data={{this.data}} />`);
 
@@ -345,18 +341,18 @@ module('Integration | Component | c3 chart', function (hooks) {
   test('data onmouseout', async function (assert) {
     assert.expect(4);
 
-    this.set('chartAction', () => {
+    this.chartAction = () => {
       assert.ok(true, 'onmouseout action is called');
-    });
+    };
 
-    this.set('data', {
+    this.data = {
       columns: [
         ['data1', 30],
         ['data2', 120]
       ],
       type: 'pie',
       onmouseout: bind(this, this.chartAction)
-    });
+    };
 
     await render(hbs`<C3Chart @data={{this.data}} />`);
 
@@ -372,25 +368,25 @@ module('Integration | Component | c3 chart', function (hooks) {
   test('Can dynamically change the title', async function (assert) {
     assert.expect(7);
 
-    this.set('dtitle', null);
+    this.dtitle = null;
 
-    this.set('chartAction', () => {
+    this.chartAction = () => {
       this.set('dtitle', { text: 'New Title', refresh: false });
       assert.ok(true, 'onclick action is called');
-    });
+    };
 
-    this.set('data', {
+    this.data = {
       columns: [
         ['data1', 30],
         ['data2', 120]
       ],
       type: 'pie',
       onclick: bind(this, this.chartAction)
-    });
+    };
 
-    this.set('title', {
+    this.title = {
       text: 'Percent Complete'
-    });
+    };
 
     await render(hbs`<C3Chart @data={{this.data}} @title={{this.title}} @dtitle={{this.dtitle}} />`);
 
