@@ -155,6 +155,52 @@ module('Integration | Component | c3 chart', function (hooks) {
     assert.dom('svg g').exists({ count: 67 }, 'svg g elements');
   });
 
+    /********** missing data  *********/
+
+    test('it handles missing data object', async function (assert) {
+      assert.expect(4);
+  
+      this.title = {
+        text: 'No data object'
+      };
+  
+      await render(
+        hbs`<C3Chart 
+              @title={{this.title}} 
+            />`
+      );
+  
+      // debugger;
+      assert.dom('svg').exists();
+      assert.dom('.c3-title').exists('Has title text');
+      assert.dom('.c3-title').hasText('No data object', 'Text matches title');
+      assert.dom('.c3-text.c3-empty').hasText('No Data');
+    });
+
+    test('it handles data oject without data source', async function (assert) {
+      assert.expect(4);
+  
+      this.data = {
+        type: 'pie'
+      };
+  
+      this.title = {
+        text: 'No data source'
+      };
+
+      await render(
+        hbs`<C3Chart 
+              @data={{this.data}} 
+              @title={{this.title}} 
+            />`
+      );
+
+      assert.dom('svg').exists();
+      assert.dom('.c3-title').exists('Has title text');
+      assert.dom('.c3-title').hasText('No data source', 'Text matches title');
+      assert.dom('.c3-text.c3-empty').hasText('No Data');
+    });
+  
   /********** c3 chart events *********/
 
   test('triggers action on chart init', async function (assert) {
