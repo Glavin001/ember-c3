@@ -12,9 +12,14 @@ Ember component library for
 
 ## Compatibility
 
-- Ember.js v3.13 or above
+- Ember.js v3.13 to v3.28 (see note)
 - Ember CLI v2.13 or above
 - Node.js v10 or above
+
+`ember-c3` is comaptaible with both Embroider safe and optimized modes.
+
+Note: Addon is currently incompatible with Ember 4.x. Ember 4 requires
+`ember-auto-import` v2.x and the addon uses v1.x
 
 ## Installation
 
@@ -61,8 +66,8 @@ The arguments match the corresponding C3 options found in the
 documented, most C3 settings (i.e. bar, axis, size, etc) can be included in the
 data object.
 
-Arguments break out the settings to simplify chart configuration.
-Note: The chart type **must be** assigned in the chart `data` object.
+Arguments break out the settings to simplify chart configuration. Note: The
+chart type **must be** assigned in the chart `data` object.
 
 Properties marked with an asterisk (\*) will update the chart when the property
 changes. See examples in the dummy app.
@@ -247,15 +252,15 @@ Chart events supported by `ember-c3`.
 
 Functions will receive the chart's `div` element id which can be used to modify
 or decorate the chart. The `@oninit` event does not receive the id because the
-chart has not been created yet. See how chart events can be used in the dummy app. 
+chart has not been created yet. See how chart events can be used in the dummy
+app.
 
 C3 data events such as `onclick`, `onmouseover` and `onmouseout` are overridden
 in the chart configuration or data settings. Data events supply the data names
 and values based on mouse location.
 
-An data events example is shown below. Note that data functions
-require `bind`. This example uses native classes. See the dummy app for more
-examples.
+An data events example is shown below. Note that data functions require `bind`.
+This example uses native classes. See the dummy app for more examples.
 
 ```handlebars
 {{! templates/application.hbs }}
