@@ -275,7 +275,7 @@ module('Integration | Component | c3 chart', function (hooks) {
     this.chartAction = chart => {
       assert.strictEqual(
         typeof chart,
-        'string',
+        'object',
         'onmouseover action is called'
       );
     };
@@ -308,7 +308,7 @@ module('Integration | Component | c3 chart', function (hooks) {
     };
 
     this.chartAction = chart => {
-      assert.strictEqual(typeof chart, 'string', 'onmouseout action is called');
+      assert.strictEqual(typeof chart, 'object', 'onmouseout action is called');
     };
 
     await render(hbs`<C3Chart 

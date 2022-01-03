@@ -234,8 +234,8 @@ export default class ApplicationController extends Controller {
 ### C3 Events
 
 C3 emits two types of events - [chart](https://c3js.org/reference.html#oninit)
-and [data](https://c3js.org/reference.html#data-onclick) events. Chart event
-properties are assigned a closure action using component arguments.
+and [data](https://c3js.org/reference.html#data-onclick) events. Chart events
+are assigned callback functions using component arguments.
 
 Data events **must** be assigned to an `action` in the data object.
 
@@ -250,17 +250,17 @@ Chart events supported by `ember-c3`.
 | onresize    | Triggered when screen is resized            | @onresize={{this.resize}}       |
 | onresized   | Triggered when resizing is completed        | @onresized={{this.resized}}     |
 
-Functions will receive the chart's `div` element id which can be used to modify
-or decorate the chart. The `@oninit` event does not receive the id because the
-chart has not been created yet. See how chart events can be used in the dummy
-app.
+Callback functions will receive the `C3` chart object which can be used to
+modify the chart or as data source for other operations. The `@oninit` event
+does not receive the chart object because the chart has not been created yet.
+See the chart events example can be used in the dummy app.
 
-C3 data events such as `onclick`, `onmouseover` and `onmouseout` are overridden
-in the chart configuration or data settings. Data events supply the data names
-and values based on mouse location.
+C3 data events such as `onclick`, `onmouseover` and `onmouseout` are assgined
+callback functions in the chart configuration or data settings. Data events
+supply the data names and values based on mouse location.
 
-An data events example is shown below. Note that data functions require `bind`.
-This example uses native classes. See the dummy app for more examples.
+A data event example is shown below. Note that data callbacks require `bind`.
+See the dummy app for more examples.
 
 ```handlebars
 {{! templates/application.hbs }}

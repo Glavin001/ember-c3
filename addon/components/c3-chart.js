@@ -110,23 +110,23 @@ export default class C3Component extends Component {
 
     // onrendered
     this.config.onrendered = () =>
-      this.args.onrendered && this.args.onrendered(this.chartId);
+      this.args.onrendered && this.args.onrendered(this.chart);
 
     // onmouseover
     this.config.onmouseover = () =>
-      this.args.onmouseover && this.args.onmouseover(this.chartId);
+      this.args.onmouseover && this.args.onmouseover(this.chart);
 
     // onmouseout
     this.config.onmouseout = () =>
-      this.args.onmouseout && this.args.onmouseout(this.chartId);
+      this.args.onmouseout && this.args.onmouseout(this.chart);
 
     // onresize
     this.config.onresize = () =>
-      this.args.onresize && this.args.onresize(this.chartId);
+      this.args.onresize && this.args.onresize(this.chart);
 
     // onresized
     this.config.onresized = () =>
-      this.args.onresized && this.args.onresized(this.chartId);
+      this.args.onresized && this.args.onresized(this.chart);
   }
 
   /**

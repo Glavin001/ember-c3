@@ -62,21 +62,23 @@ export default class ChartEventsController extends Controller {
   }
 
   @action
-  mouseover(chartId) {
+  mouseover(chart) {
+    const chartId = chart.element.id;
     document.getElementById(chartId).classList.remove('demo-box');
     document.getElementById(chartId).classList.add('demo-chart-selected');
     this.pageTitle = 'YTD Sales';
   }
 
   @action
-  mouseout(chartId) {
+  mouseout(chart) {
+    const chartId = chart.element.id;
     document.getElementById(chartId).classList.add('demo-box');
     document.getElementById(chartId).classList.remove('demo-chart-selected');
     this.pageTitle = 'C3 Chart Events';
   }
 
   // chart resizing
-  @task *resizing(/* chartId */) {
+  @task *resizing(/* chart */) {
     this.message = 'adjusting...';
     yield timeout(700);
     this.message = '';
