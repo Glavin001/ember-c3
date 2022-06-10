@@ -41,7 +41,7 @@
     "test": "ember test",
     "test:all": "ember try:each",
     "deploy": "ember build && ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\" && git push origin gh-pages:gh-pages",
-    "release": "standard-version"
+    "release": "standard-version  && git push --follow-tags"
   },
   "dependencies": {
     "@ember/render-modifiers": "^2.0.2",
