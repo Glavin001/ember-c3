@@ -1,11 +1,11 @@
 import Controller from '@ember/controller';
 import { task, timeout } from 'ember-concurrency';
-import { notifyPropertyChange } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 export default class TimeseriesController extends Controller {
   chart = null;
 
-  data = {
+  @tracked data = {
     x: 'x',
     columns: [
       [
@@ -42,6 +42,8 @@ export default class TimeseriesController extends Controller {
     this.data.columns.push(['data3', 400, 500, 450, 700, 600, 500]);
     this.data.columns.push(['data4', 300, 235, 250, 750, 675, 590]);
     this.data.columns.push(['data5', 100, 345, 400, 650, 500, 550]);
-    notifyPropertyChange(this, 'data');
+
+    // Trigger an update.
+    this.data = this.data;
   }
 }

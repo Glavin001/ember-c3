@@ -10,7 +10,7 @@ export default class ChartObjController extends Controller {
   @tracked graphVisible = true;
   @tracked legendVisible = true;
 
-  data = this.data || {
+  data = {
     columns: [
       ["data1", 30, 20, 50, 40, 60, 50],
       ["data2", 200, 130, 90, 240, 130, 220],

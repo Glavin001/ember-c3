@@ -1,9 +1,9 @@
 import Controller from '@ember/controller';
 import { task, timeout } from 'ember-concurrency';
-import { notifyPropertyChange } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 export default class DonutController extends Controller {
-  data = {
+  @tracked data = {
     columns: [
       ['data1', 30],
       ['data2', 120]
@@ -19,11 +19,15 @@ export default class DonutController extends Controller {
   @task
   *animateChart() {
     this.data.columns.pop();
-    notifyPropertyChange(this, 'data');
+
+    // Trigger an update.
+    this.data = this.data;
+
     this.data.columns.pop();
-    notifyPropertyChange(this, 'data');
+    this.data = this.data;
+
     this.data.columns.pop();
-    notifyPropertyChange(this, 'data');
+    this.data = this.data;
 
     yield timeout(500);
 
@@ -57,6 +61,6 @@ export default class DonutController extends Controller {
           2.3, 1.8
         ]);
 
-        notifyPropertyChange(this, 'data');
+    this.data = this.data;
   }
 }

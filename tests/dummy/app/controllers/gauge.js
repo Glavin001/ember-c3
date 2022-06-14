@@ -1,10 +1,11 @@
 import Controller from '@ember/controller';
 import { task, timeout } from 'ember-concurrency';
-import { set } from '@ember/object';
-import { notifyPropertyChange } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 export default class GuageController extends Controller {
-  data = {
+  // Could also use addons: tracked-builtins
+  // or tracked-maps-and-sets
+  @tracked data = {
     columns: [['data', 91.4]],
     type: 'gauge'
   };
@@ -29,27 +30,25 @@ export default class GuageController extends Controller {
   *animateChart() {
     yield timeout(500);
 
-    set(this, 'data.columns', [['data', 10]]);
-    notifyPropertyChange(this, 'data');
+    this.data.columns = [['data', 10]];
 
+    // Trigger an update.
+    this.data = this.data;
     yield timeout(500);
 
-    set(this, 'data.columns', [['data', 50]]);
-    notifyPropertyChange(this, 'data');
-
+    this.data.columns = [['data', 50]];
+    this.data = this.data;
     yield timeout(500);
 
-    set(this, 'data.columns', [['data', 70]]);
-    notifyPropertyChange(this, 'data');
-
+    this.data.columns = [['data', 70]];
+    this.data = this.data;
     yield timeout(500);
 
-    set(this, 'data.columns', [['data', 0]]);
-    notifyPropertyChange(this, 'data');
-
+    this.data.columns = [['data', 0]];
+    this.data = this.data;
     yield timeout(500);
 
-    set(this, 'data.columns', [['data', 100]]);
-    notifyPropertyChange(this, 'data');
+    this.data.columns = [['data', 100]];
+    this.data = this.data;
   }
 }

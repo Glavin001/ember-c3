@@ -1,13 +1,13 @@
 import { bind } from '@ember/runloop';
 import Controller from '@ember/controller';
 import { task, timeout } from 'ember-concurrency';
-import { notifyPropertyChange } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 export default class PieController extends Controller {
   chart = null;
 
   // iris data from R
-  data = this.data || {
+  @tracked data = {
     columns: [
       ['data1', 30],
       ['data2', 120]
@@ -61,6 +61,7 @@ export default class PieController extends Controller {
           2.3, 1.8
         ]);
 
-        notifyPropertyChange(this, 'data');
+    // Trigger an update.
+    this.data = this.data;
   }
 }
