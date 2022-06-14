@@ -14,7 +14,7 @@ Ember component library for
 
 - Ember.js v3.13 to v3.28 (see note)
 - Ember CLI v2.13 or above
-- Node.js v10 or above
+- Node.js v14 or above
 
 `ember-c3` is comaptaible with both Embroider safe and optimized modes.
 
