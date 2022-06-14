@@ -31,19 +31,13 @@
   },
   "scripts": {
     "build": "ember build",
-    "changelog": "auto-changelog -u --output CHANGELOG.md --commit-limit false",
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
     "start": "ember serve",
     "test": "ember test",
     "test:all": "ember try:each",
     "deploy": "ember build && ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\" && git push origin gh-pages:gh-pages",
-    "version": "auto-changelog -p && git add CHANGELOG.md"
-  },
-  "auto-changelog": {
-    "output": "CHANGELOG.md",
-    "unreleased": true,
-    "commitLimit": false
+    "release": "standard-version && git push --follow-tags"
   },
   "dependencies": {
     "broccoli-funnel": "^2.0.2",
@@ -56,7 +50,6 @@
   "devDependencies": {
     "@ember/jquery": "^1.1.0",
     "@ember/optional-features": "^1.1.0",
-    "auto-changelog": "^1.16.2",
     "babel-eslint": "^8.0.0",
     "bootstrap": "^4.3.1",
     "broccoli-asset-rev": "^3.0.0",
@@ -88,8 +81,9 @@
     "eslint-plugin-node": "^10.0.0",
     "loader.js": "^4.7.0",
     "popper.js": "^1.16.0",
+    "qunit-dom": "^1.6.0",
     "sass": "^1.23.7",
-    "qunit-dom": "^1.6.0"
+    "standard-version": "^9.5.0"
   },
   "engines": {
     "node": "8.* || >= 10.*"
