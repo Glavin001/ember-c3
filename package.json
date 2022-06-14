@@ -34,7 +34,6 @@
   },
   "scripts": {
     "build": "ember build --environment=production",
-    "changelog": "auto-changelog -u --output CHANGELOG.md --commit-limit false",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel \"lint:!(fix)\"",
     "lint:fix": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*:fix",
     "lint:hbs": "ember-template-lint .",
