@@ -1,15 +1,16 @@
-import { computed } from "@ember/object";
-import Controller from "@ember/controller";
-import { later } from "@ember/runloop";
+import { action } from '@ember/object';
+import Controller from '@ember/controller';
+import { tracked } from '@glimmer/tracking';
+import { task, timeout } from 'ember-concurrency';
 
 export default class ChartEventsController extends Controller {
-  pageTitle = "C3 Chart Events";
-  message = null;
+  @tracked pageTitle = 'C3 Chart Events';
+  @tracked message;
 
   axis = {
     x: {
-      type: "category",
-      categories: ["Central", "East", "West"],
+      type: 'category',
+      categories: ['Central', 'East', 'West'],
       rotated: true
     }
   };
@@ -20,7 +21,7 @@ export default class ChartEventsController extends Controller {
 
   grid = {
     y: {
-      lines: [{ value: 900, text: "Yearly Target" }]
+      lines: [{ value: 900, text: 'Yearly Target' }]
     }
   };
 
@@ -32,46 +33,54 @@ export default class ChartEventsController extends Controller {
     grouped: false
   };
 
-  title = { text: "Regional Sales" };
+  title = { text: 'Regional Sales' };
   padding = { top: 20, bottom: 5, right: 15 };
 
   jsonData = null;
 
-  @computed
   get data() {
     return {
-      json: this.jsonData,
-      type: "bar",
+      json: this.model,
+      type: 'bar',
       keys: {
-        x: "region",
-        value: ["total"]
+        x: 'region',
+        value: ['total']
       }
     };
   }
 
-  setup() {
-    this.set("pageTitle", "Chart Events - loading...");
-    later(this, () => this.set("pageTitle", "C3 Chart Events"), 500);
+  // get chart object from component
+  @action
+  getChart(chart) {
+    this.chart = chart;
   }
 
+  @task *setup() {
+    this.message = 'loading...';
+    yield timeout(1200);
+    this.message = '';
+  }
+
+  @action
   mouseover(chart) {
-    document.getElementById(chart.element.id).classList.remove("demo-box");
-    document
-      .getElementById(chart.element.id)
-      .classList.add("demo-chart-selected");
-    this.set("pageTitle", "YTD Sales");
+    const chartId = chart.element.id;
+    document.getElementById(chartId).classList.remove('demo-box');
+    document.getElementById(chartId).classList.add('demo-chart-selected');
+    this.pageTitle = 'YTD Sales';
   }
 
+  @action
   mouseout(chart) {
-    document.getElementById(chart.element.id).classList.add("demo-box");
-    document
-      .getElementById(chart.element.id)
-      .classList.remove("demo-chart-selected");
-    this.set("pageTitle", "C3 Chart Events");
+    const chartId = chart.element.id;
+    document.getElementById(chartId).classList.add('demo-box');
+    document.getElementById(chartId).classList.remove('demo-chart-selected');
+    this.pageTitle = 'C3 Chart Events';
   }
 
-  resizing /* chart */() {
-    this.set("message", "adjusting...");
-    later(() => this.set("message", ""), 700);
+  // chart resizing
+  @task *resizing(/* chart */) {
+    this.message = 'adjusting...';
+    yield timeout(700);
+    this.message = '';
   }
 }

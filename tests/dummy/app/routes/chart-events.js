@@ -2,21 +2,13 @@ import Route from "@ember/routing/route";
 
 export default class ChartEventsRoute extends Route {
   model() {
-    return data;
-  }
-
-  setupController(controller, model) {
-    super.setupController(controller, model);
-
-    let data = model.map(function(record){
-      return { region: record.region, item: record.item, total: record.total}
-    })
-
-    controller.set("jsonData", data);
+    return data.map(record => {
+      return { region: record.region, item: record.item, total: record.total };
+    });
   }
 }
 
-let data = [
+const data = [
   {
     order_date: "1/6/18",
     region: "East",

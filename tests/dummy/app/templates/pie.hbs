@@ -1,4 +1,4 @@
-<CollapsablePanel as |panel|>
+<Panel as |panel|>
   <panel.header>
     <h3>Pie Chart</h3>
   </panel.header>
@@ -7,14 +7,13 @@
     <C3Chart 
       @data={{this.data}} 
       @title={{this.title}} 
-      @padding={{this.padding}} 
-      @c3chart={{this.chart}} 
+      @padding={{this.padding}}
     />
   </panel.content>
-</CollapsablePanel>
+</Panel>
 
 <div class="container mt-2">
-  <button class="btn btn-sm btn-primary" {{on "click" this.animateChart}}>
+  <button type="button" class="btn btn-sm btn-primary" {{on "click" (perform this.animateChart)}}>
     Animate
   </button>
 </div>

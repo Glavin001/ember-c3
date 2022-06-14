@@ -1,16 +1,18 @@
-import Controller from "@ember/controller";
-import { later } from "@ember/runloop";
-import { action } from "@ember/object";
+import Controller from '@ember/controller';
+import { task, timeout } from 'ember-concurrency';
+import { tracked } from '@glimmer/tracking';
 
 export default class GuageController extends Controller {
-  data = {
-    columns: [["data", 91.4]],
-    type: "gauge"
+  // Could also use addons: tracked-builtins
+  // or tracked-maps-and-sets
+  @tracked data = {
+    columns: [['data', 91.4]],
+    type: 'gauge'
   };
 
   // the three color levels for the percentage values
   color = {
-    pattern: ["#FF0000", "#F97600", "#F6C600", "#60B044"],
+    pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'],
     threshold: {
       values: [30, 60, 90, 100]
     }
@@ -21,45 +23,32 @@ export default class GuageController extends Controller {
   };
 
   // chart title
-  title = { text: "Percent complete" };
+  title = { text: 'Percent complete' };
   padding = { top: 20 };
 
- 
-  @action
-  animateChart() {
-    later(this, () => {
-        this.set("data.columns", [["data", 10]]);
-        this.notifyPropertyChange("data");
-      },
-      500
-    );
+  @task
+  *animateChart() {
+    yield timeout(500);
 
-    later(this, () => {
-        this.set("data.columns", [["data", 50]]);
-        this.notifyPropertyChange("data");
-      },
-      1000
-    );
+    this.data.columns = [['data', 10]];
 
-    later(this, () => {
-        this.set("data.columns", [["data", 70]]);
-        this.notifyPropertyChange("data");
-      },
-      1500
-    );
+    // Trigger an update.
+    this.data = this.data;
+    yield timeout(500);
 
-    later(this, () => {
-        this.set("data.columns", [["data", 0]]);
-        this.notifyPropertyChange("data");
-      },
-      2000
-    );
+    this.data.columns = [['data', 50]];
+    this.data = this.data;
+    yield timeout(500);
 
-    later(this, () => {
-        this.set("data.columns", [["data", 100]]);
-        this.notifyPropertyChange("data");
-      },
-      2500
-    );
+    this.data.columns = [['data', 70]];
+    this.data = this.data;
+    yield timeout(500);
+
+    this.data.columns = [['data', 0]];
+    this.data = this.data;
+    yield timeout(500);
+
+    this.data.columns = [['data', 100]];
+    this.data = this.data;
   }
 }

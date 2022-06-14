@@ -1,38 +1,38 @@
-<CollapsablePanel as |panel|>
+<Panel as |panel|>
   <panel.header>
-    <h3>{{chartTitle}}</h3>
+    <h3>{{this.chartTitle}}</h3>
   </panel.header>
 
   <panel.content>
     <C3Chart 
       @data={{this.data}} 
-      @c3chart={{this.chart}} 
+      @c3Chart={{this.getChart}} 
     />
   </panel.content>
-</CollapsablePanel>
+</Panel>
 
 <div class="container mt-2">
-  <button class="btn btn-sm btn-primary" {{on "click" this.toggleLegend}}>
+  <button type="button" class="btn btn-sm btn-primary" {{on "click" this.toggleLegend}}>
     Toggle Legend
   </button>
-  <button class="btn btn-sm btn-primary" {{on "click" this.toggleData3}}>
+  <button type="button" class="btn btn-sm btn-primary" {{on "click" this.toggleData3}}>
     Toggle Data 3
   </button>
-  <button class="btn btn-sm btn-primary" {{on "click" this.transform}}>
+  <button type="button" class="btn btn-sm btn-primary" {{on "click" this.transform}}>
     Transform
   </button>
 
-  {{#if isBar}}
-    <button class="btn btn-sm btn-primary" {{on "click" this.stackBars}}>
+  {{#if this.isBar}}
+    <button type="button" class="btn btn-sm btn-primary" {{on "click" this.stackBars}}>
       Stack Bars
     </button>
   {{else}}
-    <button class="btn btn-sm btn-primary" {{on "click" this.makeCombo}}>
+    <button type="button" class="btn btn-sm btn-primary" {{on "click" this.makeCombo}}>
       Combo
     </button>
   {{/if}}
 
-  <button class="btn btn-sm btn-primary" {{on "click" this.changeColors}}>
+  <button type="button" class="btn btn-sm btn-primary" {{on "click" this.changeColors}}>
     Change Colors
   </button>
 </div>
