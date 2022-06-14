@@ -7,20 +7,13 @@ Ember component library for
 [C3, a D3-based reusable chart library](https://github.com/masayuki0812/c3).
 
 **See the demo [here](http://glavin001.github.io/ember-c3/)**
-
-<!-- Alternatively take a look at [Ember-NVD3](https://github.com/Glavin001/ember-nvd3) for your charting needs. -->
-
 ## Compatibility
 
-- Ember.js v3.13 to v3.28 (see note)
-- Ember CLI v2.13 or above
-- Node.js v14 or above
-- Consuming apps must use ember-auto-import >= 2 (BREAKING CHANGE!)
-
-`ember-c3` is comaptaible with both Embroider safe and optimized modes.
-
-Note: Addon is currently incompatible with Ember 4.x. Ember 4 requires
-`ember-auto-import` v2.x and the addon uses v1.x
+* Ember.js v3.13 or above
+* Ember CLI v2.24 or above
+* Node.js v12 or above
+* ember-auto-import >= 2 (BREAKING CHANGE!)
+* Embroider compatabile
 
 ## Installation
 
