@@ -25,6 +25,7 @@
 /bower.json
 /config/ember-try.js
 /CONTRIBUTING.md
+/CHANGELOG.md
 /ember-cli-build.js
 /testem.js
 /tests/
