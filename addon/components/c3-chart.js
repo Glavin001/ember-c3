@@ -50,7 +50,7 @@ export default class C3Component extends Component {
     };
 
     // Do we have a data object?
-    let dataObject = this.data;
+    const dataObject = this.data;
 
     if (!dataObject) {
       this.config.data = dummyData;

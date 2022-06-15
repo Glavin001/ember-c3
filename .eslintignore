@@ -8,12 +8,17 @@
 
 # dependencies
 /bower_components/
+/node_modules/
 
 # misc
 /coverage/
 !.*
-.*/
 .eslintcache
+.eslintrc.js
+ember-cli-build.js
+testem.js
+/config/
+/tests/
 
 # ember-try
 /.node_modules.ember-try/
