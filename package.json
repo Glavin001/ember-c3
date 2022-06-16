@@ -11,7 +11,7 @@
     "chart",
     "graph"
   ],
-  "homepage": "https://blog.glavin.org/ember-c3/",
+  "homepage": "https://blog.glavin.org/ember-c3",
   "repository": "https://github.com/Glavin001/ember-c3",
   "license": "MIT",
   "author": {
@@ -30,7 +30,7 @@
     "edition": "octane"
   },
   "ember-addon": {
-    "demoURL": "http://glavin001.github.io/ember-c3/",
+    "demoURL": "https://glavin001.github.io/ember-c3",
     "configPath": "tests/dummy/config"
   },
   "scripts": {
