@@ -11,6 +11,7 @@
     "chart",
     "graph"
   ],
+  "homepage": "https://blog.glavin.org/ember-c3/",
   "repository": "https://github.com/Glavin001/ember-c3",
   "license": "MIT",
   "author": {
