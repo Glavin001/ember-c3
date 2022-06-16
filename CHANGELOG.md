@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/Glavin001/ember-c3/compare/v3.0.2...v5.0.0) (2022-06-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* Consuming apps must have ember-auto-import >= 2
+* Addon component is now colocated requiring Ember v3.13 or above
+* Drop support for Node v8
+
+### Features
+
+* Convert to a glimmer component ([d54e91f](https://github.com/Glavin001/ember-c3/commit/d54e91f392b923a5faa8e1a0c11bc50174fc0e34))
+* Modernize dummy app examples ([daf8e3c](https://github.com/Glavin001/ember-c3/commit/daf8e3c2235c1436bd557ffc69ba4163e6b705aa))
+* Upgrade to ember-auto-import v2 ([c190b7f](https://github.com/Glavin001/ember-c3/commit/c190b7f77540e753ea8b99f8b627ecb778c38d83))
+* v3.12.0...v3.16.2 ([9f0e909](https://github.com/Glavin001/ember-c3/commit/9f0e9098c528c21e2469d23f4550f79682b4eebe))
+
+
+### Bug Fixes
+
+* **Events example:** Correct value used in myClick if statement ([58942f8](https://github.com/Glavin001/ember-c3/commit/58942f8361e92142b9160854a7f58d3fe682a069))
+* Fix assignment of empty data labels ([027256e](https://github.com/Glavin001/ember-c3/commit/027256e71a8ea06052c5db47ff77bf35990c39ab))
+* Fix chart to properly handle missing data sources ([4a57dc1](https://github.com/Glavin001/ember-c3/commit/4a57dc18d5652eee5b7a399ce92219dc5ad094d8))
+
 ## [4.0.0](https://github.com/Glavin001/ember-c3/compare/v3.0.2...v4.0.0) (2022-06-15)
 
 
