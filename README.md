@@ -10,7 +10,7 @@ Ember component library for
 ## Compatibility
 
 * Ember.js v3.13 or above
-* Ember CLI v2.24 or above
+* Ember CLI v3.24 or above
 * Node.js v12 or above
 * ember-auto-import >= 2 (BREAKING CHANGE!)
 * Embroider compatabile
